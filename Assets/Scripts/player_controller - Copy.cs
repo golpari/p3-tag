@@ -14,15 +14,13 @@ public class player_controller : MonoBehaviour
     public int doubleJump; // 1
     public float jump_time_limit; // 0.25f
     public float downward_gravity_factor; // 1.0f
-    public Vector3 starting_position; // Vector3(16,-10.5,-1.5)
-
+    public Vector3 starting_position; // Vector3(16, -10.5, -1.5)
 
     private float jump_time = 1.0f;
     private float scale = 1.0f;
     private bool falling = false;
     private bool isGrounded = true;
     private float gravity_scale_copy;
-
 
     float x_wall_dir = 0.0f;
     float z_wall_dir = 0.0f;
@@ -35,11 +33,16 @@ public class player_controller : MonoBehaviour
         gravity_scale_copy = gravity_scale;
     }
 
+    public void SetGravityScale(float scale)
+    {
+        gravity_scale = scale;
+        gravity_scale_copy = scale;
+    }
+
     // Update is called once per frame
     void Update()
     {
         // order is important
-      
         handle_jump();
         handle_movement(); 
         handle_fall();
@@ -52,14 +55,17 @@ public class player_controller : MonoBehaviour
         {
             z_wall_dir = 1.0f;
         }
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), 0.5f))
         {
             z_wall_dir = -1.0f;
         }
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), 0.5f))
         {
             x_wall_dir = -1.0f;
         }
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), 0.5f))
         {
             x_wall_dir = 1.0f;
@@ -74,31 +80,28 @@ public class player_controller : MonoBehaviour
         }
 
         check_wall();
-
-
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag != "floor")
+        if (!collision.gameObject.CompareTag("floor"))
         {
             z_wall_dir = 0.0f;
             x_wall_dir = 0.0f;
         }
-        
     }
 
 
     private void FixedUpdate()
     {
-            Vector3 gravity = -9.81f * gravity_scale * Vector3.up;
+        Vector3 gravity = -9.81f * gravity_scale * Vector3.up;
+        Debug.Log(gravity_scale);
 
-            rb.AddForce(gravity, ForceMode.Acceleration);
-        
-       
+        rb.AddForce(gravity, ForceMode.Acceleration);
     }
 
-    void handle_jump(){
+    void handle_jump()
+    {
         if (Input.GetKeyDown(KeyCode.Z) && (isGrounded || doubleJump >= 0))
         {
             rb.velocity = Vector3.up * jump_force;
@@ -111,8 +114,7 @@ public class player_controller : MonoBehaviour
             {
                 rb.velocity = Vector3.up * jump_force * scale;
                 jump_time -= Time.deltaTime;
-                scale -= Time.deltaTime;
-                
+                scale -= Time.deltaTime; 
             }
             else
             {
@@ -120,27 +122,24 @@ public class player_controller : MonoBehaviour
                 gravity_scale *= scale;
                 rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.y);
             }
-
         }
         else if (Input.GetKeyUp(KeyCode.Z) && !falling && !isGrounded)
         {
             falling = true;
             gravity_scale *= scale;
             rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.y);
-
         }
         else if (falling)
         {
-
             if (gravity_scale < gravity_scale_copy)
             {
                 gravity_scale += Time.deltaTime * downward_gravity_factor;
             }
-
         }
     }
 
-    void handle_movement() {
+    void handle_movement()
+    {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
         float factor = 1.0f;
@@ -150,12 +149,14 @@ public class player_controller : MonoBehaviour
             factor = 0.8f;
         }
         
-        if (z == z_wall_dir) {
+        if (z == z_wall_dir)
+        {
            
             z = 0.0f;
         }
 
-        if (x == x_wall_dir) {
+        if (x == x_wall_dir)
+        {
             x = 0.0f;
         }
 
@@ -173,11 +174,12 @@ public class player_controller : MonoBehaviour
         doubleJump = 1;
     }
 
-    void handle_fall() {
-        if (this.transform.position.y < -13.0f) {
+    void handle_fall()
+    {
+        if (this.transform.position.y < -13.0f)
+        {
             Reset_jump();
             this.transform.position = starting_position;
         }
     }
-
 }
