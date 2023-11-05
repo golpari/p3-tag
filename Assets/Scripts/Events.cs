@@ -70,3 +70,9 @@ public class StartGameEvent
 {
     public StartGameEvent() { }
 }
+
+public class ArtifactPickupEvent
+{
+    public int artRoomNum;
+    public ArtifactPickupEvent(int _artRoomNum){artRoomNum = _artRoomNum;}
+}
