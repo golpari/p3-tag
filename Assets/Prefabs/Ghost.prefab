@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3101433485284490402}
   - component: {fileID: 2353935130215850375}
   - component: {fileID: 264374679079031973}
-  - component: {fileID: 4908245753926274719}
+  - component: {fileID: -4090066513304821359}
   m_Layer: 7
   m_Name: Ghost
   m_TagString: Untagged
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440973251922343436}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: -10.5, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.46, y: 1.59, z: -8.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -164,10 +164,10 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 47639f52-9067-41b1-a15a-66e0f539b556
+  m_DefaultActionMap: Ghost
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4908245753926274719
+--- !u!114 &-4090066513304821359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,12 +176,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 440973251922343436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6006ef6660ab37744a8c588dd5cb4643, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ab42f08770f22746b46ebaabbf4e2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2353935130215850375}
-  movement_speed: 5
-  up_limit: 15
+  movementSpeed: 5
+  upLimit: 5
   defaultGravityScale: 1
   strongGravityScale: 10
   lowGravityScale: 0.25

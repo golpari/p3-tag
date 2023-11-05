@@ -44,10 +44,12 @@ public class PlayerControllerTemp : BaseController
     private void _OnGravityChange(ChangeGravityEvent e)
     {
         // Update the gravity scale when the ChangeGravityEvent is published
+        Debug.Log("Gravity changed to " + gravityScale + " " + e.gravityScale);
         gravityScale = e.gravityScale;
     }
     protected override void SubscribeActions()
     {
+        movementAction.started += OnMovementInput;
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         jumpAction.started += OnJumpStart;
@@ -57,6 +59,7 @@ public class PlayerControllerTemp : BaseController
 
     protected override void UnsubscribeActions()
     {
+        movementAction.started -= OnMovementInput;
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         jumpAction.started -= OnJumpStart;
@@ -151,7 +154,6 @@ public class PlayerControllerTemp : BaseController
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
         scale = 1.0f;
         doubleJump = 1; // Reset double jump
-        transform.position = startingPosition; // Reset position
     }
 
     private void HandleFall()
@@ -160,6 +162,7 @@ public class PlayerControllerTemp : BaseController
         if (transform.position.y < -13.0f)
         {
             ResetJump();
+            this.transform.position = startingPosition;
         }
     }
 

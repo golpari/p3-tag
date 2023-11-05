@@ -26,7 +26,6 @@ public class ToggleLighting : MonoBehaviour
                 lightComponent.intensity = 1.0f;
             }
 
-            e.isDark = false;
         }
         else
         {
@@ -40,7 +39,6 @@ public class ToggleLighting : MonoBehaviour
             {
                 lightComponent.intensity = 0.1f;
             }
-            e.isDark = true;
         }
     }
 }

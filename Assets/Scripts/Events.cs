@@ -12,9 +12,8 @@ public class ChangeGravityEvent
 
 public class ChangeLightingEvent
 {
-    public bool isDark = false;
-    // flip the lighting state
-    public ChangeLightingEvent() { isDark = !isDark; }
+    public bool isDark;
+    public ChangeLightingEvent(bool becomeDark) { isDark = becomeDark; }
 }
 
 /*public class ScoreEvent

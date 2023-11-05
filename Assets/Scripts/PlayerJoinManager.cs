@@ -1,53 +1,76 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerJoinManager : MonoBehaviour
 {
-    public PlayerInput[] playerObjects;
+    public GameObject player1Prefab;
+    public GameObject player2Prefab;
 
-    /*private void OnEnable()
+    // Using a List to keep track of the devices that have already joined.
+    private List<InputDevice> joinedDevices = new List<InputDevice>();
+
+    private void OnEnable()
     {
-        // Subscribe to the event
-        PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
+        ManualPlayerJoin.onPlayerRequestedJoin += OnPlayerJoinRequested;
     }
 
     private void OnDisable()
     {
-        // Unsubscribe from the event
-        PlayerInputManager.instance.onPlayerJoined -= OnPlayerJoined;
-    }*/
-
-    // This method is called when the onPlayerJoined event is triggered
-    public void OnJoin(PlayerInput playerInput)
-    {
-        if (playerInput.playerIndex == 0)
-        {
-            playerInput.SwitchCurrentActionMap("Player");
-            Debug.Log("Player joined");
-        }
-        else if (playerInput.playerIndex == 1)
-        {
-            playerInput.SwitchCurrentActionMap("Ghost");
-            Debug.Log("Ghost joined");
-        }
-
-        // Here you would typically enable the object associated with the player,
-        // but since they are already in the scene and just being enabled/disabled, 
-        // you may not need to do anything else here.
+        ManualPlayerJoin.onPlayerRequestedJoin -= OnPlayerJoinRequested;
     }
 
-/*    public void JoinPlayer()
+    private void OnPlayerJoinRequested(InputDevice device)
     {
-        // This method would be called by your UI or by an InputAction callback when you want to join a player.
-        PlayerInputManager.instance.JoinPlayer();
+        if (joinedDevices.Contains(device)) return; // Prevent duplicate joins
+
+        GameObject instantiatedPlayer = null;
+
+        if (!joinedDevices.Contains(device) && PlayerInput.all.Count == 0)
+        {
+            instantiatedPlayer = InstantiateAndSetup(player1Prefab);
+        }
+        else if (!joinedDevices.Contains(device) && PlayerInput.all.Count == 1)
+        {
+            instantiatedPlayer = InstantiateAndSetup(player2Prefab);
+        }
+
+        if (instantiatedPlayer != null)
+        {
+            PlayerInput playerInput = instantiatedPlayer.GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                playerInput.camera = Camera.main;
+            }
+
+            joinedDevices.Add(device);
+            if (joinedDevices.Count == 2)
+            {
+                EventBus.Publish<StartGameEvent>(new StartGameEvent());
+            }
+        }
     }
 
-    // Bind this to the UI button or the InputAction that should trigger the join
-    public void OnJoinAction(InputAction.CallbackContext context)
+    private GameObject InstantiateAndSetup(GameObject playerPrefab)
     {
-        if (context.performed)
+        Vector3 spawnPosition;
+
+        if (playerPrefab == player1Prefab)
         {
-            JoinPlayer();
+            spawnPosition = new Vector3(1f, 1.5999f, -12.61f); 
         }
-    }*/
+        else if (playerPrefab == player2Prefab)
+        {
+            spawnPosition = new Vector3(3.56f, 1.59f, -8.51f);
+        }
+        else
+        {
+            return null; // Return null if the prefab does not match any known prefabs.
+        }
+
+        GameObject instantiatedPlayer = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        return instantiatedPlayer;
+    }
+
 }
