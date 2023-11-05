@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ChangeGravity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float newGravity = 0.1f;
+    void OnCollisionEnter(Collision other)
     {
-        
+        // Attempt to retrieve the GhostController component on the other object
+        GhostController ghost = other.gameObject.GetComponent<GhostController>();
+
+        // Check if the component was found
+        if (ghost != null)
+        {
+            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(newGravity));
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

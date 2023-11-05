@@ -420,7 +420,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614064473}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 587c2efbd498f2c489f3e6a70e6e176c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -817,7 +817,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804670515}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 587c2efbd498f2c489f3e6a70e6e176c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -922,7 +922,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845229481}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 587c2efbd498f2c489f3e6a70e6e176c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1559,6 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e766a54f59eb1d647a87965a47c8d515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGravity: 0.1
 --- !u!1 &1266699426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 3101433485284490402, guid: 77457268e4d6b8f49b728c34793ff6dc, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 587c2efbd498f2c489f3e6a70e6e176c, type: 2}
     - target: {fileID: 5102587073462569515, guid: 77457268e4d6b8f49b728c34793ff6dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.46

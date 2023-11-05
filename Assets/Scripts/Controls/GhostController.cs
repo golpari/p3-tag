@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GhostControllerTemp : BaseController
+public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
 
     // Flags for gravity state and lighting state.
     private bool isStrongGravity;
     private bool isLowGravity;
-    private bool isDark = false;
+    // needs to start flipped for some reason
+    private bool isDark = true;
 
     // Gravity scale presets for different gravity states.
     [SerializeField] private float defaultGravityScale = 1.0f;
