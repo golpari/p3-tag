@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GhostControllerTemp : BaseController
+public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
 
     // Flags for gravity state and lighting state.
     private bool isStrongGravity;
     private bool isLowGravity;
+    // needs to start flipped for some reason
+    private bool isDark = true;
 
     // Gravity scale presets for different gravity states.
     [SerializeField] private float defaultGravityScale = 1.0f;
@@ -39,6 +41,7 @@ public class GhostControllerTemp : BaseController
     protected override void SubscribeActions()
     {
         // Subscribe to input actions specific to the Ghost
+        movementAction.started += OnMovementInput;
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         
@@ -54,6 +57,7 @@ public class GhostControllerTemp : BaseController
     protected override void UnsubscribeActions()
     {
         // Unsubscribe from the input actions to avoid memory leaks
+        movementAction.started -= OnMovementInput;
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         
@@ -116,7 +120,8 @@ public class GhostControllerTemp : BaseController
 
     private void ToggleLighting()
     {
-        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent());
+        isDark = !isDark;
+        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
     }
 
 }

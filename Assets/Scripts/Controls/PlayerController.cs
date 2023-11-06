@@ -1,10 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController
 {
-    // Public variables for customization in the Unity Inspector
-    public float movementSpeed;
     public float jumpForce;
     public float gravityScale;
     public int doubleJump;
@@ -13,88 +14,73 @@ public class PlayerController : MonoBehaviour
     public Vector3 startingPosition;
 
     // Private variables to control runtime behavior
-    private Rigidbody rb;
     private float jumpTime;
     private float scale;
     private bool falling;
     private bool isGrounded;
     private float gravityScaleCopy;
-    private Vector2 currentMovementInput;
     private bool jumpPressed = false;
 
     // Input System related variables
-    private InputActionAsset inputAsset;
-    private InputActionMap playerActionMap;
-    private InputAction movementAction;
     private InputAction jumpAction;
 
     private Subscription<ChangeGravityEvent> changeGravitySubscription;
 
-    private void Awake()
+    protected override void InitializeActionMap()
     {
-        // Get the Rigidbody component for physics operations
-        rb = GetComponent<Rigidbody>();
+        actionMap = inputAsset.FindActionMap("Player");
+        movementAction = actionMap.FindAction("Move");
+        jumpAction = actionMap.FindAction("Jump");
+
         rb.useGravity = false; // We'll be controlling gravity manually
         gravityScaleCopy = gravityScale; // Store the original gravity scale
-
-        // Set up the new Input System
-        inputAsset = GetComponent<PlayerInput>().actions;
-        playerActionMap = inputAsset.FindActionMap("Player");
-        movementAction = playerActionMap.FindAction("Move");
-        jumpAction = playerActionMap.FindAction("Jump");
     }
+
     private void Start()
     {
         // Subscribe to the ChangeGravityEvent
         changeGravitySubscription = EventBus.Subscribe<ChangeGravityEvent>(_OnGravityChange);
     }
-
     private void _OnGravityChange(ChangeGravityEvent e)
     {
         // Update the gravity scale when the ChangeGravityEvent is published
         gravityScale = e.gravityScale;
     }
-    private void OnEnable()
+    protected override void SubscribeActions()
     {
-        // Subscribe to the input system events
+        movementAction.started += OnMovementInput;
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         jumpAction.started += OnJumpStart;
         jumpAction.canceled += OnJumpCancel;
-        playerActionMap.Enable();
+
     }
 
-    private void OnDisable()
+    protected override void UnsubscribeActions()
     {
-        // Unsubscribe from the input system events
+        movementAction.started -= OnMovementInput;
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         jumpAction.started -= OnJumpStart;
         jumpAction.canceled -= OnJumpCancel;
-        playerActionMap.Disable();
-    }
-
-    private void OnMovementInput(InputAction.CallbackContext context)
-    {
-        // Read the movement vector from the input action
-        currentMovementInput = context.ReadValue<Vector2>();
     }
 
     private void OnJumpStart(InputAction.CallbackContext context)
     {
-        // When the jump action starts, set jumpPressed to true
+        // jump button is pressed
         jumpPressed = true;
     }
 
     private void OnJumpCancel(InputAction.CallbackContext context)
     {
-        // When the jump action ends, set jumpPressed to false
+        // jump is no longer pressed
         jumpPressed = false;
     }
 
-    void Update()
+    protected override void Update()
     {
         // Update the player's jump and fall mechanics
+        // order is important
         HandleJump();
         HandleMovement();
         HandleFall();
@@ -151,23 +137,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleMovement()
+    private void OnCollisionEnter(Collision collision)
     {
-        // Handle the player's ground movement
-        float factor = 1.0f; // A factor to reduce movement speed diagonally
-        float x = currentMovementInput.x;
-        float z = currentMovementInput.y;
-
-        // Diagonal movement should be slower than straight movement
-        if (Mathf.Abs(x) > 0.0f && Mathf.Abs(z) > 0.0f)
+        if (collision.gameObject.tag == "floor")
         {
-            factor = 0.8f;
+            ResetJump();
         }
-
-        // Apply the movement velocity to the rb
-        rb.velocity = new Vector3(x * movementSpeed * factor, rb.velocity.y, z * movementSpeed * factor);
     }
-
     private void ResetJump()
     {
         // Reset jumping mechanics after landing or falling off the map
@@ -177,15 +153,16 @@ public class PlayerController : MonoBehaviour
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
         scale = 1.0f;
         doubleJump = 1; // Reset double jump
-        transform.position = startingPosition; // Reset position
     }
 
-    void HandleFall()
+    private void HandleFall()
     {
         // Reset the player if they fall off the map
         if (transform.position.y < -13.0f)
         {
             ResetJump();
+            this.transform.position = startingPosition;
         }
     }
+
 }

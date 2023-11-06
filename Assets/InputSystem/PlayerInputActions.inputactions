@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "f0ba6613-2a9c-4841-873d-3d61821a9758",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -18,15 +18,6 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "a9ad50b2-6931-4c05-a348-b3b30f7cd2cd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Join",
-                    "type": "Button",
-                    "id": "bf4209b1-7cdb-4746-aa95-ff1812f9c498",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -144,39 +135,6 @@
                 },
                 {
                     "name": "",
-                    "id": "591f6c46-3b05-4bd6-aa09-eaa1e1416265",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "66475e79-92aa-455e-b38f-e639a35c1792",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "LeftKeyboard",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3d3aef4-f832-4ced-82ff-6c8404787a42",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3479b0b0-f491-4ce5-ba16-4a4ca20ed851",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -260,21 +218,12 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "312fbaa8-d260-45f9-9a45-9f562354feed",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Join",
-                    "type": "Button",
-                    "id": "5da3ef25-1d90-46ec-9063-3fcff8864294",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "NewGame",
@@ -446,39 +395,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d01cd5fe-73a0-4753-b595-7c047fbd6f0d",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "199e1ee2-6ba7-451d-b55f-e9e85c358863",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "LeftKeyboard",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3c6c84cf-5801-42e2-abe4-6bf0bd855585",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e7c0487f-d3e1-4a32-93fc-afba9c72d959",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -628,6 +544,56 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "ToggleLight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Join",
+            "id": "27553537-7da2-4f41-a4c0-29fb2e70d838",
+            "actions": [
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "bae395c9-cb42-479f-a2e6-ea20d529d452",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "24caba55-2565-44ae-8e8b-56cce5f92c16",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d513f3f-16fe-4b9f-9013-00dbde041799",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "LeftKeyboard",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c8820be-5471-4253-82c4-3dcc2f5fb0c9",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "RightKeyboard",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
