@@ -25,6 +25,7 @@ public class PlayerController : BaseController
     private InputAction jumpAction;
 
     private Subscription<ChangeGravityEvent> changeGravitySubscription;
+    private Subscription<EndCountdownEvent> endCountdownSubscription;
 
     protected override void InitializeActionMap()
     {
@@ -40,11 +41,22 @@ public class PlayerController : BaseController
     {
         // Subscribe to the ChangeGravityEvent
         changeGravitySubscription = EventBus.Subscribe<ChangeGravityEvent>(_OnGravityChange);
+        // Subscribe to the EndCountdownEvent
+        endCountdownSubscription = EventBus.Subscribe<EndCountdownEvent>(_OnEndCountdown);
     }
     private void _OnGravityChange(ChangeGravityEvent e)
     {
         // Update the gravity scale when the ChangeGravityEvent is published
         gravityScale = e.gravityScale;
+    }
+
+    private void _OnEndCountdown(EndCountdownEvent e)
+    {
+        // Reset the player's position when the EndCountdownEvent is published
+        this.transform.position = startingPosition;
+        string winner = "Ghost";
+        EventBus.Publish<EndGameEvent>(new EndGameEvent(winner));
+
     }
     protected override void SubscribeActions()
     {
@@ -163,6 +175,12 @@ public class PlayerController : BaseController
             ResetJump();
             this.transform.position = startingPosition;
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(changeGravitySubscription);
+        EventBus.Unsubscribe(endCountdownSubscription);
     }
 
 }

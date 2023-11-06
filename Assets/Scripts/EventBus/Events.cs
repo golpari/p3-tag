@@ -59,10 +59,15 @@ public class ChangeLightingEvent
     }
 }*/
 
-public class WinEvent
+public class EndGameEvent
 {
-    public int playerNumber;
-    public WinEvent(int _playerNumber){playerNumber = _playerNumber;}
+    public string playerWinnerName;
+    public EndGameEvent(string _playerWinnerName){playerWinnerName = _playerWinnerName;}
+}
+
+public class EndCountdownEvent
+{
+    public EndCountdownEvent() { }
 }
 
 public class StartGameEvent
