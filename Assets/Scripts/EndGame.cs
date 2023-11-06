@@ -22,13 +22,11 @@ public class EndGame : MonoBehaviour
 
     void _OnGameEnd(EndGameEvent e)
     {
-        Debug.Log("On Game End#");
-
+        inputActions.Player.Disable();
+        inputActions.Ghost.Disable();
+        inputActions.UI.NewGame.Enable();
         // Bind the restart game action to be triggered by any key or button press
-        inputActions.Player.NewGame.performed += restartInitiated;
-        inputActions.Ghost.NewGame.performed += restartInitiated;
-        inputActions.Player.NewGame.Enable();
-        inputActions.Ghost.NewGame.Enable();
+        inputActions.UI.NewGame.performed += restartInitiated;
     }
     private void restartInitiated(InputAction.CallbackContext ctx)
     {
@@ -36,10 +34,9 @@ public class EndGame : MonoBehaviour
     }
     void RestartGame()
     { 
-        inputActions.Player.NewGame.Disable();
-        inputActions.Ghost.NewGame.Disable();
-        inputActions.Player.NewGame.performed -= restartInitiated;
-        inputActions.Ghost.NewGame.performed -= restartInitiated;
+        inputActions.Player.Enable();
+        inputActions.Ghost.Enable();
+        inputActions.UI.NewGame.performed -= restartInitiated;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     private void OnDestroy()

@@ -44,15 +44,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NewGame"",
-                    ""type"": ""Button"",
-                    ""id"": ""8ce27c6d-b4fe-4377-a7e2-796a6f09e50d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,28 +147,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""3479b0b0-f491-4ce5-ba16-4a4ca20ed851"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""NewGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cb82d3cf-8bfa-4d73-9959-0928915062b0"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""RightKeyboard;LeftKeyboard"",
-                    ""action"": ""NewGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""ArrowKeys"",
                     ""id"": ""58bbc207-6f0d-4196-ac1f-15b31c2a8f84"",
                     ""path"": ""2DVector"",
@@ -246,15 +215,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""NewGame"",
-                    ""type"": ""Button"",
-                    ""id"": ""83524b55-309a-4e68-a44c-89cb062702c8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""FloatUp"",
@@ -417,28 +377,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e7c0487f-d3e1-4a32-93fc-afba9c72d959"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""NewGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""413b651e-ff19-406d-8cdc-5e1d5959a2e4"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""RightKeyboard;LeftKeyboard"",
-                    ""action"": ""NewGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1515c8eb-96ff-43c2-896d-077e4ee8fc63"",
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
@@ -572,13 +510,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Join"",
+            ""name"": ""UI"",
             ""id"": ""27553537-7da2-4f41-a4c0-29fb2e70d838"",
             ""actions"": [
                 {
                     ""name"": ""Join"",
                     ""type"": ""Button"",
                     ""id"": ""bae395c9-cb42-479f-a2e6-ea20d529d452"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NewGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4113356-a667-4073-9f69-0ff2540f2992"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -616,6 +563,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""RightKeyboard"",
                     ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76aa4eec-5956-4c63-8f5c-50f69b778c37"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""NewGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b397705b-85eb-4d00-b278-bb0f788cc98f"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard;LeftKeyboard"",
+                    ""action"": ""NewGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -662,18 +631,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_NewGame = m_Player.FindAction("NewGame", throwIfNotFound: true);
         // Ghost
         m_Ghost = asset.FindActionMap("Ghost", throwIfNotFound: true);
         m_Ghost_Move = m_Ghost.FindAction("Move", throwIfNotFound: true);
-        m_Ghost_NewGame = m_Ghost.FindAction("NewGame", throwIfNotFound: true);
         m_Ghost_FloatUp = m_Ghost.FindAction("FloatUp", throwIfNotFound: true);
         m_Ghost_FloatDown = m_Ghost.FindAction("FloatDown", throwIfNotFound: true);
         m_Ghost_ToggleLight = m_Ghost.FindAction("ToggleLight", throwIfNotFound: true);
         m_Ghost_ToggleGravity = m_Ghost.FindAction("ToggleGravity", throwIfNotFound: true);
-        // Join
-        m_Join = asset.FindActionMap("Join", throwIfNotFound: true);
-        m_Join_Join = m_Join.FindAction("Join", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Join = m_UI.FindAction("Join", throwIfNotFound: true);
+        m_UI_NewGame = m_UI.FindAction("NewGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -737,14 +705,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_NewGame;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @NewGame => m_Wrapper.m_Player_NewGame;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -760,9 +726,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @NewGame.started += instance.OnNewGame;
-            @NewGame.performed += instance.OnNewGame;
-            @NewGame.canceled += instance.OnNewGame;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -773,9 +736,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @NewGame.started -= instance.OnNewGame;
-            @NewGame.performed -= instance.OnNewGame;
-            @NewGame.canceled -= instance.OnNewGame;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -798,7 +758,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Ghost;
     private List<IGhostActions> m_GhostActionsCallbackInterfaces = new List<IGhostActions>();
     private readonly InputAction m_Ghost_Move;
-    private readonly InputAction m_Ghost_NewGame;
     private readonly InputAction m_Ghost_FloatUp;
     private readonly InputAction m_Ghost_FloatDown;
     private readonly InputAction m_Ghost_ToggleLight;
@@ -808,7 +767,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         private @PlayerInputActions m_Wrapper;
         public GhostActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Ghost_Move;
-        public InputAction @NewGame => m_Wrapper.m_Ghost_NewGame;
         public InputAction @FloatUp => m_Wrapper.m_Ghost_FloatUp;
         public InputAction @FloatDown => m_Wrapper.m_Ghost_FloatDown;
         public InputAction @ToggleLight => m_Wrapper.m_Ghost_ToggleLight;
@@ -825,9 +783,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @NewGame.started += instance.OnNewGame;
-            @NewGame.performed += instance.OnNewGame;
-            @NewGame.canceled += instance.OnNewGame;
             @FloatUp.started += instance.OnFloatUp;
             @FloatUp.performed += instance.OnFloatUp;
             @FloatUp.canceled += instance.OnFloatUp;
@@ -847,9 +802,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @NewGame.started -= instance.OnNewGame;
-            @NewGame.performed -= instance.OnNewGame;
-            @NewGame.canceled -= instance.OnNewGame;
             @FloatUp.started -= instance.OnFloatUp;
             @FloatUp.performed -= instance.OnFloatUp;
             @FloatUp.canceled -= instance.OnFloatUp;
@@ -880,51 +832,59 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public GhostActions @Ghost => new GhostActions(this);
 
-    // Join
-    private readonly InputActionMap m_Join;
-    private List<IJoinActions> m_JoinActionsCallbackInterfaces = new List<IJoinActions>();
-    private readonly InputAction m_Join_Join;
-    public struct JoinActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Join;
+    private readonly InputAction m_UI_NewGame;
+    public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
-        public JoinActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Join => m_Wrapper.m_Join_Join;
-        public InputActionMap Get() { return m_Wrapper.m_Join; }
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Join => m_Wrapper.m_UI_Join;
+        public InputAction @NewGame => m_Wrapper.m_UI_NewGame;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(JoinActions set) { return set.Get(); }
-        public void AddCallbacks(IJoinActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
         {
-            if (instance == null || m_Wrapper.m_JoinActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_JoinActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
             @Join.started += instance.OnJoin;
             @Join.performed += instance.OnJoin;
             @Join.canceled += instance.OnJoin;
+            @NewGame.started += instance.OnNewGame;
+            @NewGame.performed += instance.OnNewGame;
+            @NewGame.canceled += instance.OnNewGame;
         }
 
-        private void UnregisterCallbacks(IJoinActions instance)
+        private void UnregisterCallbacks(IUIActions instance)
         {
             @Join.started -= instance.OnJoin;
             @Join.performed -= instance.OnJoin;
             @Join.canceled -= instance.OnJoin;
+            @NewGame.started -= instance.OnNewGame;
+            @NewGame.performed -= instance.OnNewGame;
+            @NewGame.canceled -= instance.OnNewGame;
         }
 
-        public void RemoveCallbacks(IJoinActions instance)
+        public void RemoveCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_JoinActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IJoinActions instance)
+        public void SetCallbacks(IUIActions instance)
         {
-            foreach (var item in m_Wrapper.m_JoinActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_JoinActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public JoinActions @Join => new JoinActions(this);
+    public UIActions @UI => new UIActions(this);
     private int m_LeftKeyboardSchemeIndex = -1;
     public InputControlScheme LeftKeyboardScheme
     {
@@ -956,19 +916,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnNewGame(InputAction.CallbackContext context);
     }
     public interface IGhostActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnNewGame(InputAction.CallbackContext context);
         void OnFloatUp(InputAction.CallbackContext context);
         void OnFloatDown(InputAction.CallbackContext context);
         void OnToggleLight(InputAction.CallbackContext context);
         void OnToggleGravity(InputAction.CallbackContext context);
     }
-    public interface IJoinActions
+    public interface IUIActions
     {
         void OnJoin(InputAction.CallbackContext context);
+        void OnNewGame(InputAction.CallbackContext context);
     }
 }

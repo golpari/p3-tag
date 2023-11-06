@@ -17,7 +17,7 @@ public class PlayerController : BaseController
     private float jumpTime;
     private float scale;
     private bool falling;
-    private bool isGrounded;
+    private bool isGrounded; 
     private float gravityScaleCopy;
     private bool jumpPressed = false;
 

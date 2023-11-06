@@ -16,13 +16,13 @@ public class ManualPlayerJoin : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();
-        inputActions.Join.Join.performed += HandleJoinRequest;
+        inputActions.UI.Join.performed += HandleJoinRequest;
     }
 
     private void OnDisable()
     {
         inputActions.Disable();
-        inputActions.Join.Join.performed -= HandleJoinRequest;
+        inputActions.UI.Join.performed -= HandleJoinRequest;
     }
 
     private void HandleJoinRequest(InputAction.CallbackContext context)

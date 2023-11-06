@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "NewGame",
-                    "type": "Button",
-                    "id": "8ce27c6d-b4fe-4377-a7e2-796a6f09e50d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -134,28 +125,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "3479b0b0-f491-4ce5-ba16-4a4ca20ed851",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "NewGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cb82d3cf-8bfa-4d73-9959-0928915062b0",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard;LeftKeyboard",
-                    "action": "NewGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "ArrowKeys",
                     "id": "58bbc207-6f0d-4196-ac1f-15b31c2a8f84",
                     "path": "2DVector",
@@ -224,15 +193,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "NewGame",
-                    "type": "Button",
-                    "id": "83524b55-309a-4e68-a44c-89cb062702c8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "FloatUp",
@@ -395,28 +355,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e7c0487f-d3e1-4a32-93fc-afba9c72d959",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "NewGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "413b651e-ff19-406d-8cdc-5e1d5959a2e4",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard;LeftKeyboard",
-                    "action": "NewGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1515c8eb-96ff-43c2-896d-077e4ee8fc63",
                     "path": "<Keyboard>/x",
                     "interactions": "",
@@ -550,13 +488,22 @@
             ]
         },
         {
-            "name": "Join",
+            "name": "UI",
             "id": "27553537-7da2-4f41-a4c0-29fb2e70d838",
             "actions": [
                 {
                     "name": "Join",
                     "type": "Button",
                     "id": "bae395c9-cb42-479f-a2e6-ea20d529d452",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NewGame",
+                    "type": "Button",
+                    "id": "a4113356-a667-4073-9f69-0ff2540f2992",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -594,6 +541,28 @@
                     "processors": "",
                     "groups": "RightKeyboard",
                     "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76aa4eec-5956-4c63-8f5c-50f69b778c37",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "NewGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b397705b-85eb-4d00-b278-bb0f788cc98f",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "RightKeyboard;LeftKeyboard",
+                    "action": "NewGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

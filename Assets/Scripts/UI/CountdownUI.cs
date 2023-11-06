@@ -12,17 +12,24 @@ public class CountdownUI : MonoBehaviour
     private bool keepCounting = true;
     private bool runGame = true;
     Subscription<StartGameEvent> startEventSubscription;
+    Subscription<EndGameEvent> endEventSubscription;
     private void Start()
     {
         timeComp = GetComponent<Text>();
         // ignore for now
         startEventSubscription = EventBus.Subscribe<StartGameEvent>(_OnGameStart);
+        endEventSubscription = EventBus.Subscribe<EndGameEvent>(_OnGameEnd);
     }
 
     // ignore for now
     void _OnGameStart(StartGameEvent e)
     {
         runGame = true;
+    }
+
+    void _OnGameEnd(EndGameEvent e)
+    {
+        runGame = false;
     }
 
     void Update()
@@ -39,7 +46,6 @@ public class CountdownUI : MonoBehaviour
             {
                 // Ghost wins, player loses
                 EventBus.Publish<EndCountdownEvent>(new EndCountdownEvent());
-                Debug.Log("End of countdown#");
                 runGame = false;
             }
         }
