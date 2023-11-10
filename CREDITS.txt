@@ -1,2 +1,5 @@
 Materials/Textures from: Chromisu on Unity Asset Store "Handpainted Grass & Ground Textures"
 https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-grass-ground-textures-187634
+
+Stone UI from: SiLena_ART on Unity Asset Store "Stone UI"
+https://assetstore.unity.com/packages/2d/gui/icons/stone-ui-182526
