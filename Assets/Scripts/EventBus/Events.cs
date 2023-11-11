@@ -2,12 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ChangeGravityEvent
 {
     public float gravityScale;
+
     // set the gravity scale to the given value
-    public ChangeGravityEvent(float _gravityScale) { gravityScale = _gravityScale;}
+    public ChangeGravityEvent(float _gravityScale, GameObject _gravityFX)
+    {
+        gravityScale = _gravityScale;
+
+        // Toggle low gravity visual effects on and off.
+        _gravityFX.GetComponent<PostProcessVolume>().enabled = !_gravityFX.GetComponent<PostProcessVolume>().enabled;
+    }
+
+    
 }
 
 public class ChangeLightingEvent
@@ -62,6 +72,7 @@ public class ChangeLightingEvent
 public class EndGameEvent
 {
     public string playerWinnerName;
+
     public EndGameEvent(string _playerWinnerName){playerWinnerName = _playerWinnerName;}
 }
 

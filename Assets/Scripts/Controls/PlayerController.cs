@@ -128,7 +128,7 @@ public class PlayerController : BaseController
             {
                 // Start falling when jump is no longer being held or time limit exceeded
                 falling = true;
-                gravityScale *= scale;
+                //gravityScale *= scale;
                 rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             }
         }
@@ -136,7 +136,7 @@ public class PlayerController : BaseController
         {
             // Begin falling if jump is released
             falling = true;
-            gravityScale *= scale;
+            //gravityScale *= scale;
             rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
         }
         else if (falling)
@@ -144,7 +144,7 @@ public class PlayerController : BaseController
             // Apply increased gravity when falling
             if (gravityScale < gravityScaleCopy)
             {
-                gravityScale += Time.deltaTime * downwardGravityFactor;
+                //gravityScale += Time.deltaTime * downwardGravityFactor;
             }
         }
     }
@@ -162,7 +162,7 @@ public class PlayerController : BaseController
         falling = false;
         jumpTime = 1.0f;
         isGrounded = true;
-        EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
+        //EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
         scale = 1.0f;
         doubleJump = 1; // Reset double jump
     }

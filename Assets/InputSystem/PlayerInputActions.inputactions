@@ -432,17 +432,6 @@
                 },
                 {
                     "name": "",
-                    "id": "486e76c6-727b-418d-9922-75976fcd484a",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "ToggleGravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0a29026e-d5d7-4fc0-811c-68b82f5d74aa",
                     "path": "<Keyboard>/backslash",
                     "interactions": "",
