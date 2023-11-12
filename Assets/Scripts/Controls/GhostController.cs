@@ -89,7 +89,7 @@ public class GhostController : BaseController
         }
         else
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
         }
     }
 

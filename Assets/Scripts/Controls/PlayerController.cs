@@ -21,6 +21,8 @@ public class PlayerController : BaseController
     private float gravityScaleCopy;
     private bool jumpPressed = false;
 
+    public static int num_lives = 3;
+
     // Input System related variables
     private InputAction jumpAction;
 
@@ -149,13 +151,28 @@ public class PlayerController : BaseController
         }
     }
 
+
+    bool check_ground(Collision collision)
+    {
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), Mathf.Infinity) &&
+            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "jump_obj"))
+        {
+            return true;
+        }
+        return false;
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "floor")
+        if (check_ground(collision))
         {
             ResetJump();
         }
+
     }
+
     private void ResetJump()
     {
         // Reset jumping mechanics after landing or falling off the map

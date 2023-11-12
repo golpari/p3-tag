@@ -6,6 +6,7 @@ TagManager:
   tags:
   - floor
   - Ghost
+  - jump_obj
   layers:
   - Default
   - TransparentFX

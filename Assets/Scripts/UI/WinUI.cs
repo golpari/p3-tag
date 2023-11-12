@@ -14,7 +14,14 @@ public class WinUI : MonoBehaviour
 
     void _OnPlayerWin(EndGameEvent e)
     {
-        GetComponent<Text>().text = e.playerWinnerName + " Wins!\n Press any key or start to continue";
+        if (e.playerWinnerName == "Ghost")
+        {
+            PlayerController.num_lives -= 1;
+            GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
+        }
+        else {
+            GetComponent<Text>().text = "The Player sucesfully escaped! \n Press any key to continue";
+        }
     }
 
     private void OnDestroy()
