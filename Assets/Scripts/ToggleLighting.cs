@@ -18,12 +18,12 @@ public class ToggleLighting : MonoBehaviour
             // If dark, brighten the torches.
             if (lightComponent.type == LightType.Point)
             {
-                lightComponent.intensity = 3.0f;
+                lightComponent.intensity = 0.0f;
             }
             // if not a torch, brighten the main light.
             else
             {
-                lightComponent.intensity = 1.0f;
+                lightComponent.intensity = 0.0f;
             }
 
         }
@@ -32,12 +32,12 @@ public class ToggleLighting : MonoBehaviour
             // If not dark, dim the torches.
             if (lightComponent.type == LightType.Point)
             {
-                lightComponent.intensity = 1.0f;
+                lightComponent.intensity = 3.0f;
             }
             // if not a torch, dim the main light.
             else
             {
-                lightComponent.intensity = 0.1f;
+                lightComponent.intensity = 1.0f;
             }
         }
     }

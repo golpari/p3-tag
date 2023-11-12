@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
 
-    // Flags for gravity state and lighting state.
-    private bool isStrongGravity;
+    // Flag for gravity state and lighting state.
     private bool isLowGravity;
     // needs to start flipped for some reason
-    private bool isDark = true;
+    private bool isDark = false;
 
     // Gravity scale presets for different gravity states.
-    [SerializeField] private float defaultGravityScale = 1.0f;
-    [SerializeField] private float strongGravityScale = 10.0f;
-    [SerializeField] private float lowGravityScale = 0.25f;
+    [SerializeField] private float defaultGravityScale = 2.0f;
+    [SerializeField] private float lowGravityScale = 0.0005f;
+    [SerializeField] private GameObject gravityFX;
 
     // Input System related variables
     private InputAction lightAction;
@@ -89,31 +89,22 @@ public class GhostController : BaseController
         }
         else
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
         }
     }
 
     private void ToggleGravity()
     {
-        // Default to strong gravity.
-        if (!isStrongGravity && !isLowGravity)
+        // Default to low gravity.
+        if (!isLowGravity)
         {
-            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(strongGravityScale));
-            isStrongGravity = true;
-            isLowGravity = false;
-        }
-        // Strong gravity to low gravity.
-        else if (isStrongGravity)
-        {
-            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(lowGravityScale));
-            isStrongGravity = false;
+            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(lowGravityScale, gravityFX));
             isLowGravity = true;
         }
         // Low gravity to default gravity.
-        else if (isLowGravity)
+        else
         {
-            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale));
-            isStrongGravity = false;
+            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale, gravityFX));
             isLowGravity = false;
         }
     }
