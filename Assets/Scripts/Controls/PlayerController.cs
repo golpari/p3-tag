@@ -21,6 +21,8 @@ public class PlayerController : BaseController
     private float gravityScaleCopy;
     private bool jumpPressed = false;
 
+    public static int num_lives = 3;
+
     // Input System related variables
     private InputAction jumpAction;
 
@@ -128,7 +130,7 @@ public class PlayerController : BaseController
             {
                 // Start falling when jump is no longer being held or time limit exceeded
                 falling = true;
-                gravityScale *= scale;
+                //gravityScale *= scale;
                 rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             }
         }
@@ -136,7 +138,7 @@ public class PlayerController : BaseController
         {
             // Begin falling if jump is released
             falling = true;
-            gravityScale *= scale;
+            //gravityScale *= scale;
             rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
         }
         else if (falling)
@@ -144,25 +146,40 @@ public class PlayerController : BaseController
             // Apply increased gravity when falling
             if (gravityScale < gravityScaleCopy)
             {
-                gravityScale += Time.deltaTime * downwardGravityFactor;
+                //gravityScale += Time.deltaTime * downwardGravityFactor;
             }
         }
     }
 
+
+    bool check_ground(Collision collision)
+    {
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), Mathf.Infinity) &&
+            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "jump_obj"))
+        {
+            return true;
+        }
+        return false;
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "floor")
+        if (check_ground(collision))
         {
             ResetJump();
         }
+
     }
+
     private void ResetJump()
     {
         // Reset jumping mechanics after landing or falling off the map
         falling = false;
         jumpTime = 1.0f;
         isGrounded = true;
-        EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
+        //EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
         scale = 1.0f;
         doubleJump = 1; // Reset double jump
     }

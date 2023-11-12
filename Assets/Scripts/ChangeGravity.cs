@@ -8,13 +8,13 @@ public class ChangeGravity : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         // Attempt to retrieve the GhostController component on the other object
-        GhostController ghost = other.gameObject.GetComponent<GhostController>();
+        //GhostController ghost = other.gameObject.GetComponent<GhostController>();
 
-        // Check if the component was found
-        if (ghost != null)
-        {
-            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(newGravity));
-        }
+        //// Check if the component was found
+        //if (ghost != null)
+        //{
+        //    EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(newGravity));
+        //}
     }
 
 }
