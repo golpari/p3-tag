@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2353935130215850375}
   - component: {fileID: 264374679079031973}
   - component: {fileID: -4090066513304821359}
+  - component: {fileID: 2163759717735886469}
   m_Layer: 7
   m_Name: Ghost
   m_TagString: Untagged
@@ -184,3 +185,19 @@ MonoBehaviour:
   defaultGravityScale: 1
   strongGravityScale: 10
   lowGravityScale: 0.25
+--- !u!114 &2163759717735886469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440973251922343436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e760a4593774a3e828dca5b9206e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 10
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
