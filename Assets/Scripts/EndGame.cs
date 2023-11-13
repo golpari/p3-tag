@@ -31,10 +31,9 @@ public class EndGame : MonoBehaviour
         {
             index += 1;
             EventBus.Publish<int>(index); // for now
-
         }
-        
-        if (index == 3)
+
+        if (index == 3 || e.playerWinnerName == "Ghost")
         {
             Debug.Log(e.playerWinnerName);
             inputActions.Player.Disable();
@@ -43,7 +42,16 @@ public class EndGame : MonoBehaviour
             // Bind the restart game action to be triggered by any key or button press
             inputActions.UI.NewGame.performed += restartInitiated;
             index = 0;
-            text.GetComponent<Text>().text = "The Player successfully escaped! \n Press any key to continue";
+
+            if (e.playerWinnerName == "Player")
+            {
+                text.GetComponent<Text>().text = "The Player successfully escaped! \n Press any key to continue";
+            }
+
+            if (e.playerWinnerName == "Ghost")
+            {
+                text.GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
+            }
         }
     }
 
