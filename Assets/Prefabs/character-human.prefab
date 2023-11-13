@@ -112,7 +112,10 @@ PrefabInstance:
       addedObject: {fileID: 5876516225727753695}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 769897641842631466}
+      addedObject: {fileID: 5403149695425269923}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9154102747234478503}
   m_SourcePrefab: {fileID: 100100000, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
 --- !u!1 &7256124479596934106 stripped
 GameObject:
@@ -144,7 +147,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &5876516225727753695
 CapsuleCollider:
@@ -169,7 +172,7 @@ CapsuleCollider:
   m_Height: 0.6906457
   m_Direction: 1
   m_Center: {x: -0, y: 0.3079366, z: 0}
---- !u!114 &769897641842631466
+--- !u!114 &5403149695425269923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,13 +181,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 7256124479596934106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af17eda6abff7f42af04f9c2405ab90, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  jumpForce: 0
-  gravityScale: 0
-  doubleJump: 0
-  jumpTimeLimit: 0
-  downwardGravityFactor: 0
-  startingPosition: {x: 0, y: 0, z: 0}
+  m_Actions: {fileID: -944628639613478452, guid: 688dd728fbe1a754ab12ad57f3bc51de, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Ghost
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &9154102747234478503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256124479596934106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab42f08770f22746b46ebaabbf4e2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 5
+  upLimit: 5
+  defaultGravityScale: 5
+  lowGravityScale: 5
+  gravityFX: {fileID: 0}

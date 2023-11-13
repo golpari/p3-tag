@@ -15,29 +15,31 @@ public class ToggleLighting : MonoBehaviour
     {
         if (e.isDark)
         {
-            // If dark, brighten the torches.
-            if (lightComponent.type == LightType.Point)
+            if (lightComponent.CompareTag("Flashlight"))
             {
-                lightComponent.intensity = 0.0f;
+                lightComponent.intensity = 10.0f;
             }
-            // if not a torch, brighten the main light.
             else
             {
                 lightComponent.intensity = 0.0f;
             }
-
         }
         else
         {
             // If not dark, dim the torches.
-            if (lightComponent.type == LightType.Point)
+            if (lightComponent.type == LightType.Point && !lightComponent.CompareTag("Flashlight"))
             {
                 lightComponent.intensity = 3.0f;
             }
             // if not a torch, dim the main light.
-            else
+            else if (!lightComponent.CompareTag("Flashlight"))
             {
                 lightComponent.intensity = 1.0f;
+            }
+
+            if (lightComponent.CompareTag("Flashlight"))
+            {
+                lightComponent.intensity = 0.0f;
             }
         }
     }
