@@ -8,7 +8,7 @@ public abstract class BaseController : MonoBehaviour
 
     protected Rigidbody rb;
     protected Vector2 currentMovementInput;
-    protected InputActionAsset inputAsset;
+    public InputActionAsset inputAsset;
     protected InputActionMap actionMap;
     protected InputAction movementAction;
 
@@ -41,6 +41,7 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
+        //if (actionMap.enabled)
         HandleMovement();
     }
     protected virtual void HandleMovement()

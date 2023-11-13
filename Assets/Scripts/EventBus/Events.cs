@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 
 public class ChangeGravityEvent
@@ -34,7 +35,8 @@ public class OutlineEvent
 
 public class PossessionEvent
 {
-    public PossessionEvent() { }
+    public InputActionAsset inputAsset;
+    public PossessionEvent(InputActionAsset _inputAsset) { inputAsset = _inputAsset; }
 }
 
 public class EndGameEvent

@@ -7,6 +7,7 @@ public class GhostSelection : MonoBehaviour
     public LayerMask raycastLayerMask; // LayerMask to filter which objects are raycasted
     public float lenOfBox = 1f;
     private GameObject previousClosestObject = null; // To keep track of the previously closest object
+    private GameObject closestObject = null;
 
     // temp fix for having no visible outline at the start
     private void Awake()
@@ -33,7 +34,6 @@ public class GhostSelection : MonoBehaviour
 
     GameObject FindClosestObject(Collider[] colliders)
     {
-        GameObject closestObject = null;
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
@@ -47,6 +47,11 @@ public class GhostSelection : MonoBehaviour
             }
         }
 
+        return closestObject;
+    }
+
+    public GameObject GetClosestObject()
+    {
         return closestObject;
     }
 

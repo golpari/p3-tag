@@ -633,7 +633,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""ObjectPossession"",
+            ""name"": ""Possession"",
             ""id"": ""47970745-a372-4a3c-aaa6-0b2ae4a2ff3e"",
             ""actions"": [
                 {
@@ -644,6 +644,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Possess"",
+                    ""type"": ""Button"",
+                    ""id"": ""f138086e-02b8-4b2b-a185-365c254561e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -767,6 +776,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc7c7f6c-e7bd-497b-8354-c7bd33abe764"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cde8e427-3e17-484e-9c1b-4e8bc4bf014b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f14524c0-2a1e-4713-9c73-0abf8a8e4396"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -823,9 +865,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Join = m_UI.FindAction("Join", throwIfNotFound: true);
         m_UI_NewGame = m_UI.FindAction("NewGame", throwIfNotFound: true);
-        // ObjectPossession
-        m_ObjectPossession = asset.FindActionMap("ObjectPossession", throwIfNotFound: true);
-        m_ObjectPossession_Move = m_ObjectPossession.FindAction("Move", throwIfNotFound: true);
+        // Possession
+        m_Possession = asset.FindActionMap("Possession", throwIfNotFound: true);
+        m_Possession_Move = m_Possession.FindAction("Move", throwIfNotFound: true);
+        m_Possession_Possess = m_Possession.FindAction("Possess", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1078,51 +1121,59 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public UIActions @UI => new UIActions(this);
 
-    // ObjectPossession
-    private readonly InputActionMap m_ObjectPossession;
-    private List<IObjectPossessionActions> m_ObjectPossessionActionsCallbackInterfaces = new List<IObjectPossessionActions>();
-    private readonly InputAction m_ObjectPossession_Move;
-    public struct ObjectPossessionActions
+    // Possession
+    private readonly InputActionMap m_Possession;
+    private List<IPossessionActions> m_PossessionActionsCallbackInterfaces = new List<IPossessionActions>();
+    private readonly InputAction m_Possession_Move;
+    private readonly InputAction m_Possession_Possess;
+    public struct PossessionActions
     {
         private @PlayerInputActions m_Wrapper;
-        public ObjectPossessionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_ObjectPossession_Move;
-        public InputActionMap Get() { return m_Wrapper.m_ObjectPossession; }
+        public PossessionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Possession_Move;
+        public InputAction @Possess => m_Wrapper.m_Possession_Possess;
+        public InputActionMap Get() { return m_Wrapper.m_Possession; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ObjectPossessionActions set) { return set.Get(); }
-        public void AddCallbacks(IObjectPossessionActions instance)
+        public static implicit operator InputActionMap(PossessionActions set) { return set.Get(); }
+        public void AddCallbacks(IPossessionActions instance)
         {
-            if (instance == null || m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PossessionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PossessionActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Possess.started += instance.OnPossess;
+            @Possess.performed += instance.OnPossess;
+            @Possess.canceled += instance.OnPossess;
         }
 
-        private void UnregisterCallbacks(IObjectPossessionActions instance)
+        private void UnregisterCallbacks(IPossessionActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Possess.started -= instance.OnPossess;
+            @Possess.performed -= instance.OnPossess;
+            @Possess.canceled -= instance.OnPossess;
         }
 
-        public void RemoveCallbacks(IObjectPossessionActions instance)
+        public void RemoveCallbacks(IPossessionActions instance)
         {
-            if (m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PossessionActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IObjectPossessionActions instance)
+        public void SetCallbacks(IPossessionActions instance)
         {
-            foreach (var item in m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PossessionActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PossessionActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public ObjectPossessionActions @ObjectPossession => new ObjectPossessionActions(this);
+    public PossessionActions @Possession => new PossessionActions(this);
     private int m_LeftKeyboardSchemeIndex = -1;
     public InputControlScheme LeftKeyboardScheme
     {
@@ -1169,8 +1220,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJoin(InputAction.CallbackContext context);
         void OnNewGame(InputAction.CallbackContext context);
     }
-    public interface IObjectPossessionActions
+    public interface IPossessionActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnPossess(InputAction.CallbackContext context);
     }
 }

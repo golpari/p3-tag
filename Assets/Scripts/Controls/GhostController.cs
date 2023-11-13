@@ -77,8 +77,11 @@ public class GhostController : BaseController
 
     protected override void Update()
     {
-        base.Update(); 
-        HandleFloating();
+        if (actionMap.enabled)
+        {
+            base.Update(); 
+            HandleFloating();
+        }
     }
 
     private void HandleFloating()
@@ -121,9 +124,7 @@ public class GhostController : BaseController
 
     private void TogglePossession()
     {
-        EventBus.Publish<PossessionEvent>(new PossessionEvent());
-        // Change Map to Possession Controls
-
+        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
     }
 
 }

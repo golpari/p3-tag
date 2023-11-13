@@ -611,7 +611,7 @@
             ]
         },
         {
-            "name": "ObjectPossession",
+            "name": "Possession",
             "id": "47970745-a372-4a3c-aaa6-0b2ae4a2ff3e",
             "actions": [
                 {
@@ -622,6 +622,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Possess",
+                    "type": "Button",
+                    "id": "f138086e-02b8-4b2b-a185-365c254561e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -745,6 +754,39 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "cc7c7f6c-e7bd-497b-8354-c7bd33abe764",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "LeftKeyboard",
+                    "action": "Possess",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cde8e427-3e17-484e-9c1b-4e8bc4bf014b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Possess",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f14524c0-2a1e-4713-9c73-0abf8a8e4396",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "RightKeyboard",
+                    "action": "Possess",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
