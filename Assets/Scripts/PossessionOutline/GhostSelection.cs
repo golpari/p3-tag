@@ -1,51 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GhostSelection : MonoBehaviour
 {
-    public float raycastDistance = 10f; // Maximum distance of raycast
     public LayerMask raycastLayerMask; // LayerMask to filter which objects are raycasted
-    private GameObject closestObject = null; // To keep track of the closest object
+    public float lenOfBox = 1f;
     private GameObject previousClosestObject = null; // To keep track of the previously closest object
 
-    // perform raycasts in the four cardinal directions.
-    void Update()
+    // temp fix for having no visible outline at the start
+    private void Awake()
     {
-        closestObject = null;
-        float closestDistance = raycastDistance;
-
-        CheckRaycast(Vector3.forward, ref closestDistance);
-        CheckRaycast(-Vector3.forward, ref closestDistance);
-        CheckRaycast(Vector3.right, ref closestDistance);
-        CheckRaycast(-Vector3.right, ref closestDistance);
-
-        UpdateOutlineEffect();
-    }
-
-    // perform a raycast in a given direction and update the closest object if necessary
-    void CheckRaycast(Vector3 direction, ref float closestDistance)
-    {
-        RaycastHit hit;
-        Vector3 rayOrigin = transform.position;
-        Vector3 rayDirection = direction;
-
-        // Draw the ray in the Scene view
-        Debug.DrawRay(rayOrigin, rayDirection * raycastDistance, Color.red, 0.1f);
-        if (Physics.Raycast(transform.position, direction, out hit, raycastDistance, raycastLayerMask))
+        Outline[] allOutlines = GameObject.FindObjectsOfType<Outline>();
+        foreach (Outline outline in allOutlines)
         {
-            float distance = hit.distance;
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestObject = hit.collider.gameObject;
-            }
+            outline.enabled = false;
         }
     }
 
+    // perform a raycast box around the player and find the closest object
+    void Update()
+    {
+        Vector3 boxCenter = transform.position; // Center of the box, typically the player's position
+        Vector3 boxHalfExtents = new Vector3(lenOfBox, lenOfBox, lenOfBox); // Half the size of the box in each direction
+        Quaternion boxOrientation = Quaternion.identity; // Rotation of the box, 'Quaternion.identity' for no rotation
+        Collider[] hitColliders = Physics.OverlapBox(boxCenter, boxHalfExtents, boxOrientation, raycastLayerMask);
+
+        GameObject closestObject = FindClosestObject(hitColliders);
+
+        UpdateOutlineEffect(closestObject);
+    }
+
+    GameObject FindClosestObject(Collider[] colliders)
+    {
+        GameObject closestObject = null;
+        float closestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Collider collider in colliders)
+        {
+            float distance = (collider.gameObject.transform.position - currentPosition).sqrMagnitude;
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestObject = collider.gameObject;
+            }
+        }
+
+        return closestObject;
+    }
+
     // update the outline effect, enabling it on the closest object and disabling it on others
-    void UpdateOutlineEffect()
+    void UpdateOutlineEffect(GameObject closestObject)
     {
         if (closestObject != previousClosestObject)
         {
@@ -69,9 +75,10 @@ public class GhostSelection : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = true;
+            EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
         }
         else
-            Debug.Log("outline comp is null");
+            Debug.Log("outline enable is null on " + obj.name);
     }
 
     void DisableOutlineEffect(GameObject obj)
@@ -80,15 +87,23 @@ public class GhostSelection : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = false;
+            EventBus.Publish<OutlineEvent>(new OutlineEvent(false));
         }
         else
         {
-            Debug.Log("outline comp is null");
+            Debug.Log("outline disable is null on" + obj.name);
         }
     }
 
+    // called by Unity to draw Gizmos to visualize raycast.
+    void OnDrawGizmos()
+    {
+        Vector3 boxCenter = transform.position; // Center of the box
+        Vector3 boxHalfExtents = new Vector3(lenOfBox, lenOfBox, lenOfBox); // Half the size of the box in each direction
 
-
-
+        // Draw a wire cube at the position with the given size
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(boxCenter, boxHalfExtents * 2); // Multiply by 2 because it needs full size
+    }
 
 }

@@ -111,7 +111,7 @@ public class Outline : MonoBehaviour {
         materials.Remove(outlineFillMaterial);
         renderer.materials = materials.ToArray();
      }
-   }
+    }
 
   void OnEnable() {
     foreach (var renderer in renderers) {

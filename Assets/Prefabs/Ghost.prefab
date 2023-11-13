@@ -164,7 +164,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: LeftKeyboard
   m_DefaultActionMap: Ghost
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -182,9 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   upLimit: 5
-  defaultGravityScale: 1
-  strongGravityScale: 10
-  lowGravityScale: 0.25
+  defaultGravityScale: 10
+  lowGravityScale: 0.5
+  gravityFX: {fileID: 440973251922343436}
 --- !u!114 &2163759717735886469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e760a4593774a3e828dca5b9206e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDistance: 10
   raycastLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1536
+  lenOfBox: 1

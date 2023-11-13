@@ -23,6 +23,7 @@ public class GhostController : BaseController
     private InputAction gravityAction;
     private InputAction floatUpAction;
     private InputAction floatDownAction;
+    private InputAction possessAction;
 
     // Convert input to var
     private bool isFloatingUp;
@@ -36,6 +37,7 @@ public class GhostController : BaseController
         gravityAction = actionMap.FindAction("ToggleGravity");
         floatUpAction = actionMap.FindAction("FloatUp");
         floatDownAction = actionMap.FindAction("FloatDown");
+        possessAction = actionMap.FindAction("Possess");
     }
 
     protected override void SubscribeActions()
@@ -52,6 +54,7 @@ public class GhostController : BaseController
 
         lightAction.performed += _ => ToggleLighting();
         gravityAction.performed += _ => ToggleGravity();
+        possessAction.performed += _ => TogglePossession();
     }
  
     protected override void UnsubscribeActions()
@@ -68,6 +71,7 @@ public class GhostController : BaseController
 
         lightAction.performed -= _ => ToggleLighting();
         gravityAction.performed -= _ => ToggleGravity();
+        possessAction.performed -= _ => TogglePossession();
 
     }
 
@@ -113,6 +117,13 @@ public class GhostController : BaseController
     {
         isDark = !isDark;
         EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+    }
+
+    private void TogglePossession()
+    {
+        EventBus.Publish<PossessionEvent>(new PossessionEvent());
+        // Change Map to Possession Controls
+
     }
 
 }

@@ -251,6 +251,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Possess"",
+                    ""type"": ""Button"",
+                    ""id"": ""49ab9af0-aa03-45d3-9a91-0887e1cdf538"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -465,6 +474,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a438ddb1-92bf-409a-b76e-ba374558677e"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ToggleGravity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""31a23134-4bb4-4b33-a3b7-0414b702a954"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -493,6 +513,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""ToggleLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee1a0085-f940-436c-b648-d08529b5b94f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edd0b9c0-2acf-4f5a-b123-300ae70ac575"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afa57ab1-b386-4db1-b616-d8e36d266906"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Possess"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -578,6 +631,144 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ObjectPossession"",
+            ""id"": ""47970745-a372-4a3c-aaa6-0b2ae4a2ff3e"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""988c6420-76bd-4fec-a478-c5e2c72e03a3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bf5f8940-1467-404d-a71c-9dd54b0b3e4a"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""0e4cb939-ef87-4edf-b042-d1843f1fd780"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8f1335d6-3004-4801-8f17-c57d2b2253cb"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ed993221-d74a-4157-bb84-e106411ee3aa"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1f434ce6-f15c-4878-89c6-d3c3b8ece464"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3b2a5423-58c2-4ec4-8c67-4ce76ea53d18"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ArrowKeys"",
+                    ""id"": ""68acf19f-d0f0-42c1-9c41-6c8cf138690c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3b80ca91-1c41-4993-89e4-12d665a681bb"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""c66877af-db14-469f-a87d-6292a5695a07"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5ce9552d-2e49-475f-b834-72218168a357"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""29095051-f032-40f5-a517-58941f8acae6"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -627,10 +818,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Ghost_FloatDown = m_Ghost.FindAction("FloatDown", throwIfNotFound: true);
         m_Ghost_ToggleLight = m_Ghost.FindAction("ToggleLight", throwIfNotFound: true);
         m_Ghost_ToggleGravity = m_Ghost.FindAction("ToggleGravity", throwIfNotFound: true);
+        m_Ghost_Possess = m_Ghost.FindAction("Possess", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Join = m_UI.FindAction("Join", throwIfNotFound: true);
         m_UI_NewGame = m_UI.FindAction("NewGame", throwIfNotFound: true);
+        // ObjectPossession
+        m_ObjectPossession = asset.FindActionMap("ObjectPossession", throwIfNotFound: true);
+        m_ObjectPossession_Move = m_ObjectPossession.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -751,6 +946,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ghost_FloatDown;
     private readonly InputAction m_Ghost_ToggleLight;
     private readonly InputAction m_Ghost_ToggleGravity;
+    private readonly InputAction m_Ghost_Possess;
     public struct GhostActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -760,6 +956,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @FloatDown => m_Wrapper.m_Ghost_FloatDown;
         public InputAction @ToggleLight => m_Wrapper.m_Ghost_ToggleLight;
         public InputAction @ToggleGravity => m_Wrapper.m_Ghost_ToggleGravity;
+        public InputAction @Possess => m_Wrapper.m_Ghost_Possess;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -784,6 +981,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ToggleGravity.started += instance.OnToggleGravity;
             @ToggleGravity.performed += instance.OnToggleGravity;
             @ToggleGravity.canceled += instance.OnToggleGravity;
+            @Possess.started += instance.OnPossess;
+            @Possess.performed += instance.OnPossess;
+            @Possess.canceled += instance.OnPossess;
         }
 
         private void UnregisterCallbacks(IGhostActions instance)
@@ -803,6 +1003,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ToggleGravity.started -= instance.OnToggleGravity;
             @ToggleGravity.performed -= instance.OnToggleGravity;
             @ToggleGravity.canceled -= instance.OnToggleGravity;
+            @Possess.started -= instance.OnPossess;
+            @Possess.performed -= instance.OnPossess;
+            @Possess.canceled -= instance.OnPossess;
         }
 
         public void RemoveCallbacks(IGhostActions instance)
@@ -874,6 +1077,52 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // ObjectPossession
+    private readonly InputActionMap m_ObjectPossession;
+    private List<IObjectPossessionActions> m_ObjectPossessionActionsCallbackInterfaces = new List<IObjectPossessionActions>();
+    private readonly InputAction m_ObjectPossession_Move;
+    public struct ObjectPossessionActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public ObjectPossessionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_ObjectPossession_Move;
+        public InputActionMap Get() { return m_Wrapper.m_ObjectPossession; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ObjectPossessionActions set) { return set.Get(); }
+        public void AddCallbacks(IObjectPossessionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(IObjectPossessionActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(IObjectPossessionActions instance)
+        {
+            if (m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IObjectPossessionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ObjectPossessionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ObjectPossessionActions @ObjectPossession => new ObjectPossessionActions(this);
     private int m_LeftKeyboardSchemeIndex = -1;
     public InputControlScheme LeftKeyboardScheme
     {
@@ -913,10 +1162,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFloatDown(InputAction.CallbackContext context);
         void OnToggleLight(InputAction.CallbackContext context);
         void OnToggleGravity(InputAction.CallbackContext context);
+        void OnPossess(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnJoin(InputAction.CallbackContext context);
         void OnNewGame(InputAction.CallbackContext context);
+    }
+    public interface IObjectPossessionActions
+    {
+        void OnMove(InputAction.CallbackContext context);
     }
 }
