@@ -10694,14 +10694,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
-    - target: {fileID: 2163759717735886469, guid: 77457268e4d6b8f49b728c34793ff6dc, type: 3}
-      propertyPath: lenOfBox
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2163759717735886469, guid: 77457268e4d6b8f49b728c34793ff6dc, type: 3}
-      propertyPath: raycastLayerMask.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 5102587073462569515, guid: 77457268e4d6b8f49b728c34793ff6dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.27
@@ -25891,6 +25883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec674b44ee5a1240b9e70f2505eab1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!114 &1996265488
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -199,5 +199,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastLayerMask:
     serializedVersion: 2
-    m_Bits: 1536
-  lenOfBox: 1
+    m_Bits: 1024
+  lenOfBox: 0.75
