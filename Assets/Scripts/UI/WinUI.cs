@@ -14,13 +14,15 @@ public class WinUI : MonoBehaviour
 
     void _OnPlayerWin(EndGameEvent e)
     {
+        //Debug.Log(EntrywayTrigger.level);
         if (e.playerWinnerName == "Ghost")
         {
             PlayerController.num_lives -= 1;
             GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
         }
-        else {
-            GetComponent<Text>().text = "The Player sucesfully escaped! \n Press any key to continue";
+        else if (EndGame.index == 3)
+        {
+            GetComponent<Text>().text = "The Player successfully escaped! \n Press any key to continue";
         }
     }
 

@@ -7,6 +7,7 @@ TagManager:
   - floor
   - Ghost
   - jump_obj
+  - Flashlight
   layers:
   - Default
   - TransparentFX

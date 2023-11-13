@@ -44,7 +44,7 @@ public class CountdownUI : MonoBehaviour
 
     void _OnGameEnd(EndGameEvent e)
     {
-        runGame = false;
+        //runGame = false;
     }
 
     // change from 255 255 255 to 255 0 0
@@ -76,13 +76,17 @@ public class CountdownUI : MonoBehaviour
 
     public IEnumerator ShakeEffect(float duration, float radius)
     {
+        Vector3 temp = camera_.transform.localPosition;
         shake = true;
+
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
-            camera_.transform.localPosition = UnityEngine.Random.onUnitSphere * radius;
+            camera_.transform.position = temp + UnityEngine.Random.onUnitSphere * radius;
+
             yield return null;
         }
-        camera_.transform.localPosition = Vector3.zero;
+
+        camera_.transform.localPosition = temp;
         shake = false;
     }
 
