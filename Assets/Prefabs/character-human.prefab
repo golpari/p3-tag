@@ -1,5 +1,112 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7151203331450019712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2972569352924278543}
+  - component: {fileID: 3243602253667617327}
+  - component: {fileID: 6264275378730621761}
+  m_Layer: 8
+  m_Name: Point Light
+  m_TagString: Flashlight
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2972569352924278543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151203331450019712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8068548830768163168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &3243602253667617327
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151203331450019712}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.5176471, b: 0, a: 1}
+  m_Intensity: 0
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &6264275378730621761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151203331450019712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82a96a71479fbf44a71c689745612a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7526507926000307851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.82
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -102,7 +209,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2972569352924278543}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       insertIndex: -1
@@ -115,7 +225,7 @@ PrefabInstance:
       addedObject: {fileID: 5403149695425269923}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9154102747234478503}
+      addedObject: {fileID: 582612612004202283}
   m_SourcePrefab: {fileID: 100100000, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
 --- !u!1 &7256124479596934106 stripped
 GameObject:
@@ -147,7 +257,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5876516225727753695
 CapsuleCollider:
@@ -202,7 +312,7 @@ MonoBehaviour:
   m_DefaultActionMap: Ghost
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &9154102747234478503
+--- !u!114 &582612612004202283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,11 +321,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7256124479596934106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab42f08770f22746b46ebaabbf4e2d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7af17eda6abff7f42af04f9c2405ab90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  upLimit: 5
-  defaultGravityScale: 5
-  lowGravityScale: 5
-  gravityFX: {fileID: 0}
+  inputAsset: {fileID: -944628639613478452, guid: 688dd728fbe1a754ab12ad57f3bc51de, type: 3}
+  jumpForce: 5
+  gravityScale: 1
+  doubleJump: 1
+  jumpTimeLimit: 0.25
+  downwardGravityFactor: 4
+  startingPosition: {x: 0, y: -12, z: -3}
+--- !u!4 &8068548830768163168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 03d4be3a7ace6a8489561cc625fae1a4, type: 3}
+  m_PrefabInstance: {fileID: 7526507926000307851}
+  m_PrefabAsset: {fileID: 0}
