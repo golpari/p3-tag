@@ -50,4 +50,9 @@ public class DoorOpen : MonoBehaviour
 
         transform.position = endPosition; // Ensure the position is set exactly at the end position after the loop
     }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(artifactPickupSubscription);
+    }
 }

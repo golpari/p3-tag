@@ -26,6 +26,7 @@ public class PlayerController : BaseController
     // Input System related variables
     private InputAction jumpAction;
 
+    private Subscription<ThiefDiedEvent> thiefDiedSubscription;
     private Subscription<ChangeGravityEvent> changeGravitySubscription;
     private Subscription<EndCountdownEvent> endCountdownSubscription;
 
@@ -45,6 +46,8 @@ public class PlayerController : BaseController
         changeGravitySubscription = EventBus.Subscribe<ChangeGravityEvent>(_OnGravityChange);
         // Subscribe to the EndCountdownEvent
         endCountdownSubscription = EventBus.Subscribe<EndCountdownEvent>(_OnEndCountdown);
+        //Subscript to the thiefDiedEvent
+        thiefDiedSubscription = EventBus.Subscribe<ThiefDiedEvent>(_OnThiefDied);
     }
     private void _OnGravityChange(ChangeGravityEvent e)
     {
@@ -59,6 +62,12 @@ public class PlayerController : BaseController
         string winner = "Ghost";
         EventBus.Publish<EndGameEvent>(new EndGameEvent(winner));
 
+    }
+    
+    private void _OnThiefDied(ThiefDiedEvent e)
+    {
+        //whenever the player dies, its lives are decreased
+        num_lives -= e.livesLost;
     }
     protected override void SubscribeActions()
     {
@@ -97,7 +106,7 @@ public class PlayerController : BaseController
         // order is important
         HandleJump();
         HandleMovement();
-        HandleFall();
+      //  HandleFall();
     }
 
     private void FixedUpdate()
@@ -198,6 +207,7 @@ public class PlayerController : BaseController
     {
         EventBus.Unsubscribe(changeGravitySubscription);
         EventBus.Unsubscribe(endCountdownSubscription);
+        EventBus.Unsubscribe(thiefDiedSubscription);
     }
 
 }

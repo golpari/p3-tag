@@ -17,7 +17,9 @@ public class WinUI : MonoBehaviour
         //Debug.Log(EntrywayTrigger.level);
         if (e.playerWinnerName == "Ghost")
         {
-            PlayerController.num_lives -= 1;
+            // TODO: rearrange this, the number of lives is decreased in the playerController based on the thief died event
+            //TODO (for when we have multiple environments): add a check that checks if the num of lives hits 0 or below, if yes, restart from the first scene instead of just the one you are in
+            //PlayerController.num_lives -= 1;
             GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
         }
         else if (EndGame.index == 3)

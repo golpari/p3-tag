@@ -3111,7 +3111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8068548830768163168, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.18
       objectReference: {fileID: 0}
     - target: {fileID: 8068548830768163168, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3163,7 +3163,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256124479596934106, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 331425793}
+      addedObject: {fileID: 331425799}
   m_SourcePrefab: {fileID: 100100000, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
 --- !u!4 &66226429 stripped
 Transform:
@@ -3614,9 +3614,10 @@ GameObject:
   m_Component:
   - component: {fileID: 80166418}
   - component: {fileID: 80166417}
+  - component: {fileID: 80166419}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3649,6 +3650,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &80166419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80166416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdef25d054674d941b9462a18916cf43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &81558905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16074,7 +16087,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7256124479596934106, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
   m_PrefabInstance: {fileID: 66226428}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &331425793
+--- !u!114 &331425799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16083,16 +16096,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 331425786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af17eda6abff7f42af04f9c2405ab90, type: 3}
+  m_Script: {fileID: 11500000, guid: a6e836a97a6db55408b27886b134cc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  jumpForce: 5
-  gravityScale: 1
-  doubleJump: 1
-  jumpTimeLimit: 0.25
-  downwardGravityFactor: 4
-  startingPosition: {x: 0, y: -12, z: -3}
 --- !u!1001 &332176760
 PrefabInstance:
   m_ObjectHideFlags: 0

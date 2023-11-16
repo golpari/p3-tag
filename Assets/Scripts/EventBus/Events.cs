@@ -59,5 +59,13 @@ public class StartGameEvent
 public class ArtifactPickupEvent
 {
     public int artRoomNum;
-    public ArtifactPickupEvent(int _artRoomNum){artRoomNum = _artRoomNum;}
+    public ArtifactPickupEvent(int _artRoomNum){artRoomNum = _artRoomNum; }
 }
+
+public class ThiefDiedEvent
+{
+    public int livesLost;
+    public ThiefDiedEvent(int _livesLost) { livesLost = _livesLost; }
+
+}
+

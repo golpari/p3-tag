@@ -7,6 +7,10 @@ TagManager:
   - floor
   - Ghost
   - Possessable
+  - jump_obj
+  - DeathTrap
+  - Flashlight
+  - GameManager
   layers:
   - Default
   - TransparentFX

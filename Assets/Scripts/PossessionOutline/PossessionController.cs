@@ -65,7 +65,7 @@ public class PossessionController : BaseController
     // Only run update if the action map is enabled
     protected override void Update()
     {
-        Debug.Log("Current Action Map: " + actionMap.name);
+        //Debug.Log("Current Action Map: " + actionMap.name);
         if (actionMap.enabled)
             base.Update();
     }
