@@ -13,7 +13,7 @@ public class PossessionController : BaseController
     {
         possessionSubscription = EventBus.Subscribe<PossessionEvent>(_OnPossession);
         ghostSelection = GetComponent<GhostSelection>();
-        inputAsset.FindActionMap("Possess").Disable();
+        inputAsset.FindActionMap("Possession").Disable();
     }
     private void _OnPossession (PossessionEvent e)
     {
@@ -22,12 +22,12 @@ public class PossessionController : BaseController
         {
             // Change Map to Possession Controls
             e.inputAsset.FindActionMap("Ghost").Disable();
-            e.inputAsset.FindActionMap("Possess").Enable();
+            e.inputAsset.FindActionMap("Possession").Enable();
         }
-        else if (e.inputAsset.FindActionMap("Possess").enabled)
+        else if (e.inputAsset.FindActionMap("Possession").enabled)
         {
             // Change Map to Ghost Controls
-            e.inputAsset.FindActionMap("Possess").Disable();
+            e.inputAsset.FindActionMap("Possession").Disable();
             e.inputAsset.FindActionMap("Ghost").Enable();
         }
         else
