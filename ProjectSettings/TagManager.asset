@@ -11,6 +11,7 @@ TagManager:
   - DeathTrap
   - Flashlight
   - GameManager
+  - SlowTrap
   layers:
   - Default
   - TransparentFX
