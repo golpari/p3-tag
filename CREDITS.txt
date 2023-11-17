@@ -3,3 +3,9 @@ https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-g
 
 Stone UI from: SiLena_ART on Unity Asset Store "Stone UI"
 https://assetstore.unity.com/packages/2d/gui/icons/stone-ui-182526
+
+Dungeon models and animations from: kenney.nl "Mini Dungeon"
+https://kenney.nl/assets/mini-dungeon
+
+Ghost 3D model and animations from: Meshtint Studio on Unity Asset Store "Ghost Cute Series"
+https://assetstore.unity.com/packages/3d/characters/creatures/ghost-cute-series-162548
