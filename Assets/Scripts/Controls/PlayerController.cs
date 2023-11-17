@@ -124,6 +124,7 @@ public class PlayerController : BaseController
             // Perform the jump
             rb.velocity = Vector3.up * jumpForce;
             isGrounded = false;
+            animator.SetBool("isJumping", true);
             doubleJump -= 1;
         }
         else if (jumpPressed && !falling && !isGrounded)
@@ -188,6 +189,7 @@ public class PlayerController : BaseController
         falling = false;
         jumpTime = 1.0f;
         isGrounded = true;
+        animator.SetBool("isJumping", false);
         //EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
         scale = 1.0f;
         doubleJump = 1; // Reset double jump

@@ -11,10 +11,12 @@ public abstract class BaseController : MonoBehaviour
     public InputActionAsset inputAsset;
     protected InputActionMap actionMap;
     protected InputAction movementAction;
+    public Animator animator;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
         inputAsset = GetComponent<PlayerInput>().actions;
 
@@ -60,11 +62,30 @@ public abstract class BaseController : MonoBehaviour
         float moveX = currentMovementInput.x; // Left and right
         float moveZ = currentMovementInput.y; // Up and down
 
+        if (currentMovementInput.x != 0.0f ||
+            currentMovementInput.y != 0.0f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
         // Calculate the movement vector in world space
         Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed;
 
         // Apply the movement to the Rigidbody while keeping the y-velocity
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+
+        if (movement != Vector3.zero)
+        {
+            //transform.forward = movement;
+
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720.0f * Time.deltaTime);
+        }
     }
 
     protected void OnMovementInput(InputAction.CallbackContext context)
