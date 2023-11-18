@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1694997187426758645}
   - component: {fileID: 8769352875833581643}
   - component: {fileID: 4257912209118433288}
-  m_Layer: 0
+  - component: {fileID: 7202347317144704682}
+  - component: {fileID: 5754798374623221045}
+  m_Layer: 10
   m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,12 +102,42 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7202347317144704682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42304053952446946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b8d238d9d014d4d90687e1bc2180a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5754798374623221045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42304053952446946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.01579115, g: 0, b: 0.9716981, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3129714168434907498
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +149,7 @@ GameObject:
   - component: {fileID: 5197162028984439688}
   - component: {fileID: 4406201172121857241}
   - component: {fileID: 6136036965836875163}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
