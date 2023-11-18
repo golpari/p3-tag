@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 
@@ -19,11 +20,16 @@ public class GhostController : BaseController
     // Convert input to var
     private bool isFloatingUp;
     private bool isFloatingDown;
-<<<<<<< HEAD
-    bool super = false;
-=======
 
->>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
+    bool super = false;
+
+    private bool isLowGravity = false;
+    private bool isDark = false;
+
+    public float defaultGravityScale;
+    public float lowGravityScale;
+    public GameObject gravityFX;
+
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
@@ -114,7 +120,6 @@ public class GhostController : BaseController
         }
     }
 
-<<<<<<< HEAD
     private void ToggleGravity()
     {
         // Default to low gravity.
@@ -139,8 +144,6 @@ public class GhostController : BaseController
         
     }
 
-=======
->>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
     private void TogglePossession()
     {
         if (spirit_slider.current_value >= 75f) {
