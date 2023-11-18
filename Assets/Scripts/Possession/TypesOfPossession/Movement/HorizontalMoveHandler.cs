@@ -3,6 +3,8 @@ using UnityEngine;
 public class HorizontalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
 {
     private bool isActive = false;
+    [SerializeField] private float maxX = 10f;
+    [SerializeField] private float minX = -10f; 
 
     public void EnableAction()
     {
@@ -15,12 +17,17 @@ public class HorizontalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
     public void Move(Vector2 currentMovementInput, float speed)
     {
         if (!isActive) return;
-        // Read vertical input and apply movement
-        float moveX = currentMovementInput.x;
-        // Calculate the movement in Y direction
-        Vector3 movement = new Vector3(moveX * speed * Time.deltaTime, 0, 0);
-        // Apply the movement to the object's transform
-        transform.Translate(movement, Space.World);
+        //// Read vertical input and apply movement
+        float moveX = currentMovementInput.x * speed * Time.deltaTime;
+
+        // Get the current position and apply the intended movement
+        Vector3 newPosition = transform.position + new Vector3(moveX, 0, 0);
+
+        // Constrain the new X position
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+
+        // Apply the constrained position to the object's transform
+        transform.position = newPosition;
     }
 
 }
