@@ -213,24 +213,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleLight",
-                    "type": "Button",
-                    "id": "bd5e7279-76d6-4570-9f15-ac1c90ffefec",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ToggleGravity",
-                    "type": "Button",
-                    "id": "b2a21f4e-ce0a-4988-adf1-064ef02bbc10",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Possess",
                     "type": "Button",
                     "id": "49ab9af0-aa03-45d3-9a91-0887e1cdf538",
@@ -425,72 +407,6 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "FloatDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "18dbc261-c8fe-4001-b841-615419449f2a",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "LeftKeyboard",
-                    "action": "ToggleGravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0a29026e-d5d7-4fc0-811c-68b82f5d74aa",
-                    "path": "<Keyboard>/backslash",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard",
-                    "action": "ToggleGravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a438ddb1-92bf-409a-b76e-ba374558677e",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "ToggleGravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "31a23134-4bb4-4b33-a3b7-0414b702a954",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "LeftKeyboard",
-                    "action": "ToggleLight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e7d7f434-d9d5-4753-bbcc-949f11ff9ec2",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "RightKeyboard",
-                    "action": "ToggleLight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "244c45d1-2c94-4c1b-b3ae-bc8fb129ab5d",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "ToggleLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

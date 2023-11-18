@@ -66,7 +66,7 @@ public class PossessionController : BaseController
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         possessAction.performed += _ => TogglePossession();
-        toggleAction.performed += _ => AttemptToggleLighting();
+        toggleAction.performed += _ => AttemptToggle();
     }
 
     protected override void UnsubscribeActions()
@@ -76,7 +76,7 @@ public class PossessionController : BaseController
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         possessAction.performed -= _ => TogglePossession();
-        toggleAction.performed -= _ => AttemptToggleLighting();
+        toggleAction.performed -= _ => AttemptToggle();
     }
 
     // Only run update if the action map is enabled
@@ -93,12 +93,17 @@ public class PossessionController : BaseController
             movable.Move(currentMovementInput, movementSpeed);
     }
 
-    private void AttemptToggleLighting()
+    private void AttemptToggle()
     {
-        // Check if the current possession action is a LightingHandler
+        // Check if the current possession action is a light type
         if (currPossessionAction is LightHandler lightHandler)
         {
             lightHandler.ToggleLighting();
+        }
+        // check if curr possession is a low grav type
+        if (currPossessionAction is LowGravityHandler lowGravityHandler)
+        {
+            lowGravityHandler.ToggleGravity();
         }
     }
 
