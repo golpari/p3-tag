@@ -24,12 +24,16 @@ public class PossessionController : BaseController
         // Check to see which map is active
         if (e.inputAsset.FindActionMap("Ghost").enabled)
         {
+            // make sure there is a possessable object to possess
+            currObject = ghostSelection.GetClosestObject();
+            if (!currObject)
+                return;
+
             // Change Map to Possession Controls
             e.inputAsset.FindActionMap("Ghost").Disable();
             e.inputAsset.FindActionMap("Possession").Enable();
 
             // Run possession depending on what type it is
-            currObject = ghostSelection.GetClosestObject();
             currPossessionAction = currObject.GetComponent<IPossessionAction>();
             currPossessionAction.EnableAction();
         }
