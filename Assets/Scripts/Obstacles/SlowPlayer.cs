@@ -3,26 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Put this script on traps that are tagged with 'SlowTrap'.
- * This script slows the player's movement down while the trap is interacted with.
+ * Put this script on the player.
+ * This script slows the player's movement down while the any trap is interacted with.
+ * These types of traps are tagged with "SlowTrap" and include traps like quicksand.
  */
 
 public class SlowPlayer : MonoBehaviour
 {
+
+    private float originalSpeed = 0;
+    private float slowSpeed = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        originalSpeed = PlayerController.movementSpeed;
+        slowSpeed = PlayerController.movementSpeed / 2;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: add slowing script
+        // slow to half speed
+        if (other.gameObject.CompareTag("SlowTrap"))
+        {
+            PlayerController.movementSpeed = slowSpeed;
+        }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // slow to half speed
+        if (other.gameObject.CompareTag("SlowTrap"))
+        {
+            PlayerController.movementSpeed = slowSpeed;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // reset to regular speed when exiting the slowtrap
+        if (other.gameObject.CompareTag("SlowTrap"))
+        {
+            PlayerController.movementSpeed = originalSpeed;
+        }
+    }
+
+
 }
