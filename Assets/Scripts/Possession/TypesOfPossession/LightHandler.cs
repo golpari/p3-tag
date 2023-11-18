@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class LightHandler : PossessionController
-{
-    protected void Run(GameObject currObject)
-    {
-        Debug.Log("run");
-    }
-}
+//public class LightHandler : PossessionController
+//{
+//    protected void Run(GameObject currObject)
+//    {
+//        Debug.Log("run");
+//    }
+//}

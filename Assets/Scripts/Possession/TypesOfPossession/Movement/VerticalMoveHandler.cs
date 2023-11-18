@@ -1,21 +1,30 @@
 using UnityEngine;
 
-public class VerticalMoveHandler: PossessionController
+public class VerticalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
 {
-    public void Run(GameObject currObject)
-    { 
-        VerticalMovePossessed isVertMove = currObject.GetComponent<VerticalMovePossessed>();
-        //if the nearest object is of type VertMove...
-        if (currObject.GetComponent<VerticalMovePossessed>() != null)
-        {
-            // Read the input from the user for Y-axis movement
-            float moveY = currentMovementInput.y;
-
-            // Calculate the movement in Y direction
-            Vector3 movement = new Vector3(0, moveY * movementSpeed * Time.deltaTime, 0);
-
-            // Apply the movement to the object's transform
-            currObject.transform.Translate(movement, Space.World);
-        }
+    private bool isActive = false;
+    public void Execute()
+    {
+        Debug.Log("Object possessed: " + gameObject.name);
     }
+
+    public void EnableAction()
+    {
+        isActive = true;
+    }
+    public void DisableAction()
+    {
+        isActive = false;
+    }
+    public void Move(Vector2 currentMovementInput, float speed)
+    {
+        if (!isActive) return;
+        // Read vertical input and apply movement
+        float moveY = currentMovementInput.y;
+        // Calculate the movement in Y direction
+        Vector3 movement = new Vector3(0, moveY * speed * Time.deltaTime, 0);
+        // Apply the movement to the object's transform
+        transform.Translate(movement, Space.World);
+    }
+
 }

@@ -9,8 +9,8 @@ public class PossessionController : BaseController
     private InputAction possessAction;
     protected GhostSelection ghostSelection;
     Subscription<PossessionEvent> possessionSubscription;
-    private VerticalMoveHandler verticalMoveHandler = new VerticalMoveHandler();
-    private HorizontalMoveHandler horizontalMoveHandler = new HorizontalMoveHandler();
+    private IPossessionAction currPossessionAction;
+    GameObject currObject;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class PossessionController : BaseController
         ghostSelection = GetComponent<GhostSelection>();
         inputAsset.FindActionMap("Possession").Disable();
     }
-    private void _OnPossession (PossessionEvent e)
+    private void _OnPossession(PossessionEvent e)
     {
         // Check to see which map is active
         if (e.inputAsset.FindActionMap("Ghost").enabled)
@@ -26,12 +26,22 @@ public class PossessionController : BaseController
             // Change Map to Possession Controls
             e.inputAsset.FindActionMap("Ghost").Disable();
             e.inputAsset.FindActionMap("Possession").Enable();
+
+            // Run possession depending on what type it is
+            currObject = ghostSelection.GetClosestObject();
+            currPossessionAction = currObject.GetComponent<IPossessionAction>();
+            currPossessionAction.EnableAction();
         }
         else if (e.inputAsset.FindActionMap("Possession").enabled)
         {
             // Change Map to Ghost Controls
             e.inputAsset.FindActionMap("Possession").Disable();
             e.inputAsset.FindActionMap("Ghost").Enable();
+
+            // Reset the action too and the vars
+            currPossessionAction?.DisableAction();
+            currObject = null;
+            currPossessionAction = null;
         }
         else
         {
@@ -67,62 +77,16 @@ public class PossessionController : BaseController
 
     // Only run update if the action map is enabled
     protected override void Update()
-    { 
+    {
         if (actionMap.enabled)
             base.Update();
     }
 
-    // ***************************************************
-    // Add Movement Possession Here
-    // ***************************************************
     protected override void HandleMovement()
     {
-        
-        // Ghost selection is var in parent class, ghostSelection component
-        GameObject currObject = ghostSelection.GetClosestObject();
-        // Gets the type of possession of the object
-        ObjectPossessed possessionType = currObject.GetComponent<ObjectPossessed>();
-
-        if (possessionType is VerticalMovePossessed)
-        {
-            verticalMoveHandler.Run(currObject);
-        }
-
-        else if (possessionType is HorizontalMovePossessed)
-        {
-            horizontalMoveHandler.Run(currObject);
-
-        }
-        else
-        {
-            defaultMovement(currObject);
-        }
-    }
-
-    // default movement is can move in any direction
-    private void defaultMovement(GameObject currObject)
-    {
-        // Get the directions relative to the camera's orientation
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
-
-        // Remove any influence of the camera's y component
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        // Read the input from the user
-        float moveX = currentMovementInput.x; // Left and right
-        float moveZ = currentMovementInput.y; // Up and down
-
-        // Calculate the movement vector in world space
-        Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed * Time.deltaTime;
-
-        // Apply the movement to the new object's Rigidbody while keeping the y-velocity
-        //curr_rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-        if (currObject != null)
-            currObject.transform.Translate(movement, Space.World);
+        // Implement movement logic for the possessed object
+        if (currPossessionAction is IMovable movable)
+            movable.Move(currentMovementInput, movementSpeed);
     }
 
     private void TogglePossession()
@@ -130,3 +94,29 @@ public class PossessionController : BaseController
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
     }
 }
+
+//// default movement is can move in any direction
+//private void defaultMovement(GameObject currObject)
+//{
+//    // Get the directions relative to the camera's orientation
+//    Vector3 forward = Camera.main.transform.forward;
+//    Vector3 right = Camera.main.transform.right;
+
+//    // Remove any influence of the camera's y component
+//    forward.y = 0;
+//    right.y = 0;
+//    forward.Normalize();
+//    right.Normalize();
+
+//    // Read the input from the user
+//    float moveX = currentMovementInput.x; // Left and right
+//    float moveZ = currentMovementInput.y; // Up and down
+
+//    // Calculate the movement vector in world space
+//    Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed * Time.deltaTime;
+
+//    // Apply the movement to the new object's Rigidbody while keeping the y-velocity
+//    //curr_rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+//    if (currObject != null)
+//        currObject.transform.Translate(movement, Space.World);
+//}
