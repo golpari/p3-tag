@@ -24,12 +24,16 @@ public class PossessionController : BaseController
         // Check to see which map is active
         if (e.inputAsset.FindActionMap("Ghost").enabled)
         {
+            // make sure there is a possessable object to possess
+            currObject = ghostSelection.GetClosestObject();
+            if (!currObject)
+                return;
+
             // Change Map to Possession Controls
             e.inputAsset.FindActionMap("Ghost").Disable();
             e.inputAsset.FindActionMap("Possession").Enable();
 
             // Run possession depending on what type it is
-            currObject = ghostSelection.GetClosestObject();
             currPossessionAction = currObject.GetComponent<IPossessionAction>();
             currPossessionAction.EnableAction();
         }
@@ -66,7 +70,7 @@ public class PossessionController : BaseController
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         possessAction.performed += _ => TogglePossession();
-        toggleAction.performed += _ => AttemptToggleLighting();
+        toggleAction.performed += _ => AttemptToggle();
     }
 
     protected override void UnsubscribeActions()
@@ -76,7 +80,7 @@ public class PossessionController : BaseController
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         possessAction.performed -= _ => TogglePossession();
-        toggleAction.performed -= _ => AttemptToggleLighting();
+        toggleAction.performed -= _ => AttemptToggle();
     }
 
     // Only run update if the action map is enabled
@@ -93,13 +97,24 @@ public class PossessionController : BaseController
             movable.Move(currentMovementInput, movementSpeed);
     }
 
-    private void AttemptToggleLighting()
+    private void AttemptToggle()
     {
+<<<<<<< HEAD
         // Check if the current possession action is a LightingHandler
         if (currPossessionAction is LightHandler lightHandler && spirit_slider.current_value >= 25f)
         {
             EventBus.Publish<SpiritEvent>(new SpiritEvent(-25f));
+=======
+        // Check if the current possession action is a light type
+        if (currPossessionAction is LightHandler lightHandler)
+        {
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
             lightHandler.ToggleLighting();
+        }
+        // check if curr possession is a low grav type
+        if (currPossessionAction is LowGravityHandler lowGravityHandler)
+        {
+            lowGravityHandler.ToggleGravity();
         }
     }
 

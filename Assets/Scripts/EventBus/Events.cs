@@ -7,15 +7,19 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class ChangeGravityEvent
 {
-    public float gravityScale;
+    public static float gravityScale;
 
     // set the gravity scale to the given value
     public ChangeGravityEvent(float _gravityScale, GameObject _gravityFX)
     {
-        gravityScale = _gravityScale;
+        Debug.Log("change to: " + _gravityScale + " from:" + gravityScale);
+        if (gravityScale != _gravityScale)
+            // Toggle low gravity visual effects on and off when gravity has changed
+            _gravityFX.GetComponent<PostProcessVolume>().enabled = !_gravityFX.GetComponent<PostProcessVolume>().enabled;
 
-        // Toggle low gravity visual effects on and off.
-        _gravityFX.GetComponent<PostProcessVolume>().enabled = !_gravityFX.GetComponent<PostProcessVolume>().enabled;
+        gravityScale = _gravityScale;
+        //Debug.Log("current grav:" + gravityScale + "previous grav: " + _gravityScale);
+        Debug.Log("fx enabled: " + _gravityFX.GetComponent<PostProcessVolume>().enabled);
     }
 
     

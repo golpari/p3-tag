@@ -11,19 +11,7 @@ public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
 
-    // Flag for gravity state and lighting state.
-    private bool isLowGravity;
-    // needs to start flipped for some reason
-    private bool isDark = false;
-
-    // Gravity scale presets for different gravity states.
-    [SerializeField] private float defaultGravityScale = 2.0f;
-    [SerializeField] private float lowGravityScale = 0.0005f;
-    [SerializeField] private GameObject gravityFX;
-
     // Input System related variables
-    private InputAction lightAction;
-    private InputAction gravityAction;
     private InputAction floatUpAction;
     private InputAction floatDownAction;
     private InputAction possessAction;
@@ -31,14 +19,16 @@ public class GhostController : BaseController
     // Convert input to var
     private bool isFloatingUp;
     private bool isFloatingDown;
+<<<<<<< HEAD
     bool super = false;
+=======
+
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
         actionMap = inputAsset.FindActionMap("Ghost");
         movementAction = actionMap.FindAction("Move");
-        lightAction = actionMap.FindAction("ToggleLight");
-        gravityAction = actionMap.FindAction("ToggleGravity");
         floatUpAction = actionMap.FindAction("FloatUp");
         floatDownAction = actionMap.FindAction("FloatDown");
         possessAction = actionMap.FindAction("Possess");
@@ -56,8 +46,6 @@ public class GhostController : BaseController
         floatDownAction.performed += ctx => isFloatingDown = true;
         floatDownAction.canceled += ctx => isFloatingDown = false;
 
-        lightAction.performed += _ => ToggleLighting();
-        gravityAction.performed += _ => ToggleGravity();
         possessAction.performed += _ => TogglePossession();
     }
  
@@ -73,8 +61,6 @@ public class GhostController : BaseController
         floatDownAction.performed -= ctx => isFloatingDown = true;
         floatDownAction.canceled -= ctx => isFloatingDown = false;
 
-        lightAction.performed -= _ => ToggleLighting();
-        gravityAction.performed -= _ => ToggleGravity();
         possessAction.performed -= _ => TogglePossession();
 
     }
@@ -128,6 +114,7 @@ public class GhostController : BaseController
         }
     }
 
+<<<<<<< HEAD
     private void ToggleGravity()
     {
         // Default to low gravity.
@@ -152,6 +139,8 @@ public class GhostController : BaseController
         
     }
 
+=======
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
     private void TogglePossession()
     {
         if (spirit_slider.current_value >= 75f) {
