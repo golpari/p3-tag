@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LAB_alpha.unity
     guid: b8836b95c42024def98b5537e7076397
-  - enabled: 1
-    path: Assets/Scenes/LAB_tilemap.unity
-    guid: ce192cd1f470a2a4baa35f0435f357ce
   m_configObjects: {}

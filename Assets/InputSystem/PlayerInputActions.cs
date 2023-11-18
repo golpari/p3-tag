@@ -530,7 +530,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""edd0b9c0-2acf-4f5a-b123-300ae70ac575"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -648,7 +648,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Possess"",
                     ""type"": ""Button"",
-                    ""id"": ""f138086e-02b8-4b2b-a185-365c254561e3"",
+                    ""id"": ""2978effc-0b00-4c58-b104-768d0075092e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""49128643-4407-47df-96b8-5c0d14095acc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -779,7 +788,40 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cc7c7f6c-e7bd-497b-8354-c7bd33abe764"",
+                    ""id"": ""48b74a53-b8b0-4411-81e5-7b666ffd3f53"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09cdad94-6970-430c-8bed-d516e1db5b5a"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""697e9c63-0b3f-41f8-afc3-ca3c62638094"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19917a5c-ae04-496d-9a2b-19619fbe93a6"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -790,8 +832,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cde8e427-3e17-484e-9c1b-4e8bc4bf014b"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""33b421c1-101f-4bf0-b00a-4c1ac1e0af26"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -801,7 +843,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f14524c0-2a1e-4713-9c73-0abf8a8e4396"",
+                    ""id"": ""237a0b78-2f79-481a-b6be-88aff7221af9"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -869,6 +911,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Possession = asset.FindActionMap("Possession", throwIfNotFound: true);
         m_Possession_Move = m_Possession.FindAction("Move", throwIfNotFound: true);
         m_Possession_Possess = m_Possession.FindAction("Possess", throwIfNotFound: true);
+        m_Possession_Toggle = m_Possession.FindAction("Toggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1126,12 +1169,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPossessionActions> m_PossessionActionsCallbackInterfaces = new List<IPossessionActions>();
     private readonly InputAction m_Possession_Move;
     private readonly InputAction m_Possession_Possess;
+    private readonly InputAction m_Possession_Toggle;
     public struct PossessionActions
     {
         private @PlayerInputActions m_Wrapper;
         public PossessionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Possession_Move;
         public InputAction @Possess => m_Wrapper.m_Possession_Possess;
+        public InputAction @Toggle => m_Wrapper.m_Possession_Toggle;
         public InputActionMap Get() { return m_Wrapper.m_Possession; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1147,6 +1192,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Possess.started += instance.OnPossess;
             @Possess.performed += instance.OnPossess;
             @Possess.canceled += instance.OnPossess;
+            @Toggle.started += instance.OnToggle;
+            @Toggle.performed += instance.OnToggle;
+            @Toggle.canceled += instance.OnToggle;
         }
 
         private void UnregisterCallbacks(IPossessionActions instance)
@@ -1157,6 +1205,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Possess.started -= instance.OnPossess;
             @Possess.performed -= instance.OnPossess;
             @Possess.canceled -= instance.OnPossess;
+            @Toggle.started -= instance.OnToggle;
+            @Toggle.performed -= instance.OnToggle;
+            @Toggle.canceled -= instance.OnToggle;
         }
 
         public void RemoveCallbacks(IPossessionActions instance)
@@ -1224,5 +1275,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnPossess(InputAction.CallbackContext context);
+        void OnToggle(InputAction.CallbackContext context);
     }
 }
