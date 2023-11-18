@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
+//using System.Numerics;
+
 public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
@@ -27,6 +31,7 @@ public class GhostController : BaseController
     // Convert input to var
     private bool isFloatingUp;
     private bool isFloatingDown;
+    bool super = false;
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
@@ -78,10 +83,34 @@ public class GhostController : BaseController
     {
         if (actionMap.enabled)
         {
-            base.Update(); 
+            base.Update();
             HandleFloating();
+
+
+            if (Input.GetKeyDown(KeyCode.Space) && spirit_slider.current_value >= 100 && !super)
+            {
+                EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
+                StartCoroutine(super_power());
+
+
+            }
+
         }
+
+
+
+
+        // delete after
     }
+
+    public IEnumerator super_power() {
+        super = true;
+        ToggleGravity(); // something wrong with gravity scale
+        yield return new WaitForSeconds(5.0f); // 5 seconds
+        ToggleGravity();
+        super = false;
+    }
+    
 
     private void HandleFloating()
     {
@@ -119,11 +148,18 @@ public class GhostController : BaseController
     {
         isDark = !isDark;
         EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+        
+        
     }
 
     private void TogglePossession()
     {
-        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        if (spirit_slider.current_value >= 75f) {
+            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        }
+        
     }
 
 }
+
+// couldn't we have one function that does this?

@@ -30,6 +30,9 @@ public class PlayerController : BaseController
     private Subscription<ChangeGravityEvent> changeGravitySubscription;
     private Subscription<EndCountdownEvent> endCountdownSubscription;
 
+
+    public static bool player_lock = false;
+    int nextFloor = 1;
     protected override void InitializeActionMap()
     {
         actionMap = inputAsset.FindActionMap("Player");
@@ -210,6 +213,19 @@ public class PlayerController : BaseController
         EventBus.Unsubscribe(changeGravitySubscription);
         EventBus.Unsubscribe(endCountdownSubscription);
         EventBus.Unsubscribe(thiefDiedSubscription);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "room_change" && !player_lock)
+        {
+            Debug.Log("trigger hits");
+            EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
+            nextFloor += 1;
+        }
+
     }
 
 }

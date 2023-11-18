@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GhostSelection : MonoBehaviour
 {
@@ -72,6 +73,9 @@ public class GhostSelection : MonoBehaviour
 
             previousClosestObject = closestObject;
         }
+
+       
+    
     }
 
     void EnableOutlineEffect(GameObject obj)
@@ -80,7 +84,21 @@ public class GhostSelection : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = true;
-            EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
+            if (obj.gameObject.tag == "torch")
+            {
+                if (spirit_slider.current_value >= 25f)
+                {
+                    EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
+                }
+                else {
+                    outline.OutlineColor = Color.red;
+                }
+                
+            }
+            else {
+                EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
+            }
+            
         }
         else
             Debug.Log("outline enable is null on " + obj.name);
@@ -92,7 +110,10 @@ public class GhostSelection : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = false;
+            outline.OutlineColor = Color.blue;
             EventBus.Publish<OutlineEvent>(new OutlineEvent(false));
+            
+            
         }
         else
         {

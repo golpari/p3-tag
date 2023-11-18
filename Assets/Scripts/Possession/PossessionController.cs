@@ -96,15 +96,19 @@ public class PossessionController : BaseController
     private void AttemptToggleLighting()
     {
         // Check if the current possession action is a LightingHandler
-        if (currPossessionAction is LightHandler lightHandler)
+        if (currPossessionAction is LightHandler lightHandler && spirit_slider.current_value >= 25f)
         {
+            EventBus.Publish<SpiritEvent>(new SpiritEvent(-25f));
             lightHandler.ToggleLighting();
         }
     }
 
     private void TogglePossession()
     {
-        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        if (spirit_slider.current_value >= 75f) {
+            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        }
+            
     }
 }
 

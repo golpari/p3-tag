@@ -75,8 +75,15 @@ public abstract class BaseController : MonoBehaviour
         // Calculate the movement vector in world space
         Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed;
 
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+
+        // delete for noncontroller use
+        rb.velocity = new Vector3(x * movementSpeed, rb.velocity.y, z * movementSpeed);
+
         // Apply the movement to the Rigidbody while keeping the y-velocity
-        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+       // rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
 
         if (movement != Vector3.zero)
         {

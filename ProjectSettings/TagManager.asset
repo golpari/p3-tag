@@ -12,6 +12,8 @@ TagManager:
   - Flashlight
   - GameManager
   - SlowTrap
+  - room_change
+  - torch
   layers:
   - Default
   - TransparentFX

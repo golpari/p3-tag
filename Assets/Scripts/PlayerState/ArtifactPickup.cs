@@ -12,6 +12,7 @@ public class ArtifactPickup : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
             // in another script, listen for this event and open a door based on the given room number of the event
+            EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
             EventBus.Publish<ArtifactPickupEvent>(new ArtifactPickupEvent(roomNumber));
 
             // get rid of the artifact (it will still exist, but the player can't see or interact with it)
