@@ -22,7 +22,7 @@ public class WinUI : MonoBehaviour
             //PlayerController.num_lives -= 1;
             GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
         }
-        else if (EndGame.index == 3)
+        else
         {
             GetComponent<Text>().text = "The Player successfully escaped! \n Press any key to continue";
         }

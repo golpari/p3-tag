@@ -69,3 +69,28 @@ public class ThiefDiedEvent
 
 }
 
+
+public class StartCountDownTimer
+{
+    public StartCountDownTimer() { }
+}
+
+public class PauseCountDownTimer
+{
+    public PauseCountDownTimer() { }
+}
+
+public class ChangeDoorsEvent
+{
+    public int doorRoomNum;
+    public ChangeDoorsEvent(int _doorRoomNum) { doorRoomNum = _doorRoomNum; }
+}
+
+
+
+public class SpiritEvent
+{
+    public float spirit;
+    public SpiritEvent(float _spirit) { this.spirit = _spirit; }
+}
+

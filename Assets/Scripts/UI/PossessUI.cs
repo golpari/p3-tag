@@ -17,6 +17,7 @@ public class PossessUI : MonoBehaviour
     void _OnOutline(OutlineEvent e)
     {
         // if player towards or away from an object
+
         if (e.shouldOutline)
             GetComponent<Text>().text = "Y";
         else

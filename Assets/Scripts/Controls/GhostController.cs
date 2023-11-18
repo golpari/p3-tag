@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
+//using System.Numerics;
+
 public class GhostController : BaseController
 {
     public float upLimit; // The maximum height the ghost can float upwards.
@@ -15,7 +19,11 @@ public class GhostController : BaseController
     // Convert input to var
     private bool isFloatingUp;
     private bool isFloatingDown;
+<<<<<<< HEAD
+    bool super = false;
+=======
 
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
@@ -61,10 +69,34 @@ public class GhostController : BaseController
     {
         if (actionMap.enabled)
         {
-            base.Update(); 
+            base.Update();
             HandleFloating();
+
+
+            if (Input.GetKeyDown(KeyCode.Space) && spirit_slider.current_value >= 100 && !super)
+            {
+                EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
+                StartCoroutine(super_power());
+
+
+            }
+
         }
+
+
+
+
+        // delete after
     }
+
+    public IEnumerator super_power() {
+        super = true;
+        ToggleGravity(); // something wrong with gravity scale
+        yield return new WaitForSeconds(5.0f); // 5 seconds
+        ToggleGravity();
+        super = false;
+    }
+    
 
     private void HandleFloating()
     {
@@ -82,9 +114,41 @@ public class GhostController : BaseController
         }
     }
 
+<<<<<<< HEAD
+    private void ToggleGravity()
+    {
+        // Default to low gravity.
+        if (!isLowGravity)
+        {
+            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(lowGravityScale, gravityFX));
+            isLowGravity = true;
+        }
+        // Low gravity to default gravity.
+        else
+        {
+            EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale, gravityFX));
+            isLowGravity = false;
+        }
+    }
+
+    private void ToggleLighting()
+    {
+        isDark = !isDark;
+        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+        
+        
+    }
+
+=======
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
     private void TogglePossession()
     {
-        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        if (spirit_slider.current_value >= 75f) {
+            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        }
+        
     }
 
 }
+
+// couldn't we have one function that does this?

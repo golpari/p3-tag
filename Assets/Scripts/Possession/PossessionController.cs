@@ -99,9 +99,16 @@ public class PossessionController : BaseController
 
     private void AttemptToggle()
     {
+<<<<<<< HEAD
+        // Check if the current possession action is a LightingHandler
+        if (currPossessionAction is LightHandler lightHandler && spirit_slider.current_value >= 25f)
+        {
+            EventBus.Publish<SpiritEvent>(new SpiritEvent(-25f));
+=======
         // Check if the current possession action is a light type
         if (currPossessionAction is LightHandler lightHandler)
         {
+>>>>>>> 42947fcc8f92e2a8e053db779f02fbc55fe99b4c
             lightHandler.ToggleLighting();
         }
         // check if curr possession is a low grav type
@@ -113,7 +120,10 @@ public class PossessionController : BaseController
 
     private void TogglePossession()
     {
-        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        if (spirit_slider.current_value >= 75f) {
+            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        }
+            
     }
 }
 
