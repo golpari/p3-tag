@@ -22,6 +22,7 @@ public class LowGravityHandler : MonoBehaviour, IPossessionAction
     {
         isActive = false;
         // change back to normal grav when unpossess
+        Debug.Log("Disable grav");
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale, gravityFX));
         isLowGravity = false;
     }

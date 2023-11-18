@@ -52,7 +52,7 @@ public class PlayerController : BaseController
     private void _OnGravityChange(ChangeGravityEvent e)
     {
         // Update the gravity scale when the ChangeGravityEvent is published
-        gravityScale = e.gravityScale;
+        gravityScale = ChangeGravityEvent.gravityScale;
     }
 
     private void _OnEndCountdown(EndCountdownEvent e)

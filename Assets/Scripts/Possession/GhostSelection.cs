@@ -8,7 +8,6 @@ public class GhostSelection : MonoBehaviour
     public float lenOfBox = 1f;
     private GameObject previousClosestObject = null; // To keep track of the previously closest object
     private GameObject closestObject = null;
-    private bool areThereColliders = true;
 
     // temp fix for having no visible outline at the start
     private void Awake()
@@ -35,10 +34,9 @@ public class GhostSelection : MonoBehaviour
 
     GameObject FindClosestObject(Collider[] colliders)
     {
-        // check so that outline is disabled when no more objects in raycast
+        // reset closestObject when no more objects in raycast
         if (colliders.Length == 0)
         {
-            //areThereColliders = false;
             closestObject = null;
             return null;
         }
@@ -67,13 +65,6 @@ public class GhostSelection : MonoBehaviour
     // update the outline effect, enabling it on the closest object and disabling it on others
     void UpdateOutlineEffect(GameObject closestObject)
     {
-        // if the are no more colliders but still a closestObject, Disable it
-        //if (!areThereColliders && closestObject)
-        //{
-        //    DisableOutlineEffect(closestObject);
-        //    closestObject = null;
-        //}
-
         //If there's a new closest object, enable and disable accordingly
         if (closestObject != previousClosestObject)
         {
