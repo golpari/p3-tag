@@ -3,10 +3,6 @@ using UnityEngine;
 public class VerticalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
 {
     private bool isActive = false;
-    public void Execute()
-    {
-        Debug.Log("Object possessed: " + gameObject.name);
-    }
 
     public void EnableAction()
     {

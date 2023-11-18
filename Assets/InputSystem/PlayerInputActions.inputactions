@@ -626,7 +626,16 @@
                 {
                     "name": "Possess",
                     "type": "Button",
-                    "id": "f138086e-02b8-4b2b-a185-365c254561e3",
+                    "id": "2978effc-0b00-4c58-b104-768d0075092e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "49128643-4407-47df-96b8-5c0d14095acc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -757,7 +766,40 @@
                 },
                 {
                     "name": "",
-                    "id": "cc7c7f6c-e7bd-497b-8354-c7bd33abe764",
+                    "id": "48b74a53-b8b0-4411-81e5-7b666ffd3f53",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09cdad94-6970-430c-8bed-d516e1db5b5a",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "LeftKeyboard",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "697e9c63-0b3f-41f8-afc3-ca3c62638094",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "RightKeyboard",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19917a5c-ae04-496d-9a2b-19619fbe93a6",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
@@ -768,7 +810,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cde8e427-3e17-484e-9c1b-4e8bc4bf014b",
+                    "id": "33b421c1-101f-4bf0-b00a-4c1ac1e0af26",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
@@ -779,7 +821,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f14524c0-2a1e-4713-9c73-0abf8a8e4396",
+                    "id": "237a0b78-2f79-481a-b6be-88aff7221af9",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",

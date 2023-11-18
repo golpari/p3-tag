@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PossessionController : BaseController
 {
     private InputAction possessAction;
+    private InputAction toggleAction;
     protected GhostSelection ghostSelection;
     Subscription<PossessionEvent> possessionSubscription;
     private IPossessionAction currPossessionAction;
@@ -55,6 +56,7 @@ public class PossessionController : BaseController
         actionMap = inputAsset.FindActionMap("Possession");
         movementAction = actionMap.FindAction("Move");
         possessAction = actionMap.FindAction("Possess");
+        toggleAction = actionMap.FindAction("Toggle");
     }
 
     protected override void SubscribeActions()
@@ -64,6 +66,7 @@ public class PossessionController : BaseController
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
         possessAction.performed += _ => TogglePossession();
+        toggleAction.performed += _ => AttemptToggleLighting();
     }
 
     protected override void UnsubscribeActions()
@@ -73,6 +76,7 @@ public class PossessionController : BaseController
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
         possessAction.performed -= _ => TogglePossession();
+        toggleAction.performed -= _ => AttemptToggleLighting();
     }
 
     // Only run update if the action map is enabled
@@ -87,6 +91,15 @@ public class PossessionController : BaseController
         // Implement movement logic for the possessed object
         if (currPossessionAction is IMovable movable)
             movable.Move(currentMovementInput, movementSpeed);
+    }
+
+    private void AttemptToggleLighting()
+    {
+        // Check if the current possession action is a LightingHandler
+        if (currPossessionAction is LightHandler lightHandler)
+        {
+            lightHandler.ToggleLighting();
+        }
     }
 
     private void TogglePossession()
