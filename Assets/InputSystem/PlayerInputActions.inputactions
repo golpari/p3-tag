@@ -220,6 +220,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleGravity",
+                    "type": "Button",
+                    "id": "abbea2f9-4e43-4ff8-8d6c-dac5f08e379c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -440,6 +449,39 @@
                     "processors": "",
                     "groups": "RightKeyboard",
                     "action": "Possess",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3733c775-5816-4ab1-b1c0-419593677cf0",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ToggleGravity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6aa3ec62-d12c-424d-907b-dfc3b54d8abc",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "LeftKeyboard",
+                    "action": "ToggleGravity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a572a8d5-4936-4816-b2e9-10b49922aa2e",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "RightKeyboard",
+                    "action": "ToggleGravity",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

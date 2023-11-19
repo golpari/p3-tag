@@ -242,6 +242,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleGravity"",
+                    ""type"": ""Button"",
+                    ""id"": ""abbea2f9-4e43-4ff8-8d6c-dac5f08e379c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -462,6 +471,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""RightKeyboard"",
                     ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3733c775-5816-4ab1-b1c0-419593677cf0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ToggleGravity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6aa3ec62-d12c-424d-907b-dfc3b54d8abc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""ToggleGravity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a572a8d5-4936-4816-b2e9-10b49922aa2e"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""ToggleGravity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -817,6 +859,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Ghost_FloatUp = m_Ghost.FindAction("FloatUp", throwIfNotFound: true);
         m_Ghost_FloatDown = m_Ghost.FindAction("FloatDown", throwIfNotFound: true);
         m_Ghost_Possess = m_Ghost.FindAction("Possess", throwIfNotFound: true);
+        m_Ghost_ToggleGravity = m_Ghost.FindAction("ToggleGravity", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Join = m_UI.FindAction("Join", throwIfNotFound: true);
@@ -945,6 +988,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ghost_FloatUp;
     private readonly InputAction m_Ghost_FloatDown;
     private readonly InputAction m_Ghost_Possess;
+    private readonly InputAction m_Ghost_ToggleGravity;
     public struct GhostActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -953,6 +997,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @FloatUp => m_Wrapper.m_Ghost_FloatUp;
         public InputAction @FloatDown => m_Wrapper.m_Ghost_FloatDown;
         public InputAction @Possess => m_Wrapper.m_Ghost_Possess;
+        public InputAction @ToggleGravity => m_Wrapper.m_Ghost_ToggleGravity;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -974,6 +1019,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Possess.started += instance.OnPossess;
             @Possess.performed += instance.OnPossess;
             @Possess.canceled += instance.OnPossess;
+            @ToggleGravity.started += instance.OnToggleGravity;
+            @ToggleGravity.performed += instance.OnToggleGravity;
+            @ToggleGravity.canceled += instance.OnToggleGravity;
         }
 
         private void UnregisterCallbacks(IGhostActions instance)
@@ -990,6 +1038,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Possess.started -= instance.OnPossess;
             @Possess.performed -= instance.OnPossess;
             @Possess.canceled -= instance.OnPossess;
+            @ToggleGravity.started -= instance.OnToggleGravity;
+            @ToggleGravity.performed -= instance.OnToggleGravity;
+            @ToggleGravity.canceled -= instance.OnToggleGravity;
         }
 
         public void RemoveCallbacks(IGhostActions instance)
@@ -1161,6 +1212,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFloatUp(InputAction.CallbackContext context);
         void OnFloatDown(InputAction.CallbackContext context);
         void OnPossess(InputAction.CallbackContext context);
+        void OnToggleGravity(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -10,7 +10,7 @@ public class PossessionController : BaseController
     private InputAction toggleAction;
     protected GhostSelection ghostSelection;
     Subscription<PossessionEvent> possessionSubscription;
-    private IPossessionAction currPossessionAction;
+    private PossessionActionBase currPossessionAction;
     GameObject currObject;
 
     void Start()
@@ -29,13 +29,14 @@ public class PossessionController : BaseController
             if (!currObject)
                 return;
 
-            // Change Map to Possession Controls
+            // enable possession depending on what type it is
+            currPossessionAction = currObject.GetComponent<PossessionActionBase>();
+            bool canPay = currPossessionAction.EnableAction();
+            if (!canPay) return;
+
+            // Change Map to Possession Controls if possession succeeded (could pay)
             e.inputAsset.FindActionMap("Ghost").Disable();
             e.inputAsset.FindActionMap("Possession").Enable();
-
-            // Run possession depending on what type it is
-            currPossessionAction = currObject.GetComponent<IPossessionAction>();
-            currPossessionAction.EnableAction();
         }
         else if (e.inputAsset.FindActionMap("Possession").enabled)
         {
@@ -101,25 +102,22 @@ public class PossessionController : BaseController
     {
 
         // Check if the current possession action is a LightingHandler
-        if (currPossessionAction is LightHandler lightHandler && spirit_slider.current_value >= 25f)
-        {
-            EventBus.Publish<SpiritEvent>(new SpiritEvent(-25f));
+        if (currPossessionAction is LightHandler lightHandler)
+        { 
             lightHandler.ToggleLighting();
         }
-        
+
         // check if curr possession is a low grav type
-        if (currPossessionAction is LowGravityHandler lowGravityHandler && spirit_slider.current_value >= 50f)
+        if (currPossessionAction is LowGravityHandler lowGravityHandler)
         {
-            EventBus.Publish<SpiritEvent>(new SpiritEvent(-50f));
             lowGravityHandler.ToggleGravity();
         }
     }
 
     private void TogglePossession()
     {
-        if (spirit_slider.current_value >= 75f) {
-            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
-        }
+        // This is to return to the normal, non possession controls, this shouldn't cost anything
+        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
             
     }
 }

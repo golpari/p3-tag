@@ -1,19 +1,30 @@
 using UnityEngine;
 
-public class LightHandler : MonoBehaviour, IPossessionAction
+public class LightHandler : PossessionActionBase
 {
     private bool isDark = false;
     private bool isActive = false;
 
-    public void EnableAction()
+    private void Awake()
     {
-        isActive = true;
-        // Always darken when first posses
-        isDark = true;
-        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+        spiritPrice = 25f;
     }
 
-    public void DisableAction()
+    public override bool EnableAction()
+    {
+        // Don't enable if don't have the price to pay for possession
+        if (spirit_slider.current_value < spiritPrice) return false;
+
+        isActive = true;
+        // Always darken when first posses 
+        isDark = true;
+        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+        // Charge price
+        EventBus.Publish<SpiritEvent>(new SpiritEvent(-spiritPrice));
+        return true;
+    }
+
+    public override void DisableAction()
     {
         isActive = false;
         // To change back to light when unposses
