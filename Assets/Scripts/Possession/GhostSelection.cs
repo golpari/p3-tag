@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,8 @@ public class GhostSelection : MonoBehaviour
     public float lenOfBox = 1f;
     private GameObject previousClosestObject = null; // To keep track of the previously closest object
     private GameObject closestObject = null;
+    private Subscription<PossessionEvent> possessionSubscription;
+    private bool hasPossession = false;
 
     // temp fix for having no visible outline at the start
     private void Awake()
@@ -19,7 +20,17 @@ public class GhostSelection : MonoBehaviour
         {
             outline.enabled = false;
         }
+
+        // subscribe to possession so know when to stop outlining
+        //EventBus.Subscribe<PossessionEvent>(_OnPossession);
     }
+
+    //private void _OnPossession(PossessionEvent e)
+    //{
+    //    // toggle it bc (hopefully) will never have possession event without changing
+    //    // whether or not ghost currently has possession of something
+    //    hasPossession = !hasPossession;
+    //}
 
     // perform a raycast box around the player and find the closest object
     void Update()
@@ -36,9 +47,16 @@ public class GhostSelection : MonoBehaviour
 
     GameObject FindClosestObject(Collider[] colliders)
     {
+        // reset closestObject when no more objects in raycast
+        if (colliders.Length == 0) // && !hasPossession)
+        {
+            closestObject = null;
+            return null;
+        }
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
+        // find the closest object in raycast box to the ghost
         foreach (Collider collider in colliders)
         {
             float distance = (collider.gameObject.transform.position - currentPosition).sqrMagnitude;
@@ -74,32 +92,20 @@ public class GhostSelection : MonoBehaviour
 
             previousClosestObject = closestObject;
         }
-
-       
-    
     }
 
     void EnableOutlineEffect(GameObject obj)
     {
         Outline outline = obj.GetComponent<Outline>();
+        PossessionActionBase type = obj.GetComponent<PossessionActionBase>();
         if (outline != null)
         {
             outline.enabled = true;
-            if (obj.gameObject.tag == "torch")
-            {
-                if (spirit_slider.current_value >= 25f)
-                {
-                    EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
-                }
-                else {
-                    outline.OutlineColor = Color.red;
-                }
-                
-            }
-            else {
-                EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
-            }
-            
+            // change color of outline depending on if ghost can afford or not
+            if (type.AffordCheck()) outline.OutlineColor = Color.blue;
+            else outline.OutlineColor = Color.red;
+            outline.OutlineWidth = 5;
+            EventBus.Publish<OutlineEvent>(new OutlineEvent(true));
         }
         else
             Debug.Log("outline enable is null on " + obj.name);
@@ -111,10 +117,7 @@ public class GhostSelection : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = false;
-            outline.OutlineColor = Color.blue;
             EventBus.Publish<OutlineEvent>(new OutlineEvent(false));
-            
-            
         }
         else
         {

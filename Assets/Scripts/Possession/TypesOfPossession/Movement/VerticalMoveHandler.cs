@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VerticalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
+public class VerticalMoveHandler : PossessionActionBase, IMovable
 {
     private bool isActive = false;
     [SerializeField]
@@ -9,11 +9,13 @@ public class VerticalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
     [SerializeField]
     private float minY = -10f;
 
-    public void EnableAction()
+
+    public override bool EnableAction()
     {
         isActive = true;
+        return true;
     }
-    public void DisableAction()
+    public override void DisableAction()
     {
         isActive = false;
     }

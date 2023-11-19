@@ -65,25 +65,25 @@ public abstract class BaseController : MonoBehaviour
         if (currentMovementInput.x != 0.0f ||
             currentMovementInput.y != 0.0f)
         {
-            animator.SetBool("isWalking", true);
+            SetAnimatorBool("isWalking", true);
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            SetAnimatorBool("isWalking", false);
         }
 
         // Calculate the movement vector in world space
         Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        //float x = Input.GetAxisRaw("Horizontal");
+        //float z = Input.GetAxisRaw("Vertical");
 
 
         // delete for noncontroller use
-        rb.velocity = new Vector3(x * movementSpeed, rb.velocity.y, z * movementSpeed);
+        //rb.velocity = new Vector3(x * movementSpeed, rb.velocity.y, z * movementSpeed);
 
         // Apply the movement to the Rigidbody while keeping the y-velocity
-       // rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
 
         if (movement != Vector3.zero)
         {
@@ -98,6 +98,19 @@ public abstract class BaseController : MonoBehaviour
     protected void OnMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
+    }
+
+    // Necessary bc ghost animation doesn't have an isWalking val
+    private void SetAnimatorBool(string paramName, bool value)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName && param.type == AnimatorControllerParameterType.Bool)
+            {
+                animator.SetBool(paramName, value);
+                return;
+            }
+        }
     }
 
 }

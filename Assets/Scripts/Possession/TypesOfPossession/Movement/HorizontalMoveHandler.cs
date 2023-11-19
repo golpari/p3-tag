@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class HorizontalMoveHandler : MonoBehaviour, IPossessionAction, IMovable
+public class HorizontalMoveHandler : PossessionActionBase, IMovable
 {
     private bool isActive = false;
     [SerializeField] private float maxX = 10f;
     [SerializeField] private float minX = -10f; 
 
-    public void EnableAction()
+    public override bool EnableAction()
     {
         isActive = true;
+        return true;
     }
-    public void DisableAction()
+    public override void DisableAction()
     {
         isActive = false;
     }

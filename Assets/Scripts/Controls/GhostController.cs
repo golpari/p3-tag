@@ -24,7 +24,6 @@ public class GhostController : BaseController
     bool super = false;
 
     private bool isLowGravity = false;
-    private bool isDark = false;
 
     public float defaultGravityScale;
     public float lowGravityScale;
@@ -83,14 +82,8 @@ public class GhostController : BaseController
             {
                 EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
                 StartCoroutine(super_power());
-
-
             }
-
         }
-
-
-
 
         // delete after
     }
@@ -136,20 +129,10 @@ public class GhostController : BaseController
         }
     }
 
-    private void ToggleLighting()
-    {
-        isDark = !isDark;
-        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
-        
-        
-    }
-
     private void TogglePossession()
     {
-        if (spirit_slider.current_value >= 75f) {
-            EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
-        }
-        
+        // if we add a spirit limit here then it applies to all types of possession, do it within handler scripts
+        EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
     }
 
 }
