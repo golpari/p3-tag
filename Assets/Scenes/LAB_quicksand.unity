@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_DefaultControlScheme
       value: LeftKeyboard
       objectReference: {fileID: 0}
+    - target: {fileID: 5403149695425269923, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7256124479596934106, guid: 5bdabfdf3de350f45b2b0755bfe2e578, type: 3}
       propertyPath: m_Name
       value: character-human

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public abstract class BaseController : MonoBehaviour
 {
-    public static float movementSpeed;
+    public float movementSpeed;
     //public float givenAngle = 30.0f; // 270 if want to direct at end of room
 
     protected Rigidbody rb;

@@ -13,12 +13,15 @@ public class SlowPlayer : MonoBehaviour
 
     private float originalSpeed = 0;
     private float slowSpeed = 0;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        originalSpeed = PlayerController.movementSpeed;
-        slowSpeed = PlayerController.movementSpeed / 2;
+        playerController = GetComponent<PlayerController>();
+
+        originalSpeed = playerController.movementSpeed;
+        slowSpeed = playerController.movementSpeed / 2;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +29,7 @@ public class SlowPlayer : MonoBehaviour
         // slow to half speed
         if (other.gameObject.CompareTag("SlowTrap"))
         {
-            PlayerController.movementSpeed = slowSpeed;
+            playerController.movementSpeed = slowSpeed;
         }
     }
 
@@ -35,7 +38,7 @@ public class SlowPlayer : MonoBehaviour
         // slow to half speed
         if (other.gameObject.CompareTag("SlowTrap"))
         {
-            PlayerController.movementSpeed = slowSpeed;
+            playerController.movementSpeed = slowSpeed;
         }
     }
 
@@ -44,7 +47,7 @@ public class SlowPlayer : MonoBehaviour
         // reset to regular speed when exiting the slowtrap
         if (other.gameObject.CompareTag("SlowTrap"))
         {
-            PlayerController.movementSpeed = originalSpeed;
+            playerController.movementSpeed = originalSpeed;
         }
     }
 
