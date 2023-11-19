@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b8d238d9d014d4d90687e1bc2180a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spiritPrice: 10
 --- !u!114 &5754798374623221045
 MonoBehaviour:
   m_ObjectHideFlags: 0
