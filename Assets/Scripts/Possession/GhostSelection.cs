@@ -22,15 +22,15 @@ public class GhostSelection : MonoBehaviour
         }
 
         // subscribe to possession so know when to stop outlining
-        //EventBus.Subscribe<PossessionEvent>(_OnPossession);
+        EventBus.Subscribe<PossessionEvent>(_OnPossession);
     }
 
-    //private void _OnPossession(PossessionEvent e)
-    //{
-    //    // toggle it bc (hopefully) will never have possession event without changing
-    //    // whether or not ghost currently has possession of something
-    //    hasPossession = !hasPossession;
-    //}
+    private void _OnPossession(PossessionEvent e)
+    {
+        // toggle it bc (hopefully) will never have possession event without changing
+        // whether or not ghost currently has possession of something
+        hasPossession = !hasPossession;
+    }
 
     // perform a raycast box around the player and find the closest object
     void Update()
@@ -47,11 +47,11 @@ public class GhostSelection : MonoBehaviour
 
     GameObject FindClosestObject(Collider[] colliders)
     {
-        // reset closestObject when no more objects in raycast
-        if (colliders.Length == 0) // && !hasPossession)
+        // If there is a closest object but it isn't in range and not currently possessed, deactivate outline
+        if (colliders.Length == 0 && !hasPossession && closestObject)
         {
+            DisableOutlineEffect(closestObject);
             closestObject = null;
-            return null;
         }
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
@@ -113,6 +113,11 @@ public class GhostSelection : MonoBehaviour
 
     void DisableOutlineEffect(GameObject obj)
     {
+        if (obj == null)
+        {
+            Debug.Log("Attempted to disable outline effect on a null object.");
+            return;
+        }
         Outline outline = obj.GetComponent<Outline>();
         if (outline != null)
         {
