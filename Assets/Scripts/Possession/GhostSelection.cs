@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GhostSelection : MonoBehaviour
 {
     public LayerMask raycastLayerMask; // LayerMask to filter which objects are raycasted
-    public float lenOfBox = 1f;
+    public float lenOfBox = 2f;
     private GameObject previousClosestObject = null; // To keep track of the previously closest object
     private GameObject closestObject = null;
     private Subscription<PossessionEvent> possessionSubscription;
@@ -138,7 +138,7 @@ public class GhostSelection : MonoBehaviour
 
         // Draw a wire cube at the position with the given size
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(boxCenter, boxHalfExtents * 2); // Multiply by 2 because it needs full size
+        Gizmos.DrawWireCube(boxCenter, boxHalfExtents * 4); // Multiply by 2 because it needs full size
     }
 
 }

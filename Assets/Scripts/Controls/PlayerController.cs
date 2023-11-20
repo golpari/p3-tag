@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : BaseController
@@ -71,6 +72,13 @@ public class PlayerController : BaseController
     {
         //whenever the player dies, its lives are decreased
         num_lives -= e.livesLost;
+
+        Debug.Log(num_lives);
+        if (num_lives <= 0)
+        {
+            num_lives = 3;
+            SceneManager.LoadScene(0);
+        }
     }
     protected override void SubscribeActions()
     {

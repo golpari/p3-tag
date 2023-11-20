@@ -13,10 +13,19 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
+    private void Update()
+    {
+        if (PlayerController.num_lives <= 0)
+        {
+            //PlayerController.num_lives = 3;
+            //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
+        }
+    }
+
     IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
-
+        
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(levelIndex);

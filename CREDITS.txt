@@ -9,3 +9,6 @@ https://kenney.nl/assets/mini-dungeon
 
 Ghost 3D model and animations from: Meshtint Studio on Unity Asset Store "Ghost Cute Series"
 https://assetstore.unity.com/packages/3d/characters/creatures/ghost-cute-series-162548
+
+Lava and possession (force field) materials / shaders from:The Developer on Unity Asset Store "Ultimate 10+ Shaders"
+https://assetstore.unity.com/packages/vfx/shaders/ultimate-10-shaders-168611

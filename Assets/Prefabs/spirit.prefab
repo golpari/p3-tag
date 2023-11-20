@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: -6578470464110927325}
   - component: {fileID: 9190616544472005605}
   - component: {fileID: 6536383304880136638}
+  - component: {fileID: 2173412684903250362}
   m_Layer: 0
   m_Name: spirit
-  m_TagString: Untagged
+  m_TagString: Spirit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,3 +138,15 @@ MonoBehaviour:
   yMovement: 0.3
   zMovement: 0
   speed: 0.25
+--- !u!114 &2173412684903250362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266673042114260961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82a96a71479fbf44a71c689745612a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

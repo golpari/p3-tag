@@ -101,11 +101,11 @@ public class GhostController : BaseController
     {
         if (isFloatingUp && this.transform.position.y <= upLimit)
         {
-            rb.velocity = new Vector3(rb.velocity.x, 2.0f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 5.0f, rb.velocity.z);
         }
         else if (isFloatingDown)
         {
-            rb.velocity = new Vector3(rb.velocity.x, -2.0f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, -5.0f, rb.velocity.z);
         }
         else
         {

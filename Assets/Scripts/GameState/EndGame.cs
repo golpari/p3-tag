@@ -49,7 +49,7 @@ public class EndGame : MonoBehaviour
 
         if (PlayerController.num_lives <= 0) {
             PlayerController.num_lives = 3;
-            SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene(0);
         }
         else {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

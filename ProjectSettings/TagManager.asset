@@ -15,6 +15,7 @@ TagManager:
   - room_change
   - torch
   - i_wall
+  - Spirit
   layers:
   - Default
   - TransparentFX
