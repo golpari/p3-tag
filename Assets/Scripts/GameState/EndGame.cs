@@ -45,6 +45,8 @@ public class EndGame : MonoBehaviour
         inputActions.Player.Enable();
         inputActions.Ghost.Enable();
 
+        Debug.Log(PlayerController.num_lives);
+
         if (PlayerController.num_lives <= 0) {
             PlayerController.num_lives = 3;
             SceneManager.LoadScene("Main Menu");

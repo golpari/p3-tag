@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using static UnityEngine.GraphicsBuffer;
 
 public class camera_move : MonoBehaviour
@@ -53,11 +54,21 @@ public class camera_move : MonoBehaviour
         StartCoroutine(changeColor(Color.blue));
         yield return StartCoroutine(MoveObjectOverTime(player.transform, player.transform.position, starting_pos[door_num], 1.0f));
 
+
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         //yield return StartCoroutine(FadeTo(ghost.gameObject.GetComponent<Renderer>().material, 0.0f, 1.5f)); for now
 
         ghost.transform.position = ghost_pos[door_num];
+
+
+        GameObject loc = GameObject.Find("L0"+(door_num - 1).ToString()+"-Grid");
+        loc.SetActive(false);
+        loc = GameObject.Find("L0" + (door_num - 1).ToString() + "-Environment");
+        loc.SetActive(false);
+        loc = GameObject.Find("L0" + (door_num - 1).ToString() + "-SpiritContainer");
+        loc.SetActive(false);
+
         yield return StartCoroutine(MoveObjectOverTime(this.transform, this.transform.position, camera_pos[door_num], 1.5f));
 
         //yield return StartCoroutine(FadeTo(ghost.gameObject.GetComponent<Renderer>().material, 1.0f, 1.5f));

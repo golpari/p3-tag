@@ -14,6 +14,7 @@ TagManager:
   - SlowTrap
   - room_change
   - torch
+  - i_wall
   layers:
   - Default
   - TransparentFX

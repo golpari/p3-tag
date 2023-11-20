@@ -13,11 +13,11 @@ public class EntrywayTrigger : MonoBehaviour
         {
             if (final_door)
             {
-                Debug.Log("Works");
                 string winner = "Player";
                 EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
                 EventBus.Publish<EndGameEvent>(new EndGameEvent(winner));
             }
+            
             ++level;
             
         }

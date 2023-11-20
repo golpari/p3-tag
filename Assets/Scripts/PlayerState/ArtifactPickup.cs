@@ -11,6 +11,12 @@ public class ArtifactPickup : MonoBehaviour
         // If the player enters the artifact's trigger collider
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
+            GameObject[] locks = GameObject.FindGameObjectsWithTag("i_wall");
+            Debug.Log(locks.Length);
+            for (int i = 0; i < locks.Length; i++)
+            {
+                locks[i].SetActive(false);
+            }
             // in another script, listen for this event and open a door based on the given room number of the event
             EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
             EventBus.Publish<ArtifactPickupEvent>(new ArtifactPickupEvent(roomNumber));
