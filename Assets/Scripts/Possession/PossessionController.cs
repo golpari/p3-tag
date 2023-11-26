@@ -13,12 +13,26 @@ public class PossessionController : BaseController
     private PossessionActionBase currPossessionAction;
     GameObject currObject;
 
+
     void Start()
     {
         possessionSubscription = EventBus.Subscribe<PossessionEvent>(_OnPossession);
         ghostSelection = GetComponent<GhostSelection>();
         inputAsset.FindActionMap("Possession").Disable();
+        EventBus.Subscribe<ChangeDoorsEvent>(_turn_off);
     }
+
+    void _turn_off(ChangeDoorsEvent e) {
+    if (currPossessionAction != null) {
+            inputAsset.FindActionMap("Possession").Disable();
+            inputAsset.FindActionMap("Ghost").Enable();
+            currPossessionAction?.DisableAction();
+            currObject = null;
+            currPossessionAction = null;
+            spirit_slider.zero_spirit = false;
+        }
+    }
+
     private void _OnPossession(PossessionEvent e)
     {
         // Check to see which map is active
@@ -89,7 +103,25 @@ public class PossessionController : BaseController
     {
         if (actionMap.enabled)
             base.Update();
+
+        // Rohun Changes
+        if (spirit_slider.zero_spirit) {
+            inputAsset.FindActionMap("Possession").Disable();
+            inputAsset.FindActionMap("Ghost").Enable();
+            currPossessionAction?.DisableAction();
+            currObject = null;
+            currPossessionAction = null;
+            spirit_slider.zero_spirit = false;
+        }
+            // Rohun Changes
+
     }
+
+
+
+
+    //call this functiondisable
+
 
     protected override void HandleMovement()
     {

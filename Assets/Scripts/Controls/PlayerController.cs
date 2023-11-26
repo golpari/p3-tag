@@ -73,7 +73,6 @@ public class PlayerController : BaseController
         //whenever the player dies, its lives are decreased
         num_lives -= e.livesLost;
 
-        Debug.Log(num_lives);
         if (num_lives <= 0)
         {
             num_lives = 3;
@@ -229,7 +228,6 @@ public class PlayerController : BaseController
 
         if (other.gameObject.tag == "room_change" && !player_lock)
         {
-            Debug.Log("trigger hits");
             EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
             nextFloor += 1;
         }

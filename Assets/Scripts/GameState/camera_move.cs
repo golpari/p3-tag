@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
-using UnityEngine.XR;
 using static UnityEngine.GraphicsBuffer;
 
 public class camera_move : MonoBehaviour
@@ -15,7 +15,9 @@ public class camera_move : MonoBehaviour
     public GameObject ghost;
 
 
-
+    public GameObject[] Enviorments;
+    public GameObject[] Grids;
+    public GameObject Script;
 
     // Start is called before the first frame update
     void Start()
@@ -45,49 +47,73 @@ public class camera_move : MonoBehaviour
 
     }
 
+    void changeRoom(int NextDoorNum) {
+        Enviorments[NextDoorNum - 1].SetActive(false);
+        Grids[NextDoorNum - 1].SetActive(false);
+        Enviorments[NextDoorNum].SetActive(true);
+        Grids[NextDoorNum].SetActive(true);
 
+    }
     public IEnumerator camera_change(int door_num)
     {
+
         PlayerController.player_lock = true;
-
-        EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
-        StartCoroutine(changeColor(Color.blue));
-        yield return StartCoroutine(MoveObjectOverTime(player.transform, player.transform.position, starting_pos[door_num], 1.0f));
-
-
+        player.SetActive(false);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-        //yield return StartCoroutine(FadeTo(ghost.gameObject.GetComponent<Renderer>().material, 0.0f, 1.5f)); for now
-
-        ghost.transform.position = ghost_pos[door_num];
+        EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
 
 
-        GameObject loc = GameObject.Find("L0"+(door_num - 1).ToString()+"-Grid");
-        loc.SetActive(false);
-        loc = GameObject.Find("L0" + (door_num - 1).ToString() + "-Environment");
-        loc.SetActive(false);
-        loc = GameObject.Find("L0" + (door_num - 1).ToString() + "-SpiritContainer");
-        loc.SetActive(false);
+        // ghost aimation - fucking howwwwwwwwwww to fucking remove the skeleton shit
 
-        yield return StartCoroutine(MoveObjectOverTime(this.transform, this.transform.position, camera_pos[door_num], 1.5f));
+        StartCoroutine(FadeTo(ghost.GetComponentInChildren<SkinnedMeshRenderer>().material, 0.0f, 1.5f));
+        Script.GetComponent<spirit_spawn>().turn_on(0.0f);
+        yield return changeColor(new UnityEngine.Color(119 / 255, 248 / 255, 255 / 255), 1.5f);
 
-        //yield return StartCoroutine(FadeTo(ghost.gameObject.GetComponent<Renderer>().material, 1.0f, 1.5f));
+        EventBus.Publish<fadeOut>(new fadeOut(true));
+        yield return new WaitForSeconds(1.0f);
 
+        yield return ghost_transition(door_num);
+
+        EventBus.Publish<fadeOut>(new fadeOut(false));
+        yield return new WaitForSeconds(1.0f);
+
+
+        StartCoroutine(FadeTo(ghost.GetComponentInChildren<SkinnedMeshRenderer>().material, 1.0f, 1.5f));
+        Script.GetComponent<spirit_spawn>().turn_on(1.0f);
+        yield return changeColor(new UnityEngine.Color(119 / 255, 248 / 255, 255 / 255), 1.5f);
+
+        // player walks in and exclamation mark + ghost spawns in orbs
+
+
+        // start timer
         EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
 
-        StartCoroutine(changeColor(Color.red));
+        // unlock playerand ghost
+        player.SetActive(true);
         PlayerController.player_lock = false;
+
+
     }
 
 
-    public IEnumerator changeColor(Color color)
+    public IEnumerator ghost_transition(int door_num) {
+
+        // ask barb and the group about the velocity and why it won't transition up
+        changeRoom(door_num);
+        this.transform.position = camera_pos[door_num];
+        ghost.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ghost.transform.position = ghost_pos[door_num];
+        yield return null;
+    }
+
+    public IEnumerator changeColor(UnityEngine.Color color, float duration)
     {
         float t = 0;
-        while (t < 1f)
+        while (t < duration)
         {
-            t += Time.deltaTime;
-            this.GetComponent<Camera>().backgroundColor = Color.Lerp(color, Color.black, t);
-            yield return null;
+            t += Time.deltaTime/duration;
+            this.GetComponent<Camera>().backgroundColor = UnityEngine.Color.Lerp(color, UnityEngine.Color.black, t);
+            yield return null; ;
         }
 
     }
@@ -119,7 +145,7 @@ public class camera_move : MonoBehaviour
     IEnumerator FadeTo(Material material, float targetOpacity, float duration)
     {
         // Cache the current color of the material, and its initiql opacity.
-        Color color = material.color;
+        UnityEngine.Color color = material.color;
         float startOpacity = color.a;
 
         // Track how many seconds we've been fading.
@@ -127,7 +153,7 @@ public class camera_move : MonoBehaviour
 
         while (t < duration)
         {
-
+            Debug.Log(material.color.a);
             // Step the fade forward one frame.
             t += Time.deltaTime;
             // Turn the time into an interpolation factor between 0 and 1.

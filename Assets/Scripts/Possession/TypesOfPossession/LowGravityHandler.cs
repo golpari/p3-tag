@@ -25,13 +25,12 @@ public class LowGravityHandler : PossessionActionBase
         // Don't enable if don't have the price to pay for possession
         // Same for all of them but at least this way we can change the price
         // individually if we want to 
-        if (spirit_slider.current_value < spiritPrice) return false;
+        if (spirit_slider.current_value <= 0.0f) return false;
 
         isActive = true;
         // Always low grav when first posses
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(lowGravityScale, gravityFX));
-        // Charge price
-        EventBus.Publish<SpiritEvent>(new SpiritEvent(-spiritPrice));
+        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -3.0f));
         isLowGravity = true;
         return true;
     }
@@ -41,6 +40,10 @@ public class LowGravityHandler : PossessionActionBase
         isActive = false;
         // change back to normal grav when unpossess
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale, gravityFX));
+        if (spirit_slider.current_value > 0.0f)
+        {
+            EventBus.Publish<SpiritPossesion>(new SpiritPossesion(false));
+        }
         isLowGravity = false;
     }
 

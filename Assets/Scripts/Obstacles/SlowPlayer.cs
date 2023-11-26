@@ -18,7 +18,7 @@ public class SlowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = this.GetComponent<PlayerController>();
 
         originalSpeed = playerController.movementSpeed;
         slowSpeed = playerController.movementSpeed / 2;

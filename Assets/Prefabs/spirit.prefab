@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3790295912882250968}
   - component: {fileID: 3167538727749792362}
   - component: {fileID: -6578470464110927325}
-  - component: {fileID: 9190616544472005605}
   - component: {fileID: 6536383304880136638}
   - component: {fileID: 2173412684903250362}
+  - component: {fileID: -5233171092340774797}
   m_Layer: 0
   m_Name: spirit
   m_TagString: Spirit
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.72, y: -8.46, z: 1.87}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2266673042114260961}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3167538727749792362
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -99,29 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4cb020a66d41c44ba1b8de3253c8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &9190616544472005605
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266673042114260961}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  index: 0
+  spirit_gain: 10
 --- !u!114 &6536383304880136638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +108,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2266673042114260961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e3b2a746ffbb1b4db07e3a45f9e1838, type: 3}
   m_Name: 
@@ -150,3 +129,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82a96a71479fbf44a71c689745612a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &-5233171092340774797
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266673042114260961}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

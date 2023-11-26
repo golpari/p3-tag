@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,40 +12,78 @@ public class spirit_slider : MonoBehaviour
     public float min;
     public float max;
 
+    bool stop_possesion = false;
+    public static bool zero_spirit;
+
     Slider slider;
+
+
+    float A = -1.5f;
+
 
     void Start()
     {
+        zero_spirit = false;
         slider = this.GetComponent<Slider>();
         EventBus.Subscribe<SpiritEvent>(_spirit);
-        current_value = 25.0f;
+        EventBus.Subscribe<SpiritPossesion>(_spiritPoss);
+        current_value = 50.0f;
     }
 
     void _spirit(SpiritEvent e) {
-        if (current_value + e.spirit >= min && current_value + e.spirit <= max) {
-            StartCoroutine(increase_decrease(e.spirit));
+        if (current_value + e.spirit < max) {
+            current_value += e.spirit;
         }
+        //StartCoroutine(run_possesion());
     }
+
+
+    void _spiritPoss(SpiritPossesion e)
+    {
+        if (e.active_inactive == true)
+        {
+            StartCoroutine(run_possesion(e.scale_factor));
+        }
+        else if (e.active_inactive == false) {
+            stop_possesion = true;
+        }
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // for testing purposes
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EventBus.Publish<SpiritEvent>(new SpiritEvent(25));
-        }
-        else if(Input.GetKeyDown(KeyCode.E)) {
-            EventBus.Publish<SpiritEvent>(new SpiritEvent(-25));
-        }
-
-        // for testing purposes
-
         slider.value = current_value;
 
-       
+        if (Input.GetKeyDown(KeyCode.T)) {
+            Debug.Log("Enters");
+            current_value = 10.0f;
+        }
 
     }
 
+    // enable action and disable action
+    public IEnumerator run_possesion(float scale_factor) {
+        float past = current_value;
+        float t = 0.0f;
+        float limit = Mathf.Ceil(Mathf.Abs(current_value / A));
+
+        while (t <= limit && !stop_possesion) {
+            Debug.Log(t);
+            t += Time.deltaTime;
+            current_value = scale_factor * t + past;
+            yield return null;
+        }
+
+        if (current_value <= 0.0f)
+        {
+            current_value = 0.0f;
+            zero_spirit = true;
+        }
+
+        stop_possesion = false;
+        yield return null;
+    }
 
 
     public IEnumerator increase_decrease(float val) {

@@ -13,14 +13,13 @@ public class LightHandler : PossessionActionBase
     public override bool EnableAction()
     {
         // Don't enable if don't have the price to pay for possession
-        if (spirit_slider.current_value < spiritPrice) return false;
+        if (spirit_slider.current_value <= 0) return false;
 
         isActive = true;
         // Always darken when first posses 
         isDark = true;
         EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
-        // Charge price
-        EventBus.Publish<SpiritEvent>(new SpiritEvent(-spiritPrice));
+        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -2.0f));
         return true;
     }
 
@@ -30,6 +29,11 @@ public class LightHandler : PossessionActionBase
         // To change back to light when unposses
         isDark = false; 
         EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
+
+        if (spirit_slider.current_value  > 0.0f) {
+            EventBus.Publish<SpiritPossesion>(new SpiritPossesion(false));
+        }
+        // have all events be children of spiritPossesion
     }
 
     public void ToggleLighting()

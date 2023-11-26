@@ -20,6 +20,7 @@ public class ChangeGravityEvent
     }
 }
 
+
 public class ChangeLightingEvent
 {
     public bool isDark;
@@ -93,3 +94,38 @@ public class SpiritEvent
     public SpiritEvent(float _spirit) { this.spirit = _spirit; }
 }
 
+public class SpiritPickup {
+
+    public int index;
+    public string name;
+
+    public SpiritPickup(int index, string name)
+    {
+        this.index = index;
+        this.name = name;
+    }
+}
+
+public class SpiritPossesion {
+    public bool active_inactive;
+    public float scale_factor = 1.0f;
+
+    public SpiritPossesion(bool active_inactive, float scale_factor)
+    {
+        this.active_inactive = active_inactive;
+        this.scale_factor = scale_factor;
+    }
+
+    public SpiritPossesion(bool active_inactive) {
+        this.active_inactive = active_inactive;
+    }
+}
+
+public class fadeOut {
+    public bool fade;
+
+    public fadeOut(bool fade)
+    {
+        this.fade = fade;
+    }
+}
