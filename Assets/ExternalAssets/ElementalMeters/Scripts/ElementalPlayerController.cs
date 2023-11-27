@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class ElementalPlayerController : MonoBehaviour
 {
     private BoxCollider2D propBoxCollider;
     public MeterScript healthMeter; //meter code
