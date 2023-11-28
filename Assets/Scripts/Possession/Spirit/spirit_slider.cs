@@ -55,10 +55,6 @@ public class spirit_slider : MonoBehaviour
     {
         slider.value = current_value;
 
-        if (Input.GetKeyDown(KeyCode.T)) {
-            Debug.Log("Enters");
-            current_value = 10.0f;
-        }
 
     }
 
@@ -69,7 +65,6 @@ public class spirit_slider : MonoBehaviour
         float limit = Mathf.Ceil(Mathf.Abs(current_value / A));
 
         while (t <= limit && !stop_possesion) {
-            Debug.Log(t);
             t += Time.deltaTime;
             current_value = scale_factor * t + past;
             yield return null;

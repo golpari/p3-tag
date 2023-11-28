@@ -52,6 +52,7 @@ public class PlayerController : BaseController
         endCountdownSubscription = EventBus.Subscribe<EndCountdownEvent>(_OnEndCountdown);
         //Subscript to the thiefDiedEvent
         thiefDiedSubscription = EventBus.Subscribe<ThiefDiedEvent>(_OnThiefDied);
+        player_lock = false;
     }
     private void _OnGravityChange(ChangeGravityEvent e)
     {
@@ -114,9 +115,23 @@ public class PlayerController : BaseController
     {
         // Update the player's jump and fall mechanics
         // order is important
-        HandleJump();
-        HandleMovement();
+        if (!player_lock)
+        {
+            HandleJump();
+            HandleMovement();
+        }
+        else {
+            if (Input.GetKey(KeyCode.Space)) {
+                EventBus.Publish<button_mash>(new button_mash(-0.1f));
+            }
+        }
+        
+
       //  HandleFall();
+    }
+
+    void handle_button_mash() { 
+    
     }
 
     private void FixedUpdate()

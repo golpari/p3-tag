@@ -58,6 +58,7 @@ public class camera_move : MonoBehaviour
     {
 
         PlayerController.player_lock = true;
+        player.transform.position = starting_pos[door_num];
         player.SetActive(false);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
@@ -86,11 +87,11 @@ public class camera_move : MonoBehaviour
 
 
         // start timer
-        EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
 
         // unlock playerand ghost
+        
         player.SetActive(true);
-        PlayerController.player_lock = false;
+        EventBus.Publish<ghost_set>(new ghost_set(15.0f));
 
 
     }
@@ -153,7 +154,6 @@ public class camera_move : MonoBehaviour
 
         while (t < duration)
         {
-            Debug.Log(material.color.a);
             // Step the fade forward one frame.
             t += Time.deltaTime;
             // Turn the time into an interpolation factor between 0 and 1.
