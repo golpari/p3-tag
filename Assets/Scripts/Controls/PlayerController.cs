@@ -72,6 +72,7 @@ public class PlayerController : BaseController
     private void _OnThiefDied(ThiefDiedEvent e)
     {
         //whenever the player dies, its lives are decreased
+        /*
         num_lives -= e.livesLost;
 
         if (num_lives <= 0)
@@ -79,6 +80,7 @@ public class PlayerController : BaseController
             num_lives = 3;
             SceneManager.LoadScene(0);
         }
+        */
     }
     protected override void SubscribeActions()
     {

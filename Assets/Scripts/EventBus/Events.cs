@@ -146,3 +146,14 @@ public class button_mash
         this.duration = duration;
     }
 }
+
+public class health_drop {
+    public float value;
+    public health_drop(float value)
+    {
+        this.value = value;
+    }
+}
+
+public class respawn{
+}

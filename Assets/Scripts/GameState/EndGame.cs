@@ -15,6 +15,7 @@ public class EndGame : MonoBehaviour
     Subscription<EndGameEvent> gameEndSubscription;
     // Reference to your input actions
     private PlayerInputActions inputActions;
+    string current_winner = "";
     void Awake()
     {
         inputActions = new PlayerInputActions();
@@ -27,11 +28,13 @@ public class EndGame : MonoBehaviour
 
     void _OnGameEnd(EndGameEvent e)
     {
+        current_winner = e.playerWinnerName;
         inputActions.Player.Disable();
         inputActions.Ghost.Disable();
+
         inputActions.UI.NewGame.Enable();
         // Bind the restart game action to be triggered by any key or button press
-        inputActions.UI.NewGame.performed += restartInitiated;
+        StartCoroutine(transition_scene());
     }
 
         public void restartInitiated(InputAction.CallbackContext ctx)
@@ -45,18 +48,24 @@ public class EndGame : MonoBehaviour
         inputActions.Player.Enable();
         inputActions.Ghost.Enable();
 
-        Debug.Log(PlayerController.num_lives);
-
-        if (PlayerController.num_lives <= 0) {
-            PlayerController.num_lives = 3;
-            SceneManager.LoadScene(0);
-        }
-        else {
+        if (current_winner == "Ghost")
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        else {
+            SceneManager.LoadScene(0);
+        }
+
        
         
     }
+
+    public IEnumerator transition_scene() {
+        EventBus.Publish<fadeOut>(new fadeOut(true));
+        yield return new WaitForSeconds(0.75f);
+        inputActions.UI.NewGame.performed += restartInitiated;
+    }
+
     private void OnDestroy()
     {
         EventBus.Unsubscribe(gameEndSubscription);

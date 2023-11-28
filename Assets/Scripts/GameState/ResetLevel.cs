@@ -41,7 +41,7 @@ public class ResetLevel : MonoBehaviour
     void _OnThiefDied(ThiefDiedEvent e)
     {
         // when the thief dies, load the scene that you are in again
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDestroy()

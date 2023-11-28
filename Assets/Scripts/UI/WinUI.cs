@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class WinUI : MonoBehaviour
 {
     Subscription<EndGameEvent> gameEndSubscription;
+    public Sprite player;
+    public Sprite ghost;
 
     void Start()
     {
@@ -14,17 +16,15 @@ public class WinUI : MonoBehaviour
 
     void _OnPlayerWin(EndGameEvent e)
     {
-        //Debug.Log(EntrywayTrigger.level);
         if (e.playerWinnerName == "Ghost")
         {
-            // TODO: rearrange this, the number of lives is decreased in the playerController based on the thief died event
-            //TODO (for when we have multiple environments): add a check that checks if the num of lives hits 0 or below, if yes, restart from the first scene instead of just the one you are in
-            //PlayerController.num_lives -= 1;
-            GetComponent<Text>().text = "The Ghost caught the player!\n Press any key to restart the level";
+            GetComponent<Image>().sprite = player;
+            GetComponent<Image>().color = Color.red;
         }
         else
         {
-            GetComponent<Text>().text = "The Player successfully escaped! \n Press any key to continue";
+            GetComponent<Image>().sprite = ghost;
+            GetComponent<Image>().color = Color.blue;
         }
     }
 
@@ -32,4 +32,5 @@ public class WinUI : MonoBehaviour
     {
         EventBus.Unsubscribe(gameEndSubscription);
     }
+
 }

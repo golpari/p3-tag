@@ -62,9 +62,7 @@ public class CountdownUI : MonoBehaviour
         timeComp.color = Color.red;
         timeComp.color = temp;
         timeComp.fontSize = temp_size;
-        PlayerController.player_lock = true;
         yield return StartCoroutine(camera_move.MoveObjectOverTime(timeComp.transform, timeComp.transform.position, position, 1.5f));
-        PlayerController.player_lock = false;
     }
 
 
