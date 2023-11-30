@@ -88,7 +88,7 @@ public class spirit_spawn : MonoBehaviour
     
     void Single(BoxCollider coll, int index) {
         Vector3 possible = RandomSpawnPosition(coll);
-
+        
         Collider[] colliders = Physics.OverlapSphere(possible, 0.5f);
 
         for (int k = 0; k < colliders.Length; k++)
@@ -99,6 +99,7 @@ public class spirit_spawn : MonoBehaviour
                 break;
             }
         }
+        
     }
 
 

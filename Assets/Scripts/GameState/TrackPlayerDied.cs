@@ -22,7 +22,7 @@ public class TrackPlayerDied : MonoBehaviour
         //check if the player has fallen off the map or into a pit
         if (this.transform.position.y < -15 && !alreadyDead)
         {
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(1));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
             alreadyDead = true;
         }
     }
@@ -33,7 +33,7 @@ public class TrackPlayerDied : MonoBehaviour
         if (other.gameObject.CompareTag("DeathTrap"))
         {
             // listen for this event in another script and decrease the number of lives
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(1));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
         }
     }
 
@@ -44,7 +44,7 @@ public class TrackPlayerDied : MonoBehaviour
         if (collision.gameObject.CompareTag("DeathTrap"))
         {
             // listen for this event in another script and decrease the number of lives
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(1));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
         }
     }
 }

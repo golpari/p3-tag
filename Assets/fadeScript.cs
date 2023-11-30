@@ -12,8 +12,10 @@ public class fadeScript : MonoBehaviour
     void Start()
     {
         load = GetComponent<CanvasGroup>();
-        load.alpha = 0.0f;
+        load.alpha = 1.0f;
         EventBus.Subscribe<fadeOut>(_fade_change);
+        EventBus.Publish<fadeOut>(new fadeOut(false));
+        load.alpha = 0.0f;
     }
 
 

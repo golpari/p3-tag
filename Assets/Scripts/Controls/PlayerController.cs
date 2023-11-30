@@ -11,7 +11,7 @@ public class PlayerController : BaseController
     public float gravityScale;
     public int doubleJump;
     public float jumpTimeLimit;
-    public float downwardGravityFactor;
+    //public float downwardGravityFactor;
     public Vector3 startingPosition;
 
     // Private variables to control runtime behavior
@@ -52,6 +52,7 @@ public class PlayerController : BaseController
         endCountdownSubscription = EventBus.Subscribe<EndCountdownEvent>(_OnEndCountdown);
         //Subscript to the thiefDiedEvent
         thiefDiedSubscription = EventBus.Subscribe<ThiefDiedEvent>(_OnThiefDied);
+        player_lock = false;
     }
     private void _OnGravityChange(ChangeGravityEvent e)
     {
@@ -71,6 +72,7 @@ public class PlayerController : BaseController
     private void _OnThiefDied(ThiefDiedEvent e)
     {
         //whenever the player dies, its lives are decreased
+        /*
         num_lives -= e.livesLost;
 
         if (num_lives <= 0)
@@ -78,6 +80,7 @@ public class PlayerController : BaseController
             num_lives = 3;
             SceneManager.LoadScene(0);
         }
+        */
     }
     protected override void SubscribeActions()
     {
@@ -114,9 +117,23 @@ public class PlayerController : BaseController
     {
         // Update the player's jump and fall mechanics
         // order is important
-        HandleJump();
-        HandleMovement();
+        if (!player_lock)
+        {
+            HandleJump();
+            HandleMovement();
+        }
+        else {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                EventBus.Publish<button_mash>(new button_mash(-0.1f));
+            }
+        }
+        
+
       //  HandleFall();
+    }
+
+    void handle_button_mash() { 
+    
     }
 
     private void FixedUpdate()
@@ -228,8 +245,11 @@ public class PlayerController : BaseController
 
         if (other.gameObject.tag == "room_change" && !player_lock)
         {
-            EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
-            nextFloor += 1;
+            if (nextFloor < 3) { // change this value later
+                EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
+                nextFloor += 1;
+            }
+            
         }
 
     }

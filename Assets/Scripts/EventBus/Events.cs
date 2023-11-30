@@ -129,3 +129,31 @@ public class fadeOut {
         this.fade = fade;
     }
 }
+
+public class ghost_set {
+    public float duration;
+    public ghost_set(float duration)
+    {
+        this.duration = duration;
+    }
+}
+
+public class button_mash
+{
+    public float duration;
+    public button_mash(float duration)
+    {
+        this.duration = duration;
+    }
+}
+
+public class health_drop {
+    public float value;
+    public health_drop(float value)
+    {
+        this.value = value;
+    }
+}
+
+public class respawn{
+}

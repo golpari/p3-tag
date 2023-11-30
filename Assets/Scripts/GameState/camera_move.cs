@@ -18,7 +18,7 @@ public class camera_move : MonoBehaviour
     public GameObject[] Enviorments;
     public GameObject[] Grids;
     public GameObject Script;
-
+    int current_floor = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +26,27 @@ public class camera_move : MonoBehaviour
         EventBus.Publish<int>(0);
 
         EventBus.Subscribe<ChangeDoorsEvent>(transition_camera);
+        EventBus.Subscribe<respawn>(_respawn);
 
     }
 
+
+    void _respawn(respawn e) {
+        StartCoroutine(respawn());
+    }
+
+
+    public IEnumerator respawn() {
+        player.transform.position = starting_pos[current_floor];
+        yield return changeColor(UnityEngine.Color.red,1.5f);
+        yield return null;
+    }
 
     void _change_index(int ind)
     {
         this.transform.position = camera_pos[ind];
         player.transform.position = starting_pos[ind];
         ghost.transform.position = ghost_pos[ind];
-
 
     }
 
@@ -56,8 +67,8 @@ public class camera_move : MonoBehaviour
     }
     public IEnumerator camera_change(int door_num)
     {
-
-        PlayerController.player_lock = true;
+        current_floor = door_num;
+        player.transform.position = starting_pos[door_num];
         player.SetActive(false);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
@@ -82,16 +93,13 @@ public class camera_move : MonoBehaviour
         Script.GetComponent<spirit_spawn>().turn_on(1.0f);
         yield return changeColor(new UnityEngine.Color(119 / 255, 248 / 255, 255 / 255), 1.5f);
 
-        // player walks in and exclamation mark + ghost spawns in orbs
-
-
-        // start timer
-        EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
-
-        // unlock playerand ghost
+        
         player.SetActive(true);
-        PlayerController.player_lock = false;
+        PlayerController.player_lock = true;
+        // Zade put your shader here!!!
 
+
+        EventBus.Publish<ghost_set>(new ghost_set(15.0f));
 
     }
 
@@ -153,7 +161,6 @@ public class camera_move : MonoBehaviour
 
         while (t < duration)
         {
-            Debug.Log(material.color.a);
             // Step the fade forward one frame.
             t += Time.deltaTime;
             // Turn the time into an interpolation factor between 0 and 1.
