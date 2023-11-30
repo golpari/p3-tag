@@ -11,7 +11,7 @@ public class PlayerController : BaseController
     public float gravityScale;
     public int doubleJump;
     public float jumpTimeLimit;
-    public float downwardGravityFactor;
+    //public float downwardGravityFactor;
     public Vector3 startingPosition;
 
     // Private variables to control runtime behavior
@@ -123,7 +123,7 @@ public class PlayerController : BaseController
             HandleMovement();
         }
         else {
-            if (Input.GetKey(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
                 EventBus.Publish<button_mash>(new button_mash(-0.1f));
             }
         }
@@ -245,8 +245,11 @@ public class PlayerController : BaseController
 
         if (other.gameObject.tag == "room_change" && !player_lock)
         {
-            EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
-            nextFloor += 1;
+            if (nextFloor < 3) { // change this value later
+                EventBus.Publish<ChangeDoorsEvent>(new ChangeDoorsEvent(nextFloor));
+                nextFloor += 1;
+            }
+            
         }
 
     }

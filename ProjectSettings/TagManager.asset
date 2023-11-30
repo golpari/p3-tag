@@ -16,11 +16,12 @@ TagManager:
   - torch
   - i_wall
   - Spirit
+  - no_display
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - shadow_layer
   - Water
   - UI
   - PPLayer
@@ -50,6 +51,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: shadow_layer
+    uniqueID: 2643727367
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

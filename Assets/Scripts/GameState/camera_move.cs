@@ -30,14 +30,15 @@ public class camera_move : MonoBehaviour
 
     }
 
+
     void _respawn(respawn e) {
         StartCoroutine(respawn());
     }
 
 
     public IEnumerator respawn() {
-        changeColor(UnityEngine.Color.red,1.5f);
         player.transform.position = starting_pos[current_floor];
+        yield return changeColor(UnityEngine.Color.red,1.5f);
         yield return null;
     }
 
@@ -99,7 +100,6 @@ public class camera_move : MonoBehaviour
 
 
         EventBus.Publish<ghost_set>(new ghost_set(15.0f));
-        EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
 
     }
 

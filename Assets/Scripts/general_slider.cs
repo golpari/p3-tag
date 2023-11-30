@@ -44,6 +44,7 @@ public class general_slider : MonoBehaviour
             yield return null;
         }
         current_value = end;
+        Debug.Log(test);
     }
 
     public void set_value(float val) {
