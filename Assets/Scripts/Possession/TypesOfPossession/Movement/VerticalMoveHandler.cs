@@ -19,7 +19,7 @@ public class VerticalMoveHandler : PossessionActionBase, IMovable
     {
         isActive = false;
     }
-    public void Move(Vector2 currentMovementInput, float speed)
+    public void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput)
     {
         if (!isActive) return;
         float moveY = currentMovementInput.y * speed * Time.deltaTime;

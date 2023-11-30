@@ -620,6 +620,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FloatUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e27b3d2-5ca1-46dc-8170-768c2f57b01c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FloatDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5adf478-567f-4d70-a0bd-fc27ecfc44ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Float"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9cc67fe-f348-4cf0-8d58-55b30733292d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -809,6 +836,182 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Possess"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afe56cc9-f87b-470b-b372-152043e05864"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""FloatUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f952ef75-c411-4c72-996a-717a8068970d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""RightKeyboard"",
+                    ""action"": ""FloatUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""280f0f33-4599-46d4-9073-c9317b91bd88"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""FloatUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6de029d3-7d69-4991-a783-05b8bf19c199"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""FloatDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afd5cc85-8f04-4a73-bb71-b059c97ac3dc"",
+                    ""path"": ""<Keyboard>/rightAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FloatDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5a9154c-dda3-440f-92a9-2443ffc80ab7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""FloatDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""95395a80-a8b7-4677-b0cd-701ae81014d5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Float"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""acb6d291-29ee-4885-acf1-b33883e64fee"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8feed47c-939c-45d3-8aab-deaabc309c4a"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9cc23864-8ed1-41a9-b2ed-de170ae297b4"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""31c6b895-ac72-4bbc-ac3a-a9ff899a0a5b"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""562cce65-bda6-4dac-affa-4b677269038d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Float"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9fc0f77e-88e6-492c-8165-2983f3cc4ab2"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""778d60e9-385c-4457-a111-448beaeca92d"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""630ef844-e480-46cb-a1cd-62d85af78168"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""dc6271dd-a37a-4615-b578-dd61d48deb6c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""LeftKeyboard"",
+                    ""action"": ""Float"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -869,6 +1072,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Possession_Move = m_Possession.FindAction("Move", throwIfNotFound: true);
         m_Possession_Possess = m_Possession.FindAction("Possess", throwIfNotFound: true);
         m_Possession_Toggle = m_Possession.FindAction("Toggle", throwIfNotFound: true);
+        m_Possession_FloatUp = m_Possession.FindAction("FloatUp", throwIfNotFound: true);
+        m_Possession_FloatDown = m_Possession.FindAction("FloatDown", throwIfNotFound: true);
+        m_Possession_Float = m_Possession.FindAction("Float", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1119,6 +1325,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Possession_Move;
     private readonly InputAction m_Possession_Possess;
     private readonly InputAction m_Possession_Toggle;
+    private readonly InputAction m_Possession_FloatUp;
+    private readonly InputAction m_Possession_FloatDown;
+    private readonly InputAction m_Possession_Float;
     public struct PossessionActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1126,6 +1335,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Possession_Move;
         public InputAction @Possess => m_Wrapper.m_Possession_Possess;
         public InputAction @Toggle => m_Wrapper.m_Possession_Toggle;
+        public InputAction @FloatUp => m_Wrapper.m_Possession_FloatUp;
+        public InputAction @FloatDown => m_Wrapper.m_Possession_FloatDown;
+        public InputAction @Float => m_Wrapper.m_Possession_Float;
         public InputActionMap Get() { return m_Wrapper.m_Possession; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1144,6 +1356,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Toggle.started += instance.OnToggle;
             @Toggle.performed += instance.OnToggle;
             @Toggle.canceled += instance.OnToggle;
+            @FloatUp.started += instance.OnFloatUp;
+            @FloatUp.performed += instance.OnFloatUp;
+            @FloatUp.canceled += instance.OnFloatUp;
+            @FloatDown.started += instance.OnFloatDown;
+            @FloatDown.performed += instance.OnFloatDown;
+            @FloatDown.canceled += instance.OnFloatDown;
+            @Float.started += instance.OnFloat;
+            @Float.performed += instance.OnFloat;
+            @Float.canceled += instance.OnFloat;
         }
 
         private void UnregisterCallbacks(IPossessionActions instance)
@@ -1157,6 +1378,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Toggle.started -= instance.OnToggle;
             @Toggle.performed -= instance.OnToggle;
             @Toggle.canceled -= instance.OnToggle;
+            @FloatUp.started -= instance.OnFloatUp;
+            @FloatUp.performed -= instance.OnFloatUp;
+            @FloatUp.canceled -= instance.OnFloatUp;
+            @FloatDown.started -= instance.OnFloatDown;
+            @FloatDown.performed -= instance.OnFloatDown;
+            @FloatDown.canceled -= instance.OnFloatDown;
+            @Float.started -= instance.OnFloat;
+            @Float.performed -= instance.OnFloat;
+            @Float.canceled -= instance.OnFloat;
         }
 
         public void RemoveCallbacks(IPossessionActions instance)
@@ -1224,5 +1454,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnPossess(InputAction.CallbackContext context);
         void OnToggle(InputAction.CallbackContext context);
+        void OnFloatUp(InputAction.CallbackContext context);
+        void OnFloatDown(InputAction.CallbackContext context);
+        void OnFloat(InputAction.CallbackContext context);
     }
 }

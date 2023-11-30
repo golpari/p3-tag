@@ -99,6 +99,7 @@ public class GhostController : BaseController
 
     private void HandleFloating()
     {
+        
         if (isFloatingUp && this.transform.position.y <= upLimit)
         {
             rb.velocity = new Vector3(rb.velocity.x, 5.0f, rb.velocity.z);
@@ -134,6 +135,12 @@ public class GhostController : BaseController
         // if we add a spirit limit here then it applies to all types of possession, do it within handler scripts
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
     }
+
+    public (bool, bool) GetFloatStatus()
+    {
+        return (isFloatingUp, isFloatingDown);
+    }
+
 
 }
 

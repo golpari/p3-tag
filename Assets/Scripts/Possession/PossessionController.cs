@@ -8,8 +8,16 @@ public class PossessionController : BaseController
 {
     private InputAction possessAction;
     private InputAction toggleAction;
+    private InputAction floatUpAction;
+    private InputAction floatDownAction;
+
+    private bool isFloatingUp;
+    private bool isFloatingDown;
+
+
     protected GhostSelection ghostSelection;
     Subscription<PossessionEvent> possessionSubscription;
+    
     private PossessionActionBase currPossessionAction;
     GameObject currObject;
 
@@ -22,8 +30,10 @@ public class PossessionController : BaseController
         EventBus.Subscribe<ChangeDoorsEvent>(_turn_off);
     }
 
-    void _turn_off(ChangeDoorsEvent e) {
-    if (currPossessionAction != null) {
+    void _turn_off(ChangeDoorsEvent e)
+    {
+        if (currPossessionAction != null)
+        {
             inputAsset.FindActionMap("Possession").Disable();
             inputAsset.FindActionMap("Ghost").Enable();
             currPossessionAction?.DisableAction();
@@ -74,8 +84,13 @@ public class PossessionController : BaseController
         // Initialize the action map specific to Possession
         actionMap = inputAsset.FindActionMap("Possession");
         movementAction = actionMap.FindAction("Move");
+        floatAction = actionMap.FindAction("Float");
         possessAction = actionMap.FindAction("Possess");
         toggleAction = actionMap.FindAction("Toggle");
+        floatUpAction = actionMap.FindAction("FloatUp");
+        floatDownAction = actionMap.FindAction("FloatDown");
+
+
     }
 
     protected override void SubscribeActions()
@@ -84,8 +99,18 @@ public class PossessionController : BaseController
         movementAction.started += OnMovementInput;
         movementAction.performed += OnMovementInput;
         movementAction.canceled += OnMovementInput;
+        
+        floatAction.started += OnFloatInput;
+        floatAction.performed += OnFloatInput;
+        floatAction.canceled += OnFloatInput;
+        
         possessAction.performed += _ => TogglePossession();
         toggleAction.performed += _ => AttemptToggle();
+
+        floatUpAction.performed += ctx => isFloatingUp = true;
+        floatUpAction.canceled += ctx => isFloatingUp = false;
+        floatDownAction.performed += ctx => isFloatingDown = true;
+        floatDownAction.canceled += ctx => isFloatingDown = false;
     }
 
     protected override void UnsubscribeActions()
@@ -94,8 +119,18 @@ public class PossessionController : BaseController
         movementAction.started -= OnMovementInput;
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
+
+        floatAction.started -= OnFloatInput;
+        floatAction.performed -= OnFloatInput;
+        floatAction.canceled -= OnFloatInput;
+
         possessAction.performed -= _ => TogglePossession();
         toggleAction.performed -= _ => AttemptToggle();
+
+        floatUpAction.performed -= ctx => isFloatingUp = true;
+        floatUpAction.canceled -= ctx => isFloatingUp = false;
+        floatDownAction.performed -= ctx => isFloatingDown = true;
+        floatDownAction.canceled -= ctx => isFloatingDown = false;
     }
 
     // Only run update if the action map is enabled
@@ -105,7 +140,8 @@ public class PossessionController : BaseController
             base.Update();
 
         // Rohun Changes
-        if (spirit_slider.zero_spirit) {
+        if (spirit_slider.zero_spirit)
+        {
             inputAsset.FindActionMap("Possession").Disable();
             inputAsset.FindActionMap("Ghost").Enable();
             currPossessionAction?.DisableAction();
@@ -113,7 +149,7 @@ public class PossessionController : BaseController
             currPossessionAction = null;
             spirit_slider.zero_spirit = false;
         }
-            // Rohun Changes
+        // Rohun Changes
 
     }
 
@@ -126,8 +162,9 @@ public class PossessionController : BaseController
     protected override void HandleMovement()
     {
         // Implement movement logic for the possessed object
+        //(bool, bool) floatStatus = (isFloatingUp, isFloatingDown);
         if (currPossessionAction is IMovable movable)
-            movable.Move(currentMovementInput, movementSpeed);
+            movable.Move(currentMovementInput, movementSpeed, currentFloatInput);
     }
 
     private void AttemptToggle()
@@ -135,7 +172,7 @@ public class PossessionController : BaseController
 
         // Check if the current possession action is a LightingHandler
         if (currPossessionAction is LightHandler lightHandler)
-        { 
+        {
             lightHandler.ToggleLighting();
         }
 
@@ -150,32 +187,6 @@ public class PossessionController : BaseController
     {
         // This is to return to the normal, non possession controls, this shouldn't cost anything
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
-            
+
     }
 }
-
-//// default movement is can move in any direction
-//private void defaultMovement(GameObject currObject)
-//{
-//    // Get the directions relative to the camera's orientation
-//    Vector3 forward = Camera.main.transform.forward;
-//    Vector3 right = Camera.main.transform.right;
-
-//    // Remove any influence of the camera's y component
-//    forward.y = 0;
-//    right.y = 0;
-//    forward.Normalize();
-//    right.Normalize();
-
-//    // Read the input from the user
-//    float moveX = currentMovementInput.x; // Left and right
-//    float moveZ = currentMovementInput.y; // Up and down
-
-//    // Calculate the movement vector in world space
-//    Vector3 movement = (forward * moveZ + right * moveX) * movementSpeed * Time.deltaTime;
-
-//    // Apply the movement to the new object's Rigidbody while keeping the y-velocity
-//    //curr_rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-//    if (currObject != null)
-//        currObject.transform.Translate(movement, Space.World);
-//}
