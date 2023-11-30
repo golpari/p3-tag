@@ -15,10 +15,10 @@ public class HorizontalMoveHandler : PossessionActionBase, IMovable
     {
         isActive = false;
     }
-    public void Move(Vector2 currentMovementInput, float speed)
+    public void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput)
     {
         if (!isActive) return;
-        //// Read vertical input and apply movement
+        //// Read horizontal input and apply movement
         float moveX = currentMovementInput.x * speed * Time.deltaTime;
 
         // Get the current position and apply the intended movement

@@ -8,9 +8,11 @@ public abstract class BaseController : MonoBehaviour
 
     protected Rigidbody rb;
     protected Vector2 currentMovementInput;
+    protected Vector2 currentFloatInput;
     public InputActionAsset inputAsset;
     protected InputActionMap actionMap;
     protected InputAction movementAction;
+    protected InputAction floatAction;
     public Animator animator;
 
     protected virtual void Awake()
@@ -98,6 +100,11 @@ public abstract class BaseController : MonoBehaviour
     protected void OnMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
+    }
+
+    protected void OnFloatInput(InputAction.CallbackContext context)
+    {
+        currentFloatInput = context.ReadValue<Vector2>();
     }
 
     // Necessary bc ghost animation doesn't have an isWalking val
