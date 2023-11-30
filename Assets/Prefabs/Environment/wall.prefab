@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f3cee678fd03b09488790be63dbef4e9, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -84,7 +88,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7689898718536552998}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 587c2efbd498f2c489f3e6a70e6e176c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

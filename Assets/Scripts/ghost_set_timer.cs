@@ -36,6 +36,7 @@ public class ghost_set_timer : MonoBehaviour
     public IEnumerator gate_lock(float duration) { 
     yield return StartCoroutine(slider.start_slide(100.0f,0.0f, duration));
     PlayerController.player_lock = false;
+    EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
     slider.slide.gameObject.SetActive(false);
     }
 }
