@@ -29,6 +29,8 @@ public class GhostController : BaseController
     public float lowGravityScale;
     public GameObject gravityFX;
 
+    bool tempToggle = true;
+
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
@@ -132,6 +134,14 @@ public class GhostController : BaseController
 
     private void TogglePossession()
     {
+        // temporary for testing
+        if (tempToggle)
+            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
+        else
+            EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        tempToggle = !tempToggle;
+        // end temporary
+
         // if we add a spirit limit here then it applies to all types of possession, do it within handler scripts
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
     }

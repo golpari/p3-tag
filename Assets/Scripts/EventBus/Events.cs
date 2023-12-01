@@ -46,6 +46,19 @@ public class EndGameEvent
     public EndGameEvent(string _playerWinnerName){playerWinnerName = _playerWinnerName;}
 }
 
+public class PopUpEvent
+{
+    // currPlayer has to be either "thief" or "ghost" for manager to work correctly
+    public string currIcon;
+    public string currPlayer;
+
+    public PopUpEvent(string _currIcon, string _currPlayer)
+    {
+        currIcon = _currIcon;
+        currPlayer = _currPlayer;
+    }
+}
+
 public class EndCountdownEvent
 {
     public EndCountdownEvent() { }
