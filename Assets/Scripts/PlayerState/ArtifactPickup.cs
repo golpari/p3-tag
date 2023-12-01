@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArtifactPickup : MonoBehaviour
 {
+    [SerializeField] private AudioClip clip;
     public int roomNumber = 0;
 
     private void OnTriggerEnter(Collider other)
@@ -20,6 +21,12 @@ public class ArtifactPickup : MonoBehaviour
             // in another script, listen for this event and open a door based on the given room number of the event
             EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
             EventBus.Publish<ArtifactPickupEvent>(new ArtifactPickupEvent(roomNumber));
+
+            Camera cam  = Camera.main;
+
+            Camera.main.GetComponent<AudioSource>().Stop();
+            Camera.main.GetComponent<AudioSource>().clip = clip;
+            Camera.main.GetComponent<AudioSource>().Play();
 
             // get rid of the artifact (it will still exist, but the player can't see or interact with it)
             this.gameObject.SetActive(false);
