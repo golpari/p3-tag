@@ -78,7 +78,11 @@ public class ArtifactPickupEvent
 public class ThiefDiedEvent
 {
     public int livesLost;
-    public ThiefDiedEvent(int _livesLost) { livesLost = _livesLost; }
+    public bool resetPosition;
+    public ThiefDiedEvent(int _livesLost, bool _resetPosition) { 
+        livesLost = _livesLost; 
+        resetPosition = _resetPosition;
+    }
 
 }
 

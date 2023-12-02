@@ -16,7 +16,7 @@ public class player_health : MonoBehaviour
         if (slider.slide.value - e.livesLost > 0)
         {
             StartCoroutine(player_death((float)e.livesLost));
-            EventBus.Publish<respawn>(new respawn());
+            if (e.resetPosition) { EventBus.Publish<respawn>(new respawn()); }
         }
         else {
             EventBus.Publish<EndGameEvent>(new EndGameEvent("Ghost"));

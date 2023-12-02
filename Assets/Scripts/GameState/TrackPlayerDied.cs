@@ -4,16 +4,19 @@ using UnityEngine;
 
 /*
  * This script goes on the player and publishes a 'died' event every time
- * the player either falls off the map or comes into contact with a trap.
- * Trap gameobjects that kill the player on impact are marked in the inspector with the 'DeathTrap' tag.
+ * the player either falls off the map or if the the players health hits 0.
+ * Traps marked with the 'DeathTrap' tag just injure the player.
  */
 public class TrackPlayerDied : MonoBehaviour
 {
     bool alreadyDead = false;
+    private float timeSinceLastEvent = 0f; // Time tracker
 
     // Update is called once per frame
     void Update()
     {
+        timeSinceLastEvent += Time.deltaTime; // Update the timer every frame
+
         if (this.transform.position.y > -15)
         {
             alreadyDead = false;
@@ -22,7 +25,7 @@ public class TrackPlayerDied : MonoBehaviour
         //check if the player has fallen off the map or into a pit
         if (this.transform.position.y < -15 && !alreadyDead)
         {
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25, true));
             alreadyDead = true;
         }
     }
@@ -33,7 +36,32 @@ public class TrackPlayerDied : MonoBehaviour
         if (other.gameObject.CompareTag("DeathTrap"))
         {
             // listen for this event in another script and decrease the number of lives
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25, true));
+        }
+
+        // Check if the player collides with lava
+        if (other.gameObject.CompareTag("Lava"))
+        {
+            // Check if 2 seconds have passed
+            if (timeSinceLastEvent >= 2f)
+            {
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                timeSinceLastEvent = 0f; // Reset the timer
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Check if the player collides with lava
+        if (other.gameObject.CompareTag("Lava"))
+        {
+            // Check if 2 seconds have passed
+            if (timeSinceLastEvent >= 2f)
+            {
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                timeSinceLastEvent = 0f; // Reset the timer
+            }
         }
     }
 
@@ -44,7 +72,32 @@ public class TrackPlayerDied : MonoBehaviour
         if (collision.gameObject.CompareTag("DeathTrap"))
         {
             // listen for this event in another script and decrease the number of lives
-            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25));
+            EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(25, true));
+        }
+
+        // Check if the player collides with lava
+        if (collision.gameObject.CompareTag("Lava"))
+        {
+            // Check if 2 seconds have passed
+            if (timeSinceLastEvent >= 2f)
+            {
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                timeSinceLastEvent = 0f; // Reset the timer
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        // Check if the player collides with lava
+        if (collision.gameObject.CompareTag("Lava"))
+        {
+            // Check if 2 seconds have passed
+            if (timeSinceLastEvent >= 2f)
+            {
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                timeSinceLastEvent = 0f; // Reset the timer
+            }
         }
     }
 }
