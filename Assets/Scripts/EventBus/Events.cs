@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
@@ -12,9 +13,14 @@ public class ChangeGravityEvent
     // set the gravity scale to the given value
     public ChangeGravityEvent(float _gravityScale, GameObject _gravityFX)
     {
-        if (gravityScale != _gravityScale)
-            // Toggle low gravity visual effects on and off when gravity has changed
-            _gravityFX.GetComponent<PostProcessVolume>().enabled = !_gravityFX.GetComponent<PostProcessVolume>().enabled;
+        Debug.Log(gravityScale);
+        Debug.Log(_gravityScale);
+        if (gravityScale != _gravityScale) {
+            
+        }
+        _gravityFX.GetComponent<PostProcessVolume>().enabled = !_gravityFX.GetComponent<PostProcessVolume>().enabled;
+        // Toggle low gravity visual effects on and off when gravity has changed
+
 
         gravityScale = _gravityScale;
     }
@@ -172,5 +178,9 @@ public class health_drop {
     }
 }
 
-public class respawn{
+public class respawn
+{
+    public respawn() { }
 }
+
+

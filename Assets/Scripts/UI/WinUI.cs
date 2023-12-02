@@ -9,23 +9,31 @@ public class WinUI : MonoBehaviour
     public Sprite player;
     public Sprite ghost;
 
+    bool GameEnd = false;
+
     void Start()
     {
         gameEndSubscription = EventBus.Subscribe<EndGameEvent>(_OnPlayerWin);
+        GameEnd = false;
     }
 
     void _OnPlayerWin(EndGameEvent e)
     {
-        if (e.playerWinnerName == "Ghost")
-        {
-            GetComponent<Image>().sprite = player;
-            GetComponent<Image>().color = Color.red;
+        if (!GameEnd) {
+            if (e.playerWinnerName == "Ghost")
+            {
+                GameEnd = true;
+                GetComponent<Image>().sprite = player;
+                GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                GameEnd = true;
+                GetComponent<Image>().sprite = ghost;
+                GetComponent<Image>().color = Color.blue;
+            }
         }
-        else
-        {
-            GetComponent<Image>().sprite = ghost;
-            GetComponent<Image>().color = Color.blue;
-        }
+        
     }
 
     private void OnDestroy()

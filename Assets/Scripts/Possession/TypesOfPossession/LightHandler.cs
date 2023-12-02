@@ -19,7 +19,7 @@ public class LightHandler : PossessionActionBase
         // Always darken when first posses 
         isDark = true;
         EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
-        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -2.0f));
+        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -4.0f)); // -2
         return true;
     }
 

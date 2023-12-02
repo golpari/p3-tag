@@ -15,6 +15,10 @@ public class shadow_script : MonoBehaviour
     public LayerMask layer;
     bool draw = false;
     RaycastHit hit;
+
+    public float special_offset;
+    public float normal_offset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,10 +64,10 @@ public class shadow_script : MonoBehaviour
             }
                 
             float x = this.gameObject.transform.position.x;
-            float y = hit.collider.gameObject.transform.position.y;
+            float y = hit.collider.bounds.max.y + normal_offset;
             float z = this.gameObject.transform.position.z;
 
-            shadow_brush.transform.position = new Vector3(x, y, z) + new Vector3(0.0f, 0.6f, 0.0f);
+            shadow_brush.transform.position = new Vector3(x, y, z);
         }
         else {
             shadow_brush.gameObject.SetActive(false);

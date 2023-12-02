@@ -140,4 +140,6 @@ MonoBehaviour:
   MaxY: 0
   layer:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 1655
+  special_offset: 0.6
+  normal_offset: 0.1

@@ -21,6 +21,7 @@ public class PossessionController : BaseController
     private PossessionActionBase currPossessionAction;
     GameObject currObject;
 
+    bool lock_ghost = false;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class PossessionController : BaseController
         ghostSelection = GetComponent<GhostSelection>();
         inputAsset.FindActionMap("Possession").Disable();
         EventBus.Subscribe<ChangeDoorsEvent>(_turn_off);
+        lock_ghost = false;
     }
 
     void _turn_off(ChangeDoorsEvent e)
@@ -48,6 +50,7 @@ public class PossessionController : BaseController
         // Check to see which map is active
         if (e.inputAsset.FindActionMap("Ghost").enabled)
         {
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
             // make sure there is a possessable object to possess
             currObject = ghostSelection.GetClosestObject();
             if (!currObject)
@@ -64,6 +67,7 @@ public class PossessionController : BaseController
         }
         else if (e.inputAsset.FindActionMap("Possession").enabled)
         {
+            lock_ghost = false;
             // Change Map to Ghost Controls
             e.inputAsset.FindActionMap("Possession").Disable();
             e.inputAsset.FindActionMap("Ghost").Enable();
@@ -137,7 +141,10 @@ public class PossessionController : BaseController
     protected override void Update()
     {
         if (actionMap.enabled)
+        {
             base.Update();
+        }
+            
 
         // Rohun Changes
         if (spirit_slider.zero_spirit)

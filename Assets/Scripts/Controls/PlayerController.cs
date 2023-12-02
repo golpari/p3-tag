@@ -21,8 +21,10 @@ public class PlayerController : BaseController
     private bool isGrounded; 
     private float gravityScaleCopy;
     private bool jumpPressed = false;
+    bool lift = false;
 
     public static int num_lives = 3;
+
 
     // Input System related variables
     private InputAction jumpAction;
@@ -54,6 +56,9 @@ public class PlayerController : BaseController
         thiefDiedSubscription = EventBus.Subscribe<ThiefDiedEvent>(_OnThiefDied);
         player_lock = false;
     }
+
+    
+
     private void _OnGravityChange(ChangeGravityEvent e)
     {
         // Update the gravity scale when the ChangeGravityEvent is published
@@ -104,13 +109,25 @@ public class PlayerController : BaseController
     private void OnJumpStart(InputAction.CallbackContext context)
     {
         // jump button is pressed
+        if (player_lock)
+        {
+            lift = true;
+            
+        }
+
         jumpPressed = true;
+
+
+
     }
 
     private void OnJumpCancel(InputAction.CallbackContext context)
     {
         // jump is no longer pressed
-        jumpPressed = false;
+        // could use for pressing A button
+            jumpPressed = false;
+
+
     }
 
     protected override void Update()
@@ -123,14 +140,16 @@ public class PlayerController : BaseController
             HandleMovement();
         }
         else {
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (lift) {
                 EventBus.Publish<button_mash>(new button_mash(-0.1f));
+                lift = false;
             }
         }
         
 
       //  HandleFall();
     }
+
 
     void handle_button_mash() { 
     
@@ -193,7 +212,7 @@ public class PlayerController : BaseController
     {
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), Mathf.Infinity) &&
-            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "jump_obj"))
+            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "Possessable"))
         {
             return true;
         }
@@ -217,9 +236,10 @@ public class PlayerController : BaseController
         jumpTime = 1.0f;
         isGrounded = true;
         animator.SetBool("isJumping", false);
-        //EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(gravityScaleCopy)); // set gravity to default
-        scale = 1.0f;
+        scale = 1.5f;
         doubleJump = 1; // Reset double jump
+        jumpPressed = false;
+        //gravityScale = gravityScaleCopy;
     }
 
     private void HandleFall()

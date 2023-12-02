@@ -10,6 +10,7 @@ public class camera_move : MonoBehaviour
     public Vector3[] camera_pos;
     public Vector3[] starting_pos;
     public Vector3[] ghost_pos;
+    public float [] orth_sizes;
 
     public GameObject player;
     public GameObject ghost;
@@ -18,8 +19,12 @@ public class camera_move : MonoBehaviour
     public GameObject[] Enviorments;
     public GameObject[] Grids;
     public GameObject Script;
+
+
     int current_floor = 0;
     // Start is called before the first frame update
+
+    float original_speed;
     void Start()
     {
         EventBus.Subscribe<int>(_change_index);
@@ -28,6 +33,7 @@ public class camera_move : MonoBehaviour
         EventBus.Subscribe<ChangeDoorsEvent>(transition_camera);
         EventBus.Subscribe<respawn>(_respawn);
         EventBus.Subscribe<ThiefDiedEvent>(_thiefDied_flashRed);
+
 
     }
 
@@ -69,12 +75,17 @@ public class camera_move : MonoBehaviour
         Grids[NextDoorNum - 1].SetActive(false);
         Enviorments[NextDoorNum].SetActive(true);
         Grids[NextDoorNum].SetActive(true);
+        this.GetComponent<Camera>().orthographicSize = orth_sizes[NextDoorNum];
 
     }
     public IEnumerator camera_change(int door_num)
     {
         current_floor = door_num;
         player.transform.position = starting_pos[door_num];
+
+
+
+
         player.SetActive(false);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());

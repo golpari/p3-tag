@@ -13,20 +13,34 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
     [SerializeField] private float maxY = 10f;
     [SerializeField] private float minY = -10f;
 
+
+
     public override bool EnableAction()
     {
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.GetComponent<Rigidbody>().useGravity = false;
+        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -5.0f));
         isActive = true;
         return true;
     }
     public override void DisableAction()
     {
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.GetComponent<Rigidbody>().useGravity = true;
         isActive = false;
+        if (spirit_slider.current_value > 0.0f)
+        {
+            EventBus.Publish<SpiritPossesion>(new SpiritPossesion(false));
+        }
+
     }
     public void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput)
     {
-        if (!isActive) return;
+        if (!isActive) {
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            return;
+        }
 
-        // Get the directions relative to the camera's orientation
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
 
@@ -36,23 +50,20 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
         forward.Normalize();
         right.Normalize();
 
-        // Read the input from the user
+
         float moveX = currentMovementInput.x; // Left and right
         float moveZ = currentMovementInput.y; // Up and down
         float moveY = currentFloatInput.y;
 
-        // constrain the new Y position
-        //moveY = Mathf.Clamp(moveY, minY, maxY);
+        Vector3 movement = (forward * moveZ + right * moveX) * speed;
+        movement.y = moveY * speed;
 
-        // Calculate the movement vector in world space
-        Vector3 movement = (forward * moveZ + right * moveX) * speed * Time.deltaTime;
-        movement.y = moveY * speed * Time.deltaTime;
-
-        /*// Constrain the new X and Z positions
-        movement.x = Mathf.Clamp(movement.x, minX, maxX);
-        movement.z = Mathf.Clamp(movement.z, minZ, maxZ);*/
-
-        transform.Translate(movement, Space.World);
-
+        this.GetComponent<Rigidbody>().velocity = movement;
+        this.transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, minX, maxX),
+            Mathf.Clamp(this.transform.position.y, minY, maxY),
+            Mathf.Clamp(this.transform.position.z, minZ, maxZ));
+      
     }
+
+
 }

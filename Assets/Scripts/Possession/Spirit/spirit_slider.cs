@@ -17,9 +17,9 @@ public class spirit_slider : MonoBehaviour
 
     Slider slider;
 
+    public ParticleSystem particles;
 
-    float A = -1.5f;
-
+    Vector3 distance;
 
     void Start()
     {
@@ -27,13 +27,26 @@ public class spirit_slider : MonoBehaviour
         slider = this.GetComponent<Slider>();
         EventBus.Subscribe<SpiritEvent>(_spirit);
         EventBus.Subscribe<SpiritPossesion>(_spiritPoss);
-        current_value = 50.0f;
+        current_value = 100.0f;
+        particles.Stop();
+
     }
 
     void _spirit(SpiritEvent e) {
-        if (current_value + e.spirit < max) {
-            current_value += e.spirit;
+        if (e.spirit > 0)
+        {
+            if (current_value + e.spirit <= max)
+            {
+                current_value += e.spirit;
+            }
         }
+        else {
+            if (current_value + e.spirit >= min)
+            {
+                current_value += e.spirit;
+            }
+        }
+       
         //StartCoroutine(run_possesion());
     }
 
@@ -62,8 +75,8 @@ public class spirit_slider : MonoBehaviour
     public IEnumerator run_possesion(float scale_factor) {
         float past = current_value;
         float t = 0.0f;
-        float limit = Mathf.Ceil(Mathf.Abs(current_value / A));
-
+        float limit = Mathf.Ceil(Mathf.Abs(current_value / scale_factor));
+        particles.Play();
         while (t <= limit && !stop_possesion) {
             t += Time.deltaTime;
             current_value = scale_factor * t + past;
@@ -75,7 +88,7 @@ public class spirit_slider : MonoBehaviour
             current_value = 0.0f;
             zero_spirit = true;
         }
-
+        particles.Stop();
         stop_possesion = false;
         yield return null;
     }

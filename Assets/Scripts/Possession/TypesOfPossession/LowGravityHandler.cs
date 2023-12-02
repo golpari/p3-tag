@@ -3,8 +3,8 @@ using UnityEngine;
 public class LowGravityHandler : PossessionActionBase
 {
     // Gravity scale presets for different gravity states.
-    [SerializeField] private float defaultGravityScale = 2.0f;
-    [SerializeField] private float lowGravityScale = 0.0005f;
+    [SerializeField] private float defaultGravityScale = 1.0f;
+    [SerializeField] private float lowGravityScale = 2.5f;
     [SerializeField] private GameObject gravityFX;
     // To have a base spiritprice but still be able to modify individually
     //public override float spiritPrice
@@ -30,7 +30,7 @@ public class LowGravityHandler : PossessionActionBase
         isActive = true;
         // Always low grav when first posses
         EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(lowGravityScale, gravityFX));
-        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -3.0f));
+        EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -6.0f));
         isLowGravity = true;
         return true;
     }

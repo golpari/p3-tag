@@ -12,6 +12,8 @@ public class EndGame : MonoBehaviour
     public static int index = 0;
     [SerializeField] private GameObject text;
 
+    bool GameEnd = false;
+
     Subscription<EndGameEvent> gameEndSubscription;
     // Reference to your input actions
     private PlayerInputActions inputActions;
@@ -24,23 +26,28 @@ public class EndGame : MonoBehaviour
     void Start()
     {
         gameEndSubscription = EventBus.Subscribe<EndGameEvent>(_OnGameEnd);
+        GameEnd = false;
     }
 
     void _OnGameEnd(EndGameEvent e)
     {
-        current_winner = e.playerWinnerName;
-        inputActions.Player.Disable();
-        inputActions.Ghost.Disable();
+        if (!GameEnd) {
+            GameEnd = true;
+            current_winner = e.playerWinnerName;
+            inputActions.Player.Disable();
+            inputActions.Ghost.Disable();
 
-        inputActions.UI.NewGame.Enable();
-        // Bind the restart game action to be triggered by any key or button press
-        StartCoroutine(transition_scene());
+            inputActions.UI.NewGame.Enable();
+            // Bind the restart game action to be triggered by any key or button press
+            StartCoroutine(transition_scene());
+        }
+        
     }
 
-        public void restartInitiated(InputAction.CallbackContext ctx)
+    public void restartInitiated(InputAction.CallbackContext ctx)
     {
-        RestartGame();
-        inputActions.UI.NewGame.performed -= restartInitiated;
+    RestartGame();
+    inputActions.UI.NewGame.performed -= restartInitiated;
     }
     void RestartGame()
     {
