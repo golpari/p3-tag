@@ -17,6 +17,7 @@ TagManager:
   - i_wall
   - Spirit
   - no_display
+  - Lava
   layers:
   - Default
   - TransparentFX

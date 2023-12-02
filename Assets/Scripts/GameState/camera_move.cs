@@ -27,6 +27,7 @@ public class camera_move : MonoBehaviour
 
         EventBus.Subscribe<ChangeDoorsEvent>(transition_camera);
         EventBus.Subscribe<respawn>(_respawn);
+        EventBus.Subscribe<ThiefDiedEvent>(_thiefDied_flashRed);
 
     }
 
@@ -37,9 +38,14 @@ public class camera_move : MonoBehaviour
 
 
     public IEnumerator respawn() {
+        yield return new WaitForSeconds(0.5f); // add a buffer of half a second for the player to realize they got hurt
         player.transform.position = starting_pos[current_floor];
-        yield return changeColor(UnityEngine.Color.red,1.5f);
         yield return null;
+    }
+
+    void _thiefDied_flashRed(ThiefDiedEvent e)
+    {
+        StartCoroutine(changeColor(UnityEngine.Color.red, 1.5f));
     }
 
     void _change_index(int ind)
