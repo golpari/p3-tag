@@ -26,7 +26,7 @@ public class ResetLevel : MonoBehaviour
         
     }
 
-    void Awake()
+    /*void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
 
@@ -36,7 +36,7 @@ public class ResetLevel : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-    }
+    }*/
 
     void _OnThiefDied(ThiefDiedEvent e)
     {
