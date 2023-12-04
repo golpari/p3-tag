@@ -57,8 +57,8 @@ public class camera_move : MonoBehaviour
     void _change_index(int ind)
     {
         this.transform.position = camera_pos[ind];
-        player.transform.position = starting_pos[ind];
-        ghost.transform.position = ghost_pos[ind];
+        player.transform.position = starting_pos[ind] + new Vector3(0.0f, 0.0f, 5.0f);
+        ghost.transform.position = ghost_pos[ind] - new Vector3(0.0f, 0.0f, 5.0f);
 
     }
 

@@ -68,7 +68,7 @@ public class PlayerController : BaseController
     private void _OnEndCountdown(EndCountdownEvent e)
     {
         // Reset the player's position when the EndCountdownEvent is published
-        this.transform.position = startingPosition;
+        //this.transform.position = startingPosition;
         string winner = "Ghost";
         EventBus.Publish<EndGameEvent>(new EndGameEvent(winner));
 
@@ -227,6 +227,27 @@ public class PlayerController : BaseController
             ResetJump();
         }
 
+        if (collision.gameObject.CompareTag("Ghost") && spirit_slider.current_value > 75.0f)
+        {
+            spirit_slider.current_value -= 75.0f;
+            StartCoroutine(FreezePlayer());
+        }
+
+    }
+
+    private IEnumerator FreezePlayer()
+    {
+        player_lock = true;
+
+        Camera.main.GetComponent<FrostEffect>().enabled = true;
+        animator.enabled = false;
+
+        yield return new WaitForSeconds(2.0f);
+
+        animator.enabled = true;
+        Camera.main.GetComponent<FrostEffect>().enabled = false;
+
+        player_lock = false;
     }
 
     private void ResetJump()
@@ -248,7 +269,7 @@ public class PlayerController : BaseController
         if (transform.position.y < -13.0f)
         {
             ResetJump();
-            this.transform.position = startingPosition;
+            //this.transform.position = startingPosition;
         }
     }
 
@@ -262,7 +283,6 @@ public class PlayerController : BaseController
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.tag == "room_change" && !player_lock)
         {
             if (nextFloor < 3) { // change this value later
@@ -271,7 +291,6 @@ public class PlayerController : BaseController
             }
             
         }
-
     }
 
 }

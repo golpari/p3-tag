@@ -45,7 +45,7 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -59,7 +59,7 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(15, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -81,7 +81,7 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -95,7 +95,7 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(5, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(15, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }

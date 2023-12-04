@@ -58,6 +58,7 @@ public class PlayerJoinManager : MonoBehaviour
 
         if (playerPrefab == player1Prefab)
         {
+            Debug.Log("Here");
             spawnPosition = new Vector3(1f, 1.5999f, -12.61f); 
         }
         else if (playerPrefab == player2Prefab)
