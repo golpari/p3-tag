@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorOpen : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class DoorOpen : MonoBehaviour
         }
 
         transform.position = endPosition; // Ensure the position is set exactly at the end position after the loop
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void OnDestroy()

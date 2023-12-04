@@ -11,6 +11,7 @@ public class TrackPlayerDied : MonoBehaviour
 {
     bool alreadyDead = false;
     private float timeSinceLastEvent = 0f; // Time tracker
+    [SerializeField] private AudioSource lavaSound;
 
     // Update is called once per frame
     void Update()
@@ -45,7 +46,9 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
+                lavaSound.Play();
+
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(45, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -59,7 +62,7 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(15, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -78,10 +81,12 @@ public class TrackPlayerDied : MonoBehaviour
         // Check if the player collides with lava
         if (collision.gameObject.CompareTag("Lava"))
         {
+            lavaSound.Play();
+
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(45, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
         }
@@ -95,9 +100,25 @@ public class TrackPlayerDied : MonoBehaviour
             // Check if 2 seconds have passed
             if (timeSinceLastEvent >= 2f)
             {
-                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(15, false));
+                EventBus.Publish<ThiefDiedEvent>(new ThiefDiedEvent(30, false));
                 timeSinceLastEvent = 0f; // Reset the timer
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Lava"))
+        {
+            lavaSound.Stop();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Lava"))
+        {
+            lavaSound.Stop();
         }
     }
 }

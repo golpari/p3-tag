@@ -31,4 +31,14 @@ public class MovingObstacle : MonoBehaviour
 
         transform.position = new Vector3(xPosition, yPosition, zPosition);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collision.gameObject.transform.parent = transform;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        collision.gameObject.transform.parent = null;
+    }
 }

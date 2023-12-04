@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -14,6 +15,7 @@ public class SlowPlayer : MonoBehaviour
     private float originalSpeed = 0;
     private float slowSpeed = 0;
     private PlayerController playerController;
+    [SerializeField] private AudioSource sloshSound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,8 @@ public class SlowPlayer : MonoBehaviour
         {
             playerController.movementSpeed = slowSpeed;
         }
+
+        sloshSound.Play();
     }
 
     private void OnTriggerStay(Collider other)
@@ -49,6 +53,8 @@ public class SlowPlayer : MonoBehaviour
         {
             playerController.movementSpeed = originalSpeed;
         }
+
+        sloshSound.Stop();
     }
 
 
