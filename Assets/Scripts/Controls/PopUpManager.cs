@@ -12,10 +12,13 @@ public class PopUpManager : MonoBehaviour
     GameObject currentPopUp;
 
     Subscription<PopUpEvent> popUpSubscription;
-    Subscription<OutlineEvent> outlineEvent;
+    Subscription<OutlineEvent> outlineSubscription;
+    Subscription<PossessionEvent> possessionSubscription;
     private void Start()
     {
         popUpSubscription = EventBus.Subscribe<PopUpEvent>(_OnPopUpChange);
+        outlineSubscription = EventBus.Subscribe<OutlineEvent>(_OnOutlineChange);
+        possessionSubscription = EventBus.Subscribe<PossessionEvent>(_OnPossession);
     }
 
     void _OnPopUpChange(PopUpEvent e)
@@ -43,9 +46,34 @@ public class PopUpManager : MonoBehaviour
             spriteRenderer.sprite = controls[4];
         else if (e.currIcon == "rt")
             spriteRenderer.sprite = controls[5];
+        else if (e.currIcon == "button_y")
+            spriteRenderer.sprite = controls[6];
         else if (e.currIcon == null)
             spriteRenderer.sprite = null;
         else
             Debug.Log("Error: currIcon isn't named correctly (in controls in GameManager or null)");
+    }
+
+    void _OnOutlineChange(OutlineEvent e)
+    {
+        if (e.shouldOutline)
+        {
+            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
+        }
+
+        else
+            EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+    }
+
+    void _OnPossession(PossessionEvent e)
+    {
+        // if a player presses the button
+        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(outlineSubscription);
+        EventBus.Unsubscribe(possessionSubscription);
     }
 }

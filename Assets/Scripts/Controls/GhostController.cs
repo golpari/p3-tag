@@ -135,11 +135,11 @@ public class GhostController : BaseController
     private void TogglePossession()
     {
         // temporary for testing
-        if (tempToggle)
+        /*if (tempToggle)
             EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
         else
             EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
-        tempToggle = !tempToggle;
+        tempToggle = !tempToggle;*/
         // end temporary
 
         // if we add a spirit limit here then it applies to all types of possession, do it within handler scripts

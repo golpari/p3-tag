@@ -47,6 +47,9 @@ public class GhostSelection : MonoBehaviour
 
     GameObject FindClosestObject(Collider[] colliders)
     {
+        /*Debug.Log("object count: " + colliders.Length);
+        Debug.Log("has possession: " + hasPossession);
+        Debug.Log("closest object: " + closestObject);*/
         // If there is a closest object but it isn't in range and not currently possessed, deactivate outline
         if (colliders.Length == 0 && !hasPossession && closestObject)
         {
