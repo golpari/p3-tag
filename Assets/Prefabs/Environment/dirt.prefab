@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dirt
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
