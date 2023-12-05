@@ -20,7 +20,6 @@ public class fadeScript : MonoBehaviour
 
 
 
-
     public void _fade_change(fadeOut e)
     {
         float start = 0.0f, end = 1.0f;

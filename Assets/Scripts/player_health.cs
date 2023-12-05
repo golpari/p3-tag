@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player_health : MonoBehaviour
 {
@@ -10,8 +11,14 @@ public class player_health : MonoBehaviour
     void Start()
     {
         EventBus.Subscribe<ThiefDiedEvent>(_health_decrease);
+        EventBus.Subscribe<Reset>(_reset);
     }
 
+    void _reset(Reset e)
+    {
+        //slider.slide.value = 100;
+        StartCoroutine(player_death(-1 * (100 - slider.slide.value)));
+    }
     void _health_decrease(ThiefDiedEvent e) {
         if (slider.slide.value - e.livesLost > 0)
         {
@@ -19,6 +26,7 @@ public class player_health : MonoBehaviour
             if (e.resetPosition) { EventBus.Publish<respawn>(new respawn()); }
         }
         else {
+            slider.slide.value = 0;
             EventBus.Publish<EndGameEvent>(new EndGameEvent("Ghost"));
         }
     }

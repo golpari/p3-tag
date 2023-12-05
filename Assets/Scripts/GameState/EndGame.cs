@@ -34,12 +34,15 @@ public class EndGame : MonoBehaviour
         if (!GameEnd) {
             GameEnd = true;
             current_winner = e.playerWinnerName;
+            
+            /*
             inputActions.Player.Disable();
             inputActions.Ghost.Disable();
 
             inputActions.UI.NewGame.Enable();
-            // Bind the restart game action to be triggered by any key or button press
+            */
             StartCoroutine(transition_scene());
+            // Bind the restart game action to be triggered by any key or button press
         }
         
     }
@@ -51,7 +54,7 @@ public class EndGame : MonoBehaviour
     }
     void RestartGame()
     {
-
+        Debug.Log("Goes in here");
         inputActions.Player.Enable();
         inputActions.Ghost.Enable();
 
@@ -69,7 +72,11 @@ public class EndGame : MonoBehaviour
 
     public IEnumerator transition_scene() {
         EventBus.Publish<fadeOut>(new fadeOut(true));
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.50f);
+        EventBus.Publish<Reset>(new Reset());
+        GameEnd = false;
+        EventBus.Publish<fadeOut>(new fadeOut(false));
         inputActions.UI.NewGame.performed += restartInitiated;
     }
 

@@ -17,6 +17,8 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
 
     public override bool EnableAction()
     {
+        if (spirit_slider.current_value <= 0) return false;
+
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         this.GetComponent<Rigidbody>().useGravity = false;
         EventBus.Publish<SpiritPossesion>(new SpiritPossesion(true, -5.0f));

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EntrywayTrigger : MonoBehaviour
 {
@@ -11,11 +12,15 @@ public class EntrywayTrigger : MonoBehaviour
         // If the player enters the doorway trigger collider
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
+            Debug.Log(final_door);
             if (final_door)
             {
                 string winner = "Player";
                 EventBus.Publish<PauseCountDownTimer>(new PauseCountDownTimer());
                 EventBus.Publish<EndGameEvent>(new EndGameEvent(winner));
+            }
+            else if (SceneManager.GetActiveScene().name == "Tutorial_Map") {
+                SceneManager.LoadScene("BETA_copy");
             }
             
             ++level;

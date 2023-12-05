@@ -28,6 +28,8 @@ public class CountdownUI : MonoBehaviour
     float MaxFont = 260;
     int font_increase = 0;
 
+    int temp;
+    Vector3 pos;
     Subscription<StartGameEvent> startEventSubscription;
     Subscription<EndGameEvent> endEventSubscription;
     Subscription<StartCountDownTimer> startCountdownSubscription;
@@ -41,6 +43,20 @@ public class CountdownUI : MonoBehaviour
         EventBus.Subscribe<PauseCountDownTimer>(_pauseTimer);
 
         font_increase = (int)(MaxFont / totalTime);
+        EventBus.Subscribe<Reset>(_reset);
+        temp = timeComp.fontSize;
+        pos = this.transform.position;
+    }
+
+    void _reset(Reset e) {
+        this.transform.position = pos;
+        timeComp.fontSize = temp;
+        TimerBegin = false;
+        timeLeft = totalTime;
+        font_increase = (int)(MaxFont / totalTime);
+        runGame = true;
+        timeComp.text = (timeLeft).ToString("0");
+        //EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
     }
 
     void _startTimer(StartCountDownTimer e)

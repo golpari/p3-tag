@@ -183,4 +183,6 @@ public class respawn
     public respawn() { }
 }
 
-
+public class Reset {
+    public Reset() { }
+}

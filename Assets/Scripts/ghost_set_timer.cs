@@ -6,7 +6,8 @@ using UnityEngine;
 public class ghost_set_timer : MonoBehaviour
 {
     public general_slider slider;
-
+    bool flash = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,8 @@ public class ghost_set_timer : MonoBehaviour
         StartCoroutine(gate_lock(e.duration));
     }
 
-    void _bar_show(ghost_set e) { 
+    void _bar_show(ghost_set e) {
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "thief"));
         slider.slide.gameObject.SetActive(true);
     }
 
@@ -37,6 +39,7 @@ public class ghost_set_timer : MonoBehaviour
     public IEnumerator gate_lock(float duration) {
 
     yield return StartCoroutine(slider.start_slide(100.0f,0.0f, duration));
+    EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "thief"));
     PlayerController.player_lock = false;
     EventBus.Publish<StartCountDownTimer>(new StartCountDownTimer());
     slider.slide.gameObject.SetActive(false);

@@ -13,7 +13,11 @@ public class ToggleLighting : MonoBehaviour
     {
         EventBus.Subscribe<ChangeLightingEvent>(_OnLightingChange);
         lightComponent = GetComponent<Light>();
-        material = GetComponent<MeshRenderer>().material;
+        MeshRenderer temp = GetComponent<MeshRenderer>();
+        if (temp != null) {
+            material = GetComponent<MeshRenderer>().material;
+        }
+        
     }
     private void _OnLightingChange(ChangeLightingEvent e)
     {

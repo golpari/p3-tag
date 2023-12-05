@@ -6,6 +6,15 @@ public class ArtifactPickup : MonoBehaviour
 {
     [SerializeField] private AudioClip clip;
     public int roomNumber = 0;
+    private void Start()
+    {
+        EventBus.Subscribe<Reset>(_reset);
+    }
+
+    void _reset(Reset e) { 
+        this.gameObject.SetActive(true);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +39,7 @@ public class ArtifactPickup : MonoBehaviour
 
             // get rid of the artifact (it will still exist, but the player can't see or interact with it)
             this.gameObject.SetActive(false);
+
         }
     }
 }

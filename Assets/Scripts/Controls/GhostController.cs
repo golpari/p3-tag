@@ -31,6 +31,21 @@ public class GhostController : BaseController
 
     bool tempToggle = true;
 
+    Vector3 starting_position;
+
+    public static bool  ghost_lock;
+
+    private void Start()
+    {
+        ghost_lock = false;
+        EventBus.Subscribe<Reset>(_reset);
+        starting_position = this.transform.position;
+    }
+
+    void _reset(Reset e) {
+        this.transform.position = starting_position;
+    }
+
     protected override void InitializeActionMap()
     {
         // Initialize the action map specific to the Ghost
@@ -74,18 +89,21 @@ public class GhostController : BaseController
 
     protected override void Update()
     {
-        if (actionMap.enabled)
-        {
-            base.Update();
-            HandleFloating();
-
-
-            if (Input.GetKeyDown(KeyCode.Space) && spirit_slider.current_value >= 100 && !super)
+        if (!ghost_lock) {
+            if (actionMap.enabled)
             {
-                EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
-                StartCoroutine(super_power());
+                base.Update();
+                HandleFloating();
+
+
+                if (Input.GetKeyDown(KeyCode.Space) && spirit_slider.current_value >= 100 && !super)
+                {
+                    EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
+                    StartCoroutine(super_power());
+                }
             }
         }
+        
 
         // delete after
     }

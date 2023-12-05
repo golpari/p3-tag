@@ -30,6 +30,21 @@ public class PossessionController : BaseController
         inputAsset.FindActionMap("Possession").Disable();
         EventBus.Subscribe<ChangeDoorsEvent>(_turn_off);
         lock_ghost = false;
+
+        EventBus.Subscribe<Reset>(_reset);
+    }
+
+    void _reset(Reset e) {
+        lock_ghost = false;
+        if (currPossessionAction != null)
+        {
+            inputAsset.FindActionMap("Possession").Disable();
+            inputAsset.FindActionMap("Ghost").Enable();
+            currPossessionAction?.DisableAction();
+            currObject = null;
+            currPossessionAction = null;
+        }
+        spirit_slider.zero_spirit = false;
     }
 
     void _turn_off(ChangeDoorsEvent e)

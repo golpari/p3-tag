@@ -34,7 +34,6 @@ public class SlowPlayer : MonoBehaviour
             playerController.movementSpeed = slowSpeed;
         }
 
-        sloshSound.Play();
     }
 
     private void OnTriggerStay(Collider other)
@@ -53,8 +52,6 @@ public class SlowPlayer : MonoBehaviour
         {
             playerController.movementSpeed = originalSpeed;
         }
-
-        sloshSound.Stop();
     }
 
 

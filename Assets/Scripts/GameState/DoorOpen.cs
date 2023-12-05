@@ -15,12 +15,20 @@ public class DoorOpen : MonoBehaviour
     // Start is called before the first frame update
 
     public static bool artifactPicked = false;
+    Vector3 start;
     void Start()
     {
+        start = transform.position;
         if (artifactPicked) {
         transform.position += new Vector3(0, distanceUp, 0);
         }
         EventBus.Subscribe<ArtifactPickupEvent>(_OnArtifactPickup);
+        EventBus.Subscribe<Reset>(_reset);
+    }
+
+    void _reset(Reset e) {
+        artifactPicked = false;
+        transform.position = start;
     }
 
     // Update is called once per frame
@@ -28,11 +36,17 @@ public class DoorOpen : MonoBehaviour
 
     void _OnArtifactPickup(ArtifactPickupEvent e)
     {
-        // if the artifact of the room that this door is in gets picked up
-        if (e.artRoomNum == roomNumber)
+        // if the artifact of the room that this door is in gets picked up'
+        if (this != null)
         {
-            //open door (slide it up)
-            StartCoroutine(SlideUpCoroutine(distanceUp, speed));
+            if (e.artRoomNum == roomNumber)
+            {
+                //open door (slide it up)
+
+                StartCoroutine(SlideUpCoroutine(distanceUp, speed));
+            }
+
+
         }
     }
 
@@ -51,7 +65,7 @@ public class DoorOpen : MonoBehaviour
         }
 
         transform.position = endPosition; // Ensure the position is set exactly at the end position after the loop
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void OnDestroy()

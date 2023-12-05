@@ -34,9 +34,22 @@ public class camera_move : MonoBehaviour
         EventBus.Subscribe<respawn>(_respawn);
         EventBus.Subscribe<ThiefDiedEvent>(_thiefDied_flashRed);
 
+        EventBus.Subscribe<Reset>(_reset);
 
     }
 
+
+    void _reset(Reset e) {
+        Enviorments[0].SetActive(true);
+        Grids[0].SetActive(true);
+        Enviorments[1].SetActive(true);
+        Grids[1].SetActive(true);
+        Enviorments[2].SetActive(true);
+        Grids[2].SetActive(true);
+        this.GetComponent<Camera>().orthographicSize = orth_sizes[0];
+        this.GetComponent<Camera>().transform.position = camera_pos[0];
+        current_floor = 0;
+    }
 
     void _respawn(respawn e) {
         StartCoroutine(respawn());

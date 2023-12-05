@@ -40,7 +40,7 @@ public class PopUpManager : MonoBehaviour
             spriteRenderer.sprite = controls[1];
         else if (e.currIcon == "joystick2_right")
             spriteRenderer.sprite = controls[2];
-        else if (e.currIcon == "controller_xbox")
+        else if (e.currIcon == "button_b")
             spriteRenderer.sprite = controls[3];
         else if (e.currIcon == "lt")
             spriteRenderer.sprite = controls[4];

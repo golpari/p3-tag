@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+//using UnityEditor.Presets;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
+using Slider = UnityEngine.UI.Slider;
 
 public class general_slider : MonoBehaviour
 {
@@ -17,6 +20,13 @@ public class general_slider : MonoBehaviour
         EventBus.Subscribe<EndGameEvent>(_change_bool);
         slide = GetComponent<Slider>();
         current_value = 100.0f;
+        EventBus.Subscribe<Reset>(_reset);
+    }
+
+    void _reset(Reset e)
+    {
+        current_value = 100;
+        GameEnd = false;
     }
 
     // Update is called once per frame
@@ -36,6 +46,7 @@ public class general_slider : MonoBehaviour
         initial_time = Time.time;
         progress = (Time.time - initial_time) / duration;
         current_value = start;
+        Debug.Log(GameEnd);
         while (progress < 1.0f && !GameEnd)
         {
             test += Time.deltaTime;
@@ -44,7 +55,6 @@ public class general_slider : MonoBehaviour
             yield return null;
         }
         current_value = end;
-        Debug.Log(test);
     }
 
     public void set_value(float val) {

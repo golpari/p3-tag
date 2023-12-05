@@ -35,9 +35,18 @@ public class spirit_spawn : MonoBehaviour
 
         // when [icked up by ghost affects spirit
         // when picked up by player affects time
+
+        EventBus.Subscribe<Reset>(_resetA);
     }
 
     // Update is called once per frame
+
+
+    void _resetA(Reset e) {
+        room_index = 0;
+        new_room(test_trig[room_index]);
+    }
+
 
     void _reset(ChangeDoorsEvent e) {
         room_index = e.doorRoomNum;

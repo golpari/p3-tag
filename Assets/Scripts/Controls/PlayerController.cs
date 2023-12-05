@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+//using UnityEditor.Presets;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,7 +14,7 @@ public class PlayerController : BaseController
     public int doubleJump;
     public float jumpTimeLimit;
     //public float downwardGravityFactor;
-    public Vector3 startingPosition;
+    public UnityEngine.Vector3 startingPosition;
 
     // Private variables to control runtime behavior
     private float jumpTime;
@@ -24,6 +26,9 @@ public class PlayerController : BaseController
     bool lift = false;
 
     public static int num_lives = 3;
+
+    float x_wall_dir = 0.0f;
+    float z_wall_dir = 0.0f;
 
 
     // Input System related variables
@@ -55,9 +60,15 @@ public class PlayerController : BaseController
         //Subscript to the thiefDiedEvent
         thiefDiedSubscription = EventBus.Subscribe<ThiefDiedEvent>(_OnThiefDied);
         player_lock = false;
+        EventBus.Subscribe<Reset>(_reset);
     }
 
-    
+    void _reset(Reset e) {
+        this.transform.position = startingPosition;
+        player_lock = false;
+        nextFloor = 1;
+        ResetJump();
+    }
 
     private void _OnGravityChange(ChangeGravityEvent e)
     {
@@ -138,11 +149,27 @@ public class PlayerController : BaseController
         {
             HandleJump();
             HandleMovement();
+
+            if (Mathf.Abs(rb.velocity.z) == z_wall_dir)
+            {
+
+                rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y, 0.0f);
+            }
+
+            if (Mathf.Abs(rb.velocity.x) == x_wall_dir)
+            {
+                rb.velocity = new UnityEngine.Vector3(0.0f, rb.velocity.y, rb.velocity.z);
+            }
+        }
+        else if (tutorial.tut) {
+            
         }
         else {
-            if (lift) {
+            if (lift)
+            {
                 EventBus.Publish<button_mash>(new button_mash(-0.1f));
                 lift = false;
+                 EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "thief"));
             }
         }
         
@@ -151,9 +178,26 @@ public class PlayerController : BaseController
     }
 
 
-    void handle_button_mash() { 
-    
+    private void check_wall()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 0.5f))
+        {
+            z_wall_dir = 1.0f;
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), 0.5f))
+        {
+            z_wall_dir = -1.0f;
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), 0.5f))
+        {
+            x_wall_dir = -1.0f;
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), 0.5f))
+        {
+            x_wall_dir = 1.0f;
+        }
     }
+
 
     private void FixedUpdate()
     {
@@ -165,46 +209,15 @@ public class PlayerController : BaseController
     void HandleJump()
     {
         // Handle the jumping logic including double jumps
-        if (jumpPressed && (isGrounded || doubleJump > 0))
+        if (jumpPressed && isGrounded)
         {
             // Perform the jump
             rb.velocity = Vector3.up * jumpForce;
             isGrounded = false;
             animator.SetBool("isJumping", true);
-            doubleJump -= 1;
+            //doubleJump -= 1;
         }
-        else if (jumpPressed && !falling && !isGrounded)
-        {
-            // If holding the jump key, apply a sustained jump force
-            if (jumpTime > jumpTimeLimit)
-            {
-                rb.velocity = Vector3.up * jumpForce * scale;
-                jumpTime -= Time.deltaTime;
-                scale -= Time.deltaTime;
-            }
-            else
-            {
-                // Start falling when jump is no longer being held or time limit exceeded
-                falling = true;
-                //gravityScale *= scale;
-                rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-            }
-        }
-        else if (!jumpPressed && !falling && !isGrounded)
-        {
-            // Begin falling if jump is released
-            falling = true;
-            //gravityScale *= scale;
-            rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-        }
-        else if (falling)
-        {
-            // Apply increased gravity when falling
-            if (gravityScale < gravityScaleCopy)
-            {
-                //gravityScale += Time.deltaTime * downwardGravityFactor;
-            }
-        }
+        
     }
 
 
@@ -212,7 +225,7 @@ public class PlayerController : BaseController
     {
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), Mathf.Infinity) &&
-            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "Possessable"))
+            (collision.gameObject.tag == "floor" || collision.gameObject.tag == "Possessable" || collision.gameObject.tag == "Lava"))
         {
             return true;
         }
