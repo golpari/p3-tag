@@ -185,22 +185,6 @@ public class PossessionController : BaseController
             movable.Move(currentMovementInput, movementSpeed, (isFloatingUp, isFloatingDown));
     }
 
-/*    private void AttemptToggle()
-    {
-
-        // Check if the current possession action is a LightingHandler
-        if (currPossessionAction is LightHandler lightHandler)
-        {
-            lightHandler.ToggleLighting();
-        }
-
-        // check if curr possession is a low grav type
-        if (currPossessionAction is LowGravityHandler lowGravityHandler)
-        {
-            lowGravityHandler.ToggleGravity();
-        }
-    }*/
-
     private void TogglePossession()
     {
         // This is to return to the normal, non possession controls, this shouldn't cost anything
