@@ -196,10 +196,10 @@ PrefabInstance:
       addedObject: {fileID: 4606277180155585785}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2866838806179779992}
+      addedObject: {fileID: 5227979956978223805}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5227979956978223805}
+      addedObject: {fileID: 6708283323559222354}
   m_SourcePrefab: {fileID: 100100000, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
 --- !u!1 &4663555947436083794 stripped
 GameObject:
@@ -228,19 +228,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6202518890732439607, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
---- !u!114 &2866838806179779992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4663555947436083794}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56cb95a53e892194f958075f15df7a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sloshSound: {fileID: 5227979956978223805}
 --- !u!82 &5227979956978223805
 AudioSource:
   m_ObjectHideFlags: 0
@@ -253,7 +240,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d0650da2c6be7464ea9db3c930324445, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -337,6 +324,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6708283323559222354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663555947436083794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f2e4754686311438a0ceaef382b212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sloshSound: {fileID: 5227979956978223805}
 --- !u!4 &5472884824948003048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6366ccaa305e934e9f11e92cd71ea37, type: 3}
