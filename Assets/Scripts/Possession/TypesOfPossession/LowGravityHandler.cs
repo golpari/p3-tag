@@ -14,7 +14,7 @@ public class LowGravityHandler : PossessionActionBase
     //}
     private void Awake()
     {
-        spiritPrice = 75f;
+        spiritPrice = 1f;
     }
 
     private bool isLowGravity = false;

@@ -17,7 +17,8 @@ public class tutorial : MonoBehaviour
 
     void Start()
     {
-        tutorial_scene();
+        // UNCOMMENT FOR FINAL BUILD
+        //tutorial_scene();
     }
 
     void tutorial_scene() {
@@ -78,6 +79,8 @@ public class tutorial : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
 
+        EventBus.Publish<SpiritEvent>(new SpiritEvent(100.0f));
+
         PlayerController.player_lock = false;
 
         EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "thief"));
@@ -110,10 +113,10 @@ public class tutorial : MonoBehaviour
 
 
 /*
- public PopUpEvent(string _currIcon, string _currPlayer)
-    {
-        currIcon = _currIcon;
-        currPlayer = _currPlayer;
-    }
+ if (Input.GetButtonDown("Fire1"))
+{
+    Debug.Log("Fire1 button was pressed");
+}
+
  */
 

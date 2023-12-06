@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomNumber: 0
   speed: 2
-  distanceUp: 3
+  distanceUp: 5
 --- !u!65 &860172148002205212
 BoxCollider:
   m_ObjectHideFlags: 0
