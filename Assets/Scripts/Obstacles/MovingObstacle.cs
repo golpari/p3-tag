@@ -13,10 +13,12 @@ public class MovingObstacle : MonoBehaviour
     // Speed at which the object is moved;
     [SerializeField] private float speed;
 
+
     private void Start()
     {
         startPosition = transform.position;
     }
+
 
     private void Update()
     {

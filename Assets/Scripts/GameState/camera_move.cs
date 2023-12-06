@@ -42,10 +42,10 @@ public class camera_move : MonoBehaviour
     void _reset(Reset e) {
         Enviorments[0].SetActive(true);
         Grids[0].SetActive(true);
-        Enviorments[1].SetActive(true);
-        Grids[1].SetActive(true);
-        Enviorments[2].SetActive(true);
-        Grids[2].SetActive(true);
+        Enviorments[1].SetActive(false);
+        Grids[1].SetActive(false);
+        Enviorments[2].SetActive(false);
+        Grids[2].SetActive(false);
         this.GetComponent<Camera>().orthographicSize = orth_sizes[0];
         this.GetComponent<Camera>().transform.position = camera_pos[0];
         current_floor = 0;

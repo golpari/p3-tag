@@ -46,7 +46,7 @@ public class general_slider : MonoBehaviour
         initial_time = Time.time;
         progress = (Time.time - initial_time) / duration;
         current_value = start;
-        Debug.Log(GameEnd);
+
         while (progress < 1.0f && !GameEnd)
         {
             test += Time.deltaTime;

@@ -64,6 +64,7 @@ public class PlayerController : BaseController
     }
 
     void _reset(Reset e) {
+        this.gameObject.transform.parent = null;
         this.transform.position = startingPosition;
         player_lock = false;
         nextFloor = 1;
@@ -143,6 +144,7 @@ public class PlayerController : BaseController
 
     protected override void Update()
     {
+
         // Update the player's jump and fall mechanics
         // order is important
         if (!player_lock)

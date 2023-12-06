@@ -7,7 +7,7 @@ public class LightHandler : PossessionActionBase
 
     private void Awake()
     {
-        spiritPrice = 25f;
+        spiritPrice = 1f;
     }
 
     public override bool EnableAction()

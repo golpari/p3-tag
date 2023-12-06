@@ -43,6 +43,7 @@ public class GhostController : BaseController
     }
 
     void _reset(Reset e) {
+        GhostController.ghost_lock = false;
         this.transform.position = starting_position;
     }
 
@@ -96,25 +97,11 @@ public class GhostController : BaseController
                 HandleFloating();
 
 
-                if (Input.GetKeyDown(KeyCode.Space) && spirit_slider.current_value >= 100 && !super)
-                {
-                    EventBus.Publish<SpiritEvent>(new SpiritEvent(-100));
-                    StartCoroutine(super_power());
-                }
             }
         }
-        
 
-        // delete after
     }
 
-    public IEnumerator super_power() {
-        super = true;
-        ToggleGravity(); // something wrong with gravity scale
-        yield return new WaitForSeconds(5.0f); // 5 seconds
-        ToggleGravity();
-        super = false;
-    }
     
 
     private void HandleFloating()

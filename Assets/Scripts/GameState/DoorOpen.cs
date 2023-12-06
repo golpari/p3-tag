@@ -11,6 +11,8 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] private float speed = 2;
     [SerializeField] private float distanceUp = 3;
 
+    public int index;
+
     //private bool moveDoor = false;
     // Start is called before the first frame update
 
@@ -32,27 +34,27 @@ public class DoorOpen : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        if (artifactPicked)
+        {
+            transform.position = start + new Vector3(0, distanceUp, 0);
+        }
+    }
 
 
     void _OnArtifactPickup(ArtifactPickupEvent e)
     {
         // if the artifact of the room that this door is in gets picked up'
-        if (this != null)
+        if (index == 0)
         {
-            if (e.artRoomNum == roomNumber)
-            {
-                //open door (slide it up)
-
-                StartCoroutine(SlideUpCoroutine(distanceUp, speed));
-            }
-
+            StartCoroutine(SlideUpCoroutine(distanceUp, speed));
 
         }
     }
 
     IEnumerator SlideUpCoroutine(float distance, float duration)
     {
-        artifactPicked = true;
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + new Vector3(0, distance, 0);
         float time = 0;
@@ -65,6 +67,7 @@ public class DoorOpen : MonoBehaviour
         }
 
         transform.position = endPosition; // Ensure the position is set exactly at the end position after the loop
+        artifactPicked = true;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

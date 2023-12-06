@@ -54,7 +54,7 @@ public class EndGame : MonoBehaviour
     }
     void RestartGame()
     {
-        Debug.Log("Goes in here");
+        Debug.Log("If it goes in here we need to restart application");
         inputActions.Player.Enable();
         inputActions.Ghost.Enable();
 
@@ -72,12 +72,13 @@ public class EndGame : MonoBehaviour
 
     public IEnumerator transition_scene() {
         EventBus.Publish<fadeOut>(new fadeOut(true));
-        yield return new WaitForSeconds(0.25f);
-        yield return new WaitForSeconds(0.50f);
-        EventBus.Publish<Reset>(new Reset());
+        PlayerController.player_lock = true;
+        GhostController.ghost_lock = true;
+        yield return new WaitForSeconds(1.0f);
         GameEnd = false;
         EventBus.Publish<fadeOut>(new fadeOut(false));
-        inputActions.UI.NewGame.performed += restartInitiated;
+        EventBus.Publish<Reset>(new Reset());
+        //inputActions.UI.NewGame.performed += restartInitiated;
     }
 
     private void OnDestroy()

@@ -47,7 +47,6 @@ public class spirit_slider : MonoBehaviour
                 current_value += e.spirit;
             }
             else {
-                Debug.Log("what is going on");
                 current_value = 100.0f;
             }
         }
