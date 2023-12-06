@@ -57,9 +57,9 @@ public class spirit_spawn : MonoBehaviour
     public void turn_on(float val) {
         for (int i = 0; i < number_spirits; i++)
         {
-            Color temp = spirit_lis[i].GetComponent<MeshRenderer>().material.color;
+            /*Color temp = spirit_lis[i].GetComponent<MeshRenderer>().material.color;
             temp.a = val;
-            spirit_lis[i].GetComponent<MeshRenderer>().material.color = temp;
+            spirit_lis[i].GetComponent<MeshRenderer>().material.color = temp;*/
         }
     }
 
