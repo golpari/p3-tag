@@ -18,6 +18,9 @@ https://assetstore.unity.com/packages/2d/textures-materials/abstract/vibrant-eff
 
 Cutscene voiceover by Maria Corcobado: https://www.mariacorcobado.com/
 
+UI Sliders from: NoobGameDev on Unity Asset Store: "Health System For Dummies"
+https://assetstore.unity.com/packages/tools/utilities/health-system-for-dummies-215755
+
 Soundtrack by Mann Gupta
 
 Sound Effects from freesound.org
