@@ -23,7 +23,7 @@ public class SlowPlayer : MonoBehaviour
         playerController = this.GetComponent<PlayerController>();
 
         originalSpeed = playerController.movementSpeed;
-        slowSpeed = playerController.movementSpeed / 2;
+        slowSpeed = 1.5f;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -244,8 +244,11 @@ public class PlayerController : BaseController
 
         if (collision.gameObject.CompareTag("Ghost") && spirit_slider.current_value > 75.0f)
         {
-            spirit_slider.current_value -= 75.0f;
-            StartCoroutine(FreezePlayer());
+            if (!player_lock)
+            {
+                spirit_slider.current_value -= 75.0f;
+                StartCoroutine(FreezePlayer());
+            }
         }
 
     }
