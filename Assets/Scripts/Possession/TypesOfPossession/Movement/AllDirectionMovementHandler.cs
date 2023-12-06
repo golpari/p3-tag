@@ -13,7 +13,10 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
     [SerializeField] private float maxY = 100f;
     [SerializeField] private float minY = -100f;
 
-
+    private void Awake()
+    {
+        spiritPrice = 1f;
+    }
 
     public override bool EnableAction()
     {
