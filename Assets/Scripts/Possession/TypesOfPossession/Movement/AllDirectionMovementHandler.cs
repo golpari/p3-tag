@@ -13,10 +13,29 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
     [SerializeField] private float maxY = 100f;
     [SerializeField] private float minY = -100f;
 
+
+    Vector3 starting_position;
+    Transform parent;
+
     private void Awake()
     {
         spiritPrice = 1f;
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        parent = this.gameObject.transform.parent;
+        starting_position = transform.position;
+        EventBus.Subscribe<Reset>(_reset);
+    }
+    void _reset(Reset e)
+    {
+        this.gameObject.transform.parent = parent;
+        this.transform.position = starting_position;
+        this.GetComponent<Rigidbody>().useGravity = true;
+    }
+
 
     public override bool EnableAction()
     {

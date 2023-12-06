@@ -74,7 +74,7 @@ public class EndGame : MonoBehaviour
         EventBus.Publish<fadeOut>(new fadeOut(true));
         PlayerController.player_lock = true;
         GhostController.ghost_lock = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
         GameEnd = false;
         EventBus.Publish<fadeOut>(new fadeOut(false));
         EventBus.Publish<Reset>(new Reset());

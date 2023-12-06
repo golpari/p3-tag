@@ -50,7 +50,7 @@ public class WinUI : MonoBehaviour
                 GetComponent<Image>().sprite = player;
                 GetComponent<Image>().color = Color.red;
 
-                text.SetActive(true);
+                //text.SetActive(true);
             }
             else
             {
@@ -58,7 +58,7 @@ public class WinUI : MonoBehaviour
                 GetComponent<Image>().sprite = ghost;
                 GetComponent<Image>().color = Color.blue;
 
-                text.SetActive(true);
+                //text.SetActive(true);
             }
         }
 

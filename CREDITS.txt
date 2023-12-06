@@ -12,3 +12,15 @@ https://assetstore.unity.com/packages/3d/characters/creatures/ghost-cute-series-
 
 Lava and possession (force field) materials / shaders from:The Developer on Unity Asset Store "Ultimate 10+ Shaders"
 https://assetstore.unity.com/packages/vfx/shaders/ultimate-10-shaders-168611
+
+Spirit VFX from: Sagital3D on Unity Asset Store "Vibrant Effect Textures Sample"
+https://assetstore.unity.com/packages/2d/textures-materials/abstract/vibrant-effect-textures-sample-35514
+
+Cutscene voiceover by Maria Corcobado: https://www.mariacorcobado.com/
+
+UI Sliders from: NoobGameDev on Unity Asset Store: "Health System For Dummies"
+https://assetstore.unity.com/packages/tools/utilities/health-system-for-dummies-215755
+
+Soundtrack by Mann Gupta
+
+Sound Effects from freesound.org
