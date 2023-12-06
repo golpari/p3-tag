@@ -124,9 +124,13 @@ public class PossessionController : BaseController
         possessAction.performed += _ => TogglePossession();
 
         floatUpAction.performed += ctx => isFloatingUp = true;
+        floatUpAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_b", "ghost"));
         floatUpAction.canceled += ctx => isFloatingUp = false;
+        floatUpAction.canceled += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
         floatDownAction.performed += ctx => isFloatingDown = true;
+        floatDownAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_a", "ghost"));
         floatDownAction.canceled += ctx => isFloatingDown = false;
+        floatDownAction.canceled += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
     }
 
     protected override void UnsubscribeActions()
@@ -143,9 +147,13 @@ public class PossessionController : BaseController
         possessAction.performed -= _ => TogglePossession();
 
         floatUpAction.performed -= ctx => isFloatingUp = true;
+        floatUpAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_b", "ghost"));
         floatUpAction.canceled -= ctx => isFloatingUp = false;
+        floatUpAction.canceled -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
         floatDownAction.performed -= ctx => isFloatingDown = true;
+        floatDownAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_a", "ghost"));
         floatDownAction.canceled -= ctx => isFloatingDown = false;
+        floatDownAction.canceled -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
     }
 
     // Only run update if the action map is enabled
@@ -176,7 +184,11 @@ public class PossessionController : BaseController
 
     //call this functiondisable
 
-
+    protected override void OnMovementInput(InputAction.CallbackContext context)
+    {
+        base.OnMovementInput(context);
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("joystick2_left", "ghost"));
+    }
     protected override void HandleMovement()
     {
         // Implement movement logic for the possessed object
@@ -189,6 +201,6 @@ public class PossessionController : BaseController
     {
         // This is to return to the normal, non possession controls, this shouldn't cost anything
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
-
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
     }
 }

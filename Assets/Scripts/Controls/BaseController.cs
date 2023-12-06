@@ -97,7 +97,7 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
-    protected void OnMovementInput(InputAction.CallbackContext context)
+    protected virtual void OnMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
     }

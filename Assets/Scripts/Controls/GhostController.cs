@@ -65,11 +65,16 @@ public class GhostController : BaseController
         movementAction.canceled += OnMovementInput;
         
         floatUpAction.performed += ctx => isFloatingUp = true;
+        floatUpAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_b", "ghost"));
         floatUpAction.canceled += ctx => isFloatingUp = false;
+        floatUpAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
         floatDownAction.performed += ctx => isFloatingDown = true;
+        floatUpAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_a", "ghost"));
         floatDownAction.canceled += ctx => isFloatingDown = false;
+        floatUpAction.performed += ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
 
         possessAction.performed += _ => TogglePossession();
+
     }
  
     protected override void UnsubscribeActions()
@@ -78,11 +83,15 @@ public class GhostController : BaseController
         movementAction.started -= OnMovementInput;
         movementAction.performed -= OnMovementInput;
         movementAction.canceled -= OnMovementInput;
-        
+
         floatUpAction.performed -= ctx => isFloatingUp = true;
+        floatUpAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_b", "ghost"));
         floatUpAction.canceled -= ctx => isFloatingUp = false;
+        floatUpAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
         floatDownAction.performed -= ctx => isFloatingDown = true;
+        floatUpAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_a", "ghost"));
         floatDownAction.canceled -= ctx => isFloatingDown = false;
+        floatUpAction.performed -= ctx => EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "ghost"));
 
         possessAction.performed -= _ => TogglePossession();
 
@@ -102,7 +111,12 @@ public class GhostController : BaseController
 
     }
 
-    
+    protected override void OnMovementInput(InputAction.CallbackContext context)
+    {
+        base.OnMovementInput(context);
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("joystick2_left", "ghost"));
+    }
+
 
     private void HandleFloating()
     {
@@ -149,6 +163,7 @@ public class GhostController : BaseController
 
         // if we add a spirit limit here then it applies to all types of possession, do it within handler scripts
         EventBus.Publish<PossessionEvent>(new PossessionEvent(inputAsset));
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_y", "ghost"));
     }
 
     public (bool, bool) GetFloatStatus()

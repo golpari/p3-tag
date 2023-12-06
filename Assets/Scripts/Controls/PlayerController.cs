@@ -128,7 +128,7 @@ public class PlayerController : BaseController
         }
 
         jumpPressed = true;
-
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("button_a", "thief"));
 
 
     }
@@ -138,7 +138,7 @@ public class PlayerController : BaseController
         // jump is no longer pressed
         // could use for pressing A button
             jumpPressed = false;
-
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent(null, "thief"));
 
     }
 
@@ -179,6 +179,11 @@ public class PlayerController : BaseController
       //  HandleFall();
     }
 
+    protected override void OnMovementInput(InputAction.CallbackContext context)
+    {
+        base.OnMovementInput(context);
+        EventBus.Publish<ButtonPressEvent>(new ButtonPressEvent("joystick2_left", "thief"));
+    }
 
     private void check_wall()
     {

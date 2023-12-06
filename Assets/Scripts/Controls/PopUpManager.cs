@@ -44,8 +44,8 @@ public class PopUpManager : MonoBehaviour
         else if (e.currIcon == "joystick2_left")
         {
             spriteRenderer.sprite = controls[1];
-            /*if (hasPossessed)
-                StartCoroutine(PossessionPopUpFloatUp());*/
+            if (hasPossessed)
+                StartCoroutine(PossessionPopUpFloatUp());
         }   
         
         else if (e.currIcon == "joystick2_right")
@@ -62,8 +62,8 @@ public class PopUpManager : MonoBehaviour
         else if (e.currIcon == "button_b")
         {
             spriteRenderer.sprite = controls[7];
-            /*if (hasPossessed)
-                StartCoroutine(PossessionPopUpFloatDown());*/
+            if (hasPossessed)
+                StartCoroutine(PossessionPopUpFloatDown());
         }
 
         else if (e.currIcon == null)
@@ -97,15 +97,15 @@ public class PopUpManager : MonoBehaviour
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
     }
 
-  /*  IEnumerator PossessionPopUpInitial()
+    IEnumerator PossessionPopUpInitial()
     {
         // show Y for 0.5 after usage
         yield return new WaitForSeconds(lagTime);
         // show nothing
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
         yield return new WaitForSeconds(lagTime);
-        if (hasPossessed)
-            EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "ghost")); // show leftstick
+        /*if (hasPossessed)
+            EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "ghost")); // show leftstick*/
     }
 
     IEnumerator PossessionPopUpFloatUp()
@@ -113,8 +113,8 @@ public class PopUpManager : MonoBehaviour
         yield return new WaitForSeconds(lagTime);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
         yield return new WaitForSeconds(lagTime);
-        if (hasPossessed)
-            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost")); // show b button
+        /*if (hasPossessed)
+            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost")); // show b button*/
     }
 
     IEnumerator PossessionPopUpFloatDown()
@@ -122,9 +122,9 @@ public class PopUpManager : MonoBehaviour
         yield return new WaitForSeconds(lagTime);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
         yield return new WaitForSeconds(lagTime);
-        if (hasPossessed)
-            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost")); // show b button
-    }*/
+        /*if (hasPossessed)
+            EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost")); // show a button*/
+    }
 
 
     private void OnDestroy()

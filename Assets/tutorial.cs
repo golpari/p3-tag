@@ -14,11 +14,17 @@ public class tutorial : MonoBehaviour
     public GameObject second_target;
     public Material glow;
     public static bool tut = true;
+    Subscription<ButtonPressEvent> butttonSubscription;
+    private bool buttonBPressed = false;
+    private bool buttonAPressed = false;
+    private bool buttonYPressed = false;
+    private bool joystickPressed = false;
 
     void Start()
     {
         // UNCOMMENT FOR FINAL BUILD
-        //tutorial_scene();
+        tutorial_scene();
+        butttonSubscription = EventBus.Subscribe<ButtonPressEvent>(_OnButtonPress);
     }
 
     void tutorial_scene() {
@@ -28,20 +34,58 @@ public class tutorial : MonoBehaviour
     }
     // Update is called once per frame
 
+    void _OnButtonPress(ButtonPressEvent e)
+    {
+        if (e.currButton == "button_b")
+        {
+            buttonBPressed = true;
+        }
+        else if (e.currButton == "button_a")
+        {
+            buttonAPressed = true;
+        }
+        else if (e.currButton == "button_y")
+        {
+            buttonYPressed = true;
+        }
+        else if (e.currButton == "joystick2_left")
+        {
+            joystickPressed = true;
+        }
+        /*else if (e.currButton == null)
+        {
+            buttonBPressed = false;
+            buttonAPressed = false;
+            buttonYPressed = false;
+            joystickPressed = false;
+        }   */
+    }
 
     IEnumerator test()
     {
+        // ghost move
         EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "ghost"));
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitUntil(() => joystickPressed);
+        joystickPressed = false;
+        yield return new WaitForSeconds(1.0f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        yield return new WaitForSeconds(1.0f);
 
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
-        yield return new WaitForSeconds(5.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
-
+        // ghost float up
         EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost"));
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitUntil(() => buttonBPressed);
+        buttonBPressed = false;                                                                                         
+        yield return new WaitForSeconds(1.0f);                                                                  
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        yield return new WaitForSeconds(1.0f);
+
+        // ghost float down
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));  
+        yield return new WaitUntil(() => buttonAPressed);
+        buttonAPressed = false;
+        yield return new WaitForSeconds(1.0f);
+        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        yield return new WaitForSeconds(1.0f);
 
         Material mat = target_object.GetComponent<MeshRenderer>().material;
         for (int i = 0; i < 20; i++) {
@@ -51,13 +95,16 @@ public class tutorial : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
 
-        yield return new WaitForSeconds(1.5f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
-        yield return new WaitForSeconds(1.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        // ghost possess
+        //EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
+        yield return new WaitUntil(() => buttonYPressed);
+        buttonYPressed = false;
+        //yield return new WaitForSeconds(1.0f);
+        //EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        //yield return new WaitForSeconds(1.0f);
 
         mat = second_target.GetComponent<MeshRenderer>().material;
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
         {
             second_target.GetComponent<MeshRenderer>().material = glow;
             yield return new WaitForSeconds(0.15f);
@@ -67,30 +114,53 @@ public class tutorial : MonoBehaviour
 
         EventBus.Publish<SpiritEvent>(new SpiritEvent(100.0f));
 
+        //EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
+        yield return new WaitUntil(() => buttonYPressed);
+        buttonYPressed = false;
+       // yield return new WaitForSeconds(1.0f);
+        //EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        yield return new WaitForSeconds(0.5f);
+
+        joystickPressed = false;
         EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "ghost"));
-        yield return new WaitForSeconds(5.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost"));
-        yield return new WaitForSeconds(5.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitUntil(() => joystickPressed);
+        joystickPressed = false;
+        yield return new WaitForSeconds(0.5f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
 
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
-        yield return new WaitForSeconds(1.0f);
+        buttonBPressed = false;
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost"));
+        yield return new WaitUntil(() => buttonBPressed);
+        buttonBPressed = false;
+        yield return new WaitForSeconds(0.5f);
+        buttonAPressed = false;
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
+        yield return new WaitUntil(() => buttonAPressed);
+        buttonAPressed = false;
+        yield return new WaitForSeconds(0.5f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+
+        /*EventBus.Publish<PopUpEvent>(new PopUpEvent("button_y", "ghost"));
+        yield return new WaitUntil(() => buttonYPressed);
+        buttonYPressed = false;
+        yield return new WaitForSeconds(1.0f);
+        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));*/
 
         EventBus.Publish<SpiritEvent>(new SpiritEvent(100.0f));
 
         PlayerController.player_lock = false;
 
         EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "thief"));
+        joystickPressed = false;
+        yield return new WaitUntil(() => joystickPressed);
         yield return new WaitForSeconds(5.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
+        EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "thief"));
 
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "thief"));
-        yield return new WaitForSeconds(5.0f);
+        buttonAPressed = false;
         EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "thief"));
-        yield return new WaitForSeconds(5.0f);
+        buttonAPressed = false;
+        yield return new WaitUntil(() => buttonAPressed);
+        yield return new WaitForSeconds(1.0f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "thief"));
 
 

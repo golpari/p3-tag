@@ -65,6 +65,19 @@ public class PopUpEvent
     }
 }
 
+public class  ButtonPressEvent
+{
+    public string currButton;
+    public string currPlayer;
+    public ButtonPressEvent(string _currButton, string _currPlayer)
+    {
+        currButton = _currButton;
+        currPlayer = _currPlayer;
+        Debug.Log("button: " + currButton + " player: " + currPlayer);
+    }
+
+}
+
 public class EndCountdownEvent
 {
     public EndCountdownEvent() { }
