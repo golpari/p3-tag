@@ -25,6 +25,12 @@ public class tutorial : MonoBehaviour
         // UNCOMMENT FOR FINAL BUILD
         tutorial_scene();
         butttonSubscription = EventBus.Subscribe<ButtonPressEvent>(_OnButtonPress);
+        EventBus.Subscribe<Reset>(_reset);
+    }
+
+    void _reset(Reset e) {
+        tutorial_scene();
+        tut = true;
     }
 
     void tutorial_scene() {
