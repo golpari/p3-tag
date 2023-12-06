@@ -42,7 +42,9 @@ public class OutlineEvent
 public class PossessionEvent
 {
     public InputActionAsset inputAsset;
-    public PossessionEvent(InputActionAsset _inputAsset) { inputAsset = _inputAsset; }
+    public PossessionEvent(InputActionAsset _inputAsset) { inputAsset = _inputAsset;
+        Debug.Log("Possession Event triggered");
+    }
 }
 
 public class EndGameEvent

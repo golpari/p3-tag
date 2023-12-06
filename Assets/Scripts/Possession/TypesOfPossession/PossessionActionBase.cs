@@ -3,7 +3,7 @@ using UnityEngine;
 // Possessable action is movement related
 public interface IMovable
 {
-    void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput);
+    void Move(Vector2 currentMovementInput, float speed, (bool isFloatingUp, bool isFloatingDown) floatStatus);
     // can do checks e.g. if (currentPossessionAction is IMovable movable)
     //{
     //    movable.Move();

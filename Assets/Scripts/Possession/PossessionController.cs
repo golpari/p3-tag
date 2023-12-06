@@ -186,7 +186,7 @@ public class PossessionController : BaseController
         // Implement movement logic for the possessed object
         //(bool, bool) floatStatus = (isFloatingUp, isFloatingDown);
         if (currPossessionAction is IMovable movable)
-            movable.Move(currentMovementInput, movementSpeed, currentFloatInput);
+            movable.Move(currentMovementInput, movementSpeed, (isFloatingUp, isFloatingDown));
     }
 
     private void AttemptToggle()

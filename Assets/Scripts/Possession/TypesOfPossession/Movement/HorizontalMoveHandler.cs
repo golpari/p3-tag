@@ -15,7 +15,7 @@ public class HorizontalMoveHandler : PossessionActionBase, IMovable
     {
         isActive = false;
     }
-    public void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput)
+    public void Move(Vector2 currentMovementInput, float speed, (bool isFloatingUp, bool isFloatingDown) floatStatus)
     {
         if (!isActive) return;
         //// Read horizontal input and apply movement

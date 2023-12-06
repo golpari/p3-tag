@@ -36,7 +36,7 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
         }
 
     }
-    public void Move(Vector2 currentMovementInput, float speed, Vector2 currentFloatInput)
+    public void Move(Vector2 currentMovementInput, float speed, (bool isFloatingUp, bool isFloatingDown) floatStatus)
     {
         if (!isActive) {
             this.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -56,10 +56,26 @@ public class AllDirectionMovementHandler : PossessionActionBase, IMovable
 
         float moveX = currentMovementInput.x; // Left and right
         float moveZ = currentMovementInput.y; // Up and down
-        float moveY = currentFloatInput.y;
+
+        // Define vertical speed
+        float verticalSpeed = 5.0f; // Adjust this value as needed
+        float moveY = 0f;
+
+        // no y movement when both buttons are pressed
+        if (floatStatus.isFloatingUp && !floatStatus.isFloatingDown)
+        {
+            moveY = verticalSpeed;
+        }
+
+        else if (floatStatus.isFloatingDown && !floatStatus.isFloatingUp)
+        {
+            moveY = -verticalSpeed;
+        }
+
+
 
         Vector3 movement = (forward * moveZ + right * moveX) * speed;
-        movement.y = moveY * speed;
+        movement.y = moveY;
 
         this.GetComponent<Rigidbody>().velocity = movement;
         this.transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, minX, maxX),
