@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PossessionController : BaseController
 {
     private InputAction possessAction;
-    private InputAction toggleAction;
     private InputAction floatUpAction;
     private InputAction floatDownAction;
 
@@ -105,7 +104,6 @@ public class PossessionController : BaseController
         movementAction = actionMap.FindAction("Move");
         floatAction = actionMap.FindAction("Float");
         possessAction = actionMap.FindAction("Possess");
-        toggleAction = actionMap.FindAction("Toggle");
         floatUpAction = actionMap.FindAction("FloatUp");
         floatDownAction = actionMap.FindAction("FloatDown");
 
@@ -124,7 +122,6 @@ public class PossessionController : BaseController
         floatAction.canceled += OnFloatInput;
         
         possessAction.performed += _ => TogglePossession();
-        toggleAction.performed += _ => AttemptToggle();
 
         floatUpAction.performed += ctx => isFloatingUp = true;
         floatUpAction.canceled += ctx => isFloatingUp = false;
@@ -144,7 +141,6 @@ public class PossessionController : BaseController
         floatAction.canceled -= OnFloatInput;
 
         possessAction.performed -= _ => TogglePossession();
-        toggleAction.performed -= _ => AttemptToggle();
 
         floatUpAction.performed -= ctx => isFloatingUp = true;
         floatUpAction.canceled -= ctx => isFloatingUp = false;
@@ -189,7 +185,7 @@ public class PossessionController : BaseController
             movable.Move(currentMovementInput, movementSpeed, (isFloatingUp, isFloatingDown));
     }
 
-    private void AttemptToggle()
+/*    private void AttemptToggle()
     {
 
         // Check if the current possession action is a LightingHandler
@@ -203,7 +199,7 @@ public class PossessionController : BaseController
         {
             lowGravityHandler.ToggleGravity();
         }
-    }
+    }*/
 
     private void TogglePossession()
     {

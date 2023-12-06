@@ -47,7 +47,7 @@ public class LowGravityHandler : PossessionActionBase
         isLowGravity = false;
     }
 
-    public void ToggleGravity()
+/*    public void ToggleGravity()
     {
         if (!isActive) return;
         //Default to low gravity.
@@ -62,5 +62,5 @@ public class LowGravityHandler : PossessionActionBase
             EventBus.Publish<ChangeGravityEvent>(new ChangeGravityEvent(defaultGravityScale, gravityFX));
             isLowGravity = false;
         }
-    }
+    }*/
 }

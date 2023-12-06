@@ -68,7 +68,9 @@ public class tutorial : MonoBehaviour
 
         EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_left", "ghost"));
         yield return new WaitForSeconds(5.0f);
-        EventBus.Publish<PopUpEvent>(new PopUpEvent("joystick2_right", "ghost"));
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_b", "ghost"));
+        yield return new WaitForSeconds(5.0f);
+        EventBus.Publish<PopUpEvent>(new PopUpEvent("button_a", "ghost"));
         yield return new WaitForSeconds(5.0f);
         EventBus.Publish<PopUpEvent>(new PopUpEvent(null, "ghost"));
 

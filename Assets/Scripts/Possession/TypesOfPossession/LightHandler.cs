@@ -35,12 +35,5 @@ public class LightHandler : PossessionActionBase
         }
         // have all events be children of spiritPossesion
     }
-
-    public void ToggleLighting()
-    {
-        if (!isActive) return;
-        isDark = !isDark;
-        EventBus.Publish<ChangeLightingEvent>(new ChangeLightingEvent(isDark));
-    }
 }
 
